@@ -16,7 +16,7 @@ class Template extends BaseStage
 	
 	override function createPost()
 	{
-		// Use this function to layer things above characters!
+
 	}
 
 	override function update(elapsed:Float)

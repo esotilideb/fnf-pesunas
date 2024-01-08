@@ -34,6 +34,18 @@ class StageWeek1 extends BaseStage
 			add(stageCurtains);
 		}
 	}
+
+	override function createPost()
+		{ //lo dejo en el stage de dad por ahora
+			var blackScreen = new FlxSprite().makeGraphic(FlxG.width * 2, FlxG.height * 2, 0xFF000000);
+			blackScreen.screenCenter();
+			add(blackScreen);
+			new FlxTimer().start(1.2, function(deadTime:FlxTimer)
+				{
+					FlxTween.tween(blackScreen, {alpha: 0}, 20, { ease: FlxEase.quadInOut});
+				});
+		}
+
 	override function eventPushed(event:objects.Note.EventNote)
 	{
 		switch(event.event)
