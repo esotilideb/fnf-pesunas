@@ -169,7 +169,8 @@ class MainMenuState extends MusicBeatState
 
 							#if ACHIEVEMENTS_ALLOWED
 							case 'awards':
-								MusicBeatState.switchState(new AchievementsMenuState());
+								//MusicBeatState.switchState(new AchievementsMenuState());
+								MusicBeatState.switchState(new OverWorld());
 							#end
 
 							case 'credits':

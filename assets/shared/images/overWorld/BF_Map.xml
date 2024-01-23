@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="BF_Map.png">
+<SubTexture name="Front0000" x="21" y="20" width="20" height="19" frameX="-2" frameY="-4" frameWidth="24" frameHeight="24" />
+<SubTexture name="Front0001" x="0" y="0" width="18" height="20" frameX="-3" frameY="-3" frameWidth="24" frameHeight="24" />
+<SubTexture name="Left0000" x="57" y="0" width="22" height="19" frameX="0" frameY="-4" frameWidth="24" frameHeight="24" />
+<SubTexture name="Left0001" x="18" y="0" width="21" height="20" frameX="-1" frameY="-3" frameWidth="24" frameHeight="24" />
+<SubTexture name="Back0000" x="57" y="19" width="20" height="19" frameX="-2" frameY="-4" frameWidth="24" frameHeight="24" />
+<SubTexture name="Back0001" x="39" y="0" width="18" height="20" frameX="-3" frameY="-3" frameWidth="24" frameHeight="24" />
+<SubTexture name="Right0000" x="0" y="40" width="22" height="19" frameX="-2" frameY="-4" frameWidth="24" frameHeight="24" />
+<SubTexture name="Right0001" x="0" y="20" width="21" height="20" frameX="-2" frameY="-3" frameWidth="24" frameHeight="24" />
+</TextureAtlas>

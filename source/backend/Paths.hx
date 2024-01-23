@@ -196,6 +196,16 @@ class Paths
 		return sound(key + FlxG.random.int(min, max), library);
 	}
 
+	inline static public function level(key:String, levelName:String, ?library:String)
+		{
+			return getPath('levels/$levelName/$key.txt', TEXT, library);
+		}
+	
+	inline static public function player(levelName:String, ?library:String)
+	{
+		return getPath('levels/$levelName/playerSET.json', TEXT, library);
+	}
+
 	inline static public function music(key:String, ?library:String):Sound
 	{
 		var file:Sound = returnSound('music', key, library);

@@ -6,7 +6,7 @@ import objects.Character;
 
 import states.MainMenuState;
 import states.FreeplayState;
-
+import states.LevelEditor;
 class MasterEditorMenu extends MusicBeatState
 {
 	var options:Array<String> = [
@@ -16,7 +16,8 @@ class MasterEditorMenu extends MusicBeatState
 		'Menu Character Editor',
 		'Dialogue Editor',
 		'Dialogue Portrait Editor',
-		'Note Splash Debug'
+		'Note Splash Debug',
+		'Level Editor'
 	];
 	private var grpTexts:FlxTypedGroup<Alphabet>;
 	private var directories:Array<String> = [null];
@@ -118,6 +119,8 @@ class MasterEditorMenu extends MusicBeatState
 					LoadingState.loadAndSwitchState(new DialogueCharacterEditorState(), false);
 				case 'Note Splash Debug':
 					MusicBeatState.switchState(new NoteSplashDebugState());
+				case 'Level Editor':
+					MusicBeatState.switchState(new LevelEditor());			
 			}
 			FlxG.sound.music.volume = 0;
 			FreeplayState.destroyFreeplayVocals();
