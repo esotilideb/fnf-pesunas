@@ -138,7 +138,7 @@ class FreeplayState extends MusicBeatState
 		cancion = new FlxSprite(125,-200);
 		cancion.loadGraphic(Paths.image('freeplayshit/' + optionShit[curSelected] + '/title'));
 		cancion.scrollFactor.set(0, 0);
-		cancion.screenCenter(Y);
+		cancion.screenCenter(Y); //hola
 		cancion.y = cancion.y + 40;
 		//cancion.setGraphicSize(Std.int(cancion.width * 0.38));
 		cancion.antialiasing = ClientPrefs.data.antialiasing;
