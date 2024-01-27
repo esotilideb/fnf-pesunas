@@ -7,56 +7,56 @@ import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
 import flixel.tile.FlxTilemap;
+import flixel.addons.editors.ogmo.FlxOgmo3Loader;
 import flixel.FlxObject;
 import sys.io.File;
 import flixel.util.FlxColor;
 import openfl.Assets;
 import haxe.Json;
 import backend.Paths;
-typedef PlayerSET =
-{
-	pX:Int,
-	pY:Int,
-}
 
-class OverWorld extends MusicBeatState
+class OverworldDross extends FlxState
 {
-	var map:FlxTilemap;
-	var mapData:Array<Int>;
 	var player:FlxSprite;
-	var playerJSON:PlayerSET;
+
+    var map:FlxOgmo3Loader;
+	var walls:FlxTilemap;
 
 	override public function create():Void
 	{
-		playerJSON = tjson.TJSON.parse(Paths.getTextFromFile(Paths.player("overworld")));
+        FlxG.camera.zoom = 2.1;
 
-		mapData = converter(Paths.level("overworld", "overworld"));
-		map = new FlxTilemap();
-		map.loadMapFromArray(mapData, 20, 12, Paths.image("bad"), 95, 95);
-		add(map);
+        var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('overWorld/drossmap'));
+		bg.antialiasing = false;
+		bg.updateHitbox();
+		add(bg);
 
-		player = new FlxSprite(playerJSON.pX, playerJSON.pY);
+		player = new FlxSprite(101, 576);
 		player.frames = Paths.getSparrowAtlas('overWorld/BF_Map');
 		player.animation.addByPrefix('up', "Back", 4, false);
 		player.animation.addByPrefix('down', "Front", 4, false);
 		player.animation.addByPrefix('left', "Left", 4, false);
 		player.animation.addByPrefix('right', "Right", 4, false);
 		player.animation.play('down');
-		player.scale.x = 3.5;
-		player.scale.y = 3.5;
 		add(player);
+
+        map = new FlxOgmo3Loader(AssetPaths.overworlddross__ogmo, AssetPaths.overworlddross__json);
+		walls = map.loadTilemap(Paths.image('overWorld/tiles'), "walls");
+		walls.follow();
+		walls.setTileProperties(1, NONE);
+		walls.setTileProperties(2, ANY);
+		//walls.visible = false;
+		add(walls);
+
+        FlxG.camera.follow(player, TOPDOWN, 1);
 
 		super.create();
 	}
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
-		FlxG.collide(map, player);
+        FlxG.collide(player, walls);
 		movePlayer();
-
-		if (FlxG.keys.justPressed.D) {
-			MusicBeatState.switchState(new OverworldDross());
-		}
 	}
 
 	private function movePlayer():Void
@@ -83,26 +83,5 @@ class OverWorld extends MusicBeatState
 				player.animation.play('down');
 				player.velocity.y += 130;
 			}
-	}
-
-	public static function converter(nombreArchivo:String):Array<Int>
-	{
-		// Lee el contenido del archivo
-		var contenido:String = sys.io.File.getContent(nombreArchivo);
-
-		// Divide la cadena en un array de cadenas usando la coma como delimitador
-		var numeros:Array<String> = contenido.split(",");
-
-		// Crea un nuevo Array<Int> para almacenar los números convertidos
-		var arrayDeEnteros:Array<Int> = [];
-
-		// Convierte cada cadena a un entero y agrega al Array<Int>
-		for (num in numeros)
-		{
-			arrayDeEnteros.push(Std.parseInt(num));
-		}
-
-		// Devuelve el Array<Int> creado a partir del archivo
-		return arrayDeEnteros;
 	}
 }
