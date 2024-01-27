@@ -189,6 +189,12 @@ class MainMenuState extends MusicBeatState
 				selectedSomethin = true;
 				MusicBeatState.switchState(new MasterEditorMenu());
 			}
+
+			if (FlxG.keys.justPressed.Q)
+			{
+				selectedSomethin = true;
+				MusicBeatState.switchState(new OverWorld());
+			}
 			#end
 		}
 
