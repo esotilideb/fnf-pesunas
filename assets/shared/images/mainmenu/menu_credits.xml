@@ -1,17 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TextureAtlas imagePath="menu_credits.png">
-	<!-- Created with Adobe Animate version 21.0.1.37179 -->
+	<!-- Created with Adobe Animate version 22.0.3.179 -->
 	<!-- http://www.adobe.com/products/animate.html -->
-	<SubTexture name="credits basic0000" x="4" y="4" width="474" height="126" pivotX="-5.3" pivotY="7.75"/>
-	<SubTexture name="credits basic0001" x="4" y="4" width="474" height="126"/>
-	<SubTexture name="credits basic0002" x="4" y="4" width="474" height="126"/>
-	<SubTexture name="credits basic0003" x="478" y="4" width="474" height="126"/>
-	<SubTexture name="credits basic0004" x="478" y="4" width="474" height="126"/>
-	<SubTexture name="credits basic0005" x="478" y="4" width="474" height="126"/>
-	<SubTexture name="credits basic0006" x="4" y="130" width="474" height="126"/>
-	<SubTexture name="credits basic0007" x="4" y="130" width="474" height="126"/>
-	<SubTexture name="credits basic0008" x="4" y="130" width="474" height="126"/>
-	<SubTexture name="credits white0000" x="4" y="256" width="650" height="172" pivotX="22.35" pivotY="57.55" frameX="0" frameY="0" frameWidth="652" frameHeight="172"/>
-	<SubTexture name="credits white0001" x="4" y="428" width="643" height="171" frameX="0" frameY="0" frameWidth="652" frameHeight="172"/>
-	<SubTexture name="credits white0002" x="4" y="599" width="651" height="171" frameX="-1" frameY="0" frameWidth="652" frameHeight="172"/>
+	<SubTexture name="menu_credits0000" x="0" y="0" width="800" height="800"/>
+	<SubTexture name="menu_credits0001" x="0" y="0" width="800" height="800"/>
+	<SubTexture name="menu_credits0002" x="800" y="0" width="800" height="800"/>
+	<SubTexture name="menu_credits0003" x="800" y="0" width="800" height="800"/>
+	<SubTexture name="menu_credits0004" x="0" y="0" width="800" height="800"/>
+	<SubTexture name="menu_credits0005" x="0" y="0" width="800" height="800"/>
+	<SubTexture name="menu_credits0006" x="800" y="0" width="800" height="800"/>
+	<SubTexture name="menu_credits0007" x="800" y="0" width="800" height="800"/>
+	<SubTexture name="menu_credits0008" x="0" y="0" width="800" height="800"/>
+	<SubTexture name="menu_credits0009" x="0" y="0" width="800" height="800"/>
+	<SubTexture name="menu_credits0010" x="800" y="0" width="800" height="800"/>
+	<SubTexture name="menu_credits0011" x="800" y="0" width="800" height="800"/>
+	<SubTexture name="menu_credits0012" x="0" y="0" width="800" height="800"/>
+	<SubTexture name="menu_credits0013" x="0" y="0" width="800" height="800"/>
+	<SubTexture name="menu_credits0014" x="800" y="0" width="800" height="800"/>
+	<SubTexture name="menu_credits0015" x="800" y="0" width="800" height="800"/>
+	<SubTexture name="rebote0000" x="1600" y="0" width="790" height="790" frameX="-66" frameY="-66" frameWidth="856" frameHeight="856"/>
+	<SubTexture name="rebote0001" x="2390" y="0" width="830" height="830" frameX="0" frameY="0" frameWidth="856" frameHeight="856"/>
+	<SubTexture name="rebote0002" x="2390" y="0" width="830" height="830" frameX="0" frameY="0" frameWidth="856" frameHeight="856"/>
+	<SubTexture name="rebote0003" x="3220" y="0" width="806" height="806" frameX="-39" frameY="-39" frameWidth="856" frameHeight="856"/>
+	<SubTexture name="rebote0004" x="3220" y="0" width="806" height="806" frameX="-39" frameY="-39" frameWidth="856" frameHeight="856"/>
+	<SubTexture name="rebote0005" x="0" y="830" width="800" height="800" frameX="-49" frameY="-49" frameWidth="856" frameHeight="856"/>
+	<SubTexture name="rebote0006" x="0" y="830" width="800" height="800" frameX="-49" frameY="-49" frameWidth="856" frameHeight="856"/>
+	<SubTexture name="rebote0007" x="0" y="830" width="800" height="800" frameX="-49" frameY="-49" frameWidth="856" frameHeight="856"/>
+	<SubTexture name="rebote0008" x="0" y="830" width="800" height="800" frameX="-49" frameY="-49" frameWidth="856" frameHeight="856"/>
+	<SubTexture name="rebote0009" x="0" y="830" width="800" height="800" frameX="-49" frameY="-49" frameWidth="856" frameHeight="856"/>
+	<SubTexture name="rebote0010" x="0" y="830" width="800" height="800" frameX="-49" frameY="-49" frameWidth="856" frameHeight="856"/>
+	<SubTexture name="rebote0011" x="0" y="830" width="800" height="800" frameX="-49" frameY="-49" frameWidth="856" frameHeight="856"/>
+	<SubTexture name="rebote0012" x="0" y="830" width="800" height="800" frameX="-49" frameY="-49" frameWidth="856" frameHeight="856"/>
+	<SubTexture name="rebote0013" x="0" y="830" width="800" height="800" frameX="-49" frameY="-49" frameWidth="856" frameHeight="856"/>
+	<SubTexture name="rebote0014" x="0" y="830" width="800" height="800" frameX="-49" frameY="-49" frameWidth="856" frameHeight="856"/>
+	<SubTexture name="credits_select0000" x="0" y="830" width="800" height="800" frameX="0" frameY="0" frameWidth="856" frameHeight="856"/>
+	<SubTexture name="credits_select0001" x="0" y="830" width="800" height="800" frameX="0" frameY="0" frameWidth="856" frameHeight="856"/>
+	<SubTexture name="credits_select0002" x="800" y="830" width="800" height="800"/>
+	<SubTexture name="credits_select0003" x="800" y="830" width="800" height="800"/>
+	<SubTexture name="credits_select0004" x="0" y="830" width="800" height="800" frameX="0" frameY="0" frameWidth="856" frameHeight="856"/>
+	<SubTexture name="credits_select0005" x="0" y="830" width="800" height="800" frameX="0" frameY="0" frameWidth="856" frameHeight="856"/>
+	<SubTexture name="credits_select0006" x="800" y="830" width="800" height="800"/>
+	<SubTexture name="credits_select0007" x="800" y="830" width="800" height="800"/>
+	<SubTexture name="credits_select0008" x="0" y="830" width="800" height="800" frameX="0" frameY="0" frameWidth="856" frameHeight="856"/>
+	<SubTexture name="credits_select0009" x="0" y="830" width="800" height="800" frameX="0" frameY="0" frameWidth="856" frameHeight="856"/>
+	<SubTexture name="credits_select0010" x="800" y="830" width="800" height="800"/>
+	<SubTexture name="credits_select0011" x="800" y="830" width="800" height="800"/>
+	<SubTexture name="credits_select0012" x="0" y="830" width="800" height="800" frameX="0" frameY="0" frameWidth="856" frameHeight="856"/>
+	<SubTexture name="credits_select0013" x="0" y="830" width="800" height="800" frameX="0" frameY="0" frameWidth="856" frameHeight="856"/>
+	<SubTexture name="credits_select0014" x="800" y="830" width="800" height="800"/>
+	<SubTexture name="credits_select0015" x="800" y="830" width="800" height="800"/>
 </TextureAtlas>

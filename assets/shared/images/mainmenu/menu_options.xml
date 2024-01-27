@@ -1,17 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TextureAtlas imagePath="menu_options.png">
-	<!-- Created with Adobe Animate version 21.0.1.37179 -->
+	<!-- Created with Adobe Animate version 22.0.3.179 -->
 	<!-- http://www.adobe.com/products/animate.html -->
-	<SubTexture name="options basic0000" x="4" y="4" width="487" height="111" pivotX="14.15" pivotY="11.95"/>
-	<SubTexture name="options basic0001" x="4" y="4" width="487" height="111"/>
-	<SubTexture name="options basic0002" x="4" y="4" width="487" height="111"/>
-	<SubTexture name="options basic0003" x="491" y="4" width="487" height="111"/>
-	<SubTexture name="options basic0004" x="491" y="4" width="487" height="111"/>
-	<SubTexture name="options basic0005" x="491" y="4" width="487" height="111"/>
-	<SubTexture name="options basic0006" x="4" y="115" width="487" height="111"/>
-	<SubTexture name="options basic0007" x="4" y="115" width="487" height="111"/>
-	<SubTexture name="options basic0008" x="4" y="115" width="487" height="111"/>
-	<SubTexture name="options white0000" x="4" y="226" width="606" height="155" pivotX="18.2" pivotY="23.95" frameX="-2" frameY="-1" frameWidth="610" frameHeight="163"/>
-	<SubTexture name="options white0001" x="4" y="381" width="607" height="158" frameX="-3" frameY="-1" frameWidth="610" frameHeight="163"/>
-	<SubTexture name="options white0002" x="4" y="539" width="610" height="163"/>
+	<SubTexture name="menu_options0000" x="0" y="0" width="1280" height="720"/>
+	<SubTexture name="menu_options0001" x="1280" y="0" width="1280" height="720"/>
+	<SubTexture name="menu_options0002" x="1280" y="0" width="1280" height="720"/>
+	<SubTexture name="menu_options0003" x="0" y="0" width="1280" height="720"/>
+	<SubTexture name="menu_options0004" x="1280" y="0" width="1280" height="720"/>
+	<SubTexture name="menu_options0005" x="1280" y="0" width="1280" height="720"/>
+	<SubTexture name="menu_options0006" x="0" y="0" width="1280" height="720"/>
+	<SubTexture name="menu_options0007" x="1280" y="0" width="1280" height="720"/>
+	<SubTexture name="menu_options0008" x="1280" y="0" width="1280" height="720"/>
+	<SubTexture name="menu_options0009" x="0" y="0" width="1280" height="720"/>
+	<SubTexture name="menu_options0010" x="1280" y="0" width="1280" height="720"/>
+	<SubTexture name="menu_options0011" x="1280" y="0" width="1280" height="720"/>
+	<SubTexture name="options_select0000" x="2560" y="0" width="1285" height="725"/>
+	<SubTexture name="options_select0001" x="0" y="725" width="1285" height="725"/>
+	<SubTexture name="options_select0002" x="0" y="725" width="1285" height="725"/>
+	<SubTexture name="options_select0003" x="2560" y="0" width="1285" height="725"/>
+	<SubTexture name="options_select0004" x="1285" y="725" width="1285" height="725"/>
+	<SubTexture name="options_select0005" x="1285" y="725" width="1285" height="725"/>
+	<SubTexture name="options_select0006" x="2560" y="0" width="1285" height="725"/>
+	<SubTexture name="options_select0007" x="1285" y="725" width="1285" height="725"/>
+	<SubTexture name="options_select0008" x="1285" y="725" width="1285" height="725"/>
+	<SubTexture name="options_select0009" x="2560" y="0" width="1285" height="725"/>
+	<SubTexture name="options_select0010" x="1285" y="725" width="1285" height="725"/>
+	<SubTexture name="options_select0011" x="1285" y="725" width="1285" height="725"/>
 </TextureAtlas>
