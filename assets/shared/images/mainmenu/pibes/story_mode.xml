@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="story_mode.png">
+	<!-- Created with Adobe Animate version 23.0.1.70 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="idle0000" x="0" y="0" width="3281" height="2714" frameX="-61" frameY="-120" frameWidth="3435" frameHeight="2834"/>
+	<SubTexture name="idle0001" x="0" y="0" width="3281" height="2714" frameX="-61" frameY="-120" frameWidth="3435" frameHeight="2834"/>
+	<SubTexture name="idle0002" x="3281" y="0" width="3352" height="2799" frameX="-27" frameY="-35" frameWidth="3435" frameHeight="2834"/>
+	<SubTexture name="idle0003" x="3281" y="0" width="3352" height="2799" frameX="-27" frameY="-35" frameWidth="3435" frameHeight="2834"/>
+	<SubTexture name="idle0004" x="0" y="2799" width="3435" height="2834"/>
+	<SubTexture name="idle0005" x="0" y="2799" width="3435" height="2834"/>
+	<SubTexture name="idle0006" x="3435" y="2799" width="3401" height="2793" frameX="-19" frameY="-41" frameWidth="3435" frameHeight="2834"/>
+	<SubTexture name="idle0007" x="3435" y="2799" width="3401" height="2793" frameX="-19" frameY="-41" frameWidth="3435" frameHeight="2834"/>
+</TextureAtlas>
