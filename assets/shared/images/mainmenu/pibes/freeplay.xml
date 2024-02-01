@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="freeplay.png">
+	<!-- Created with Adobe Animate version 23.0.1.70 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="idle0000" x="0" y="0" width="3331" height="3239" frameX="-34" frameY="-97" frameWidth="3428" frameHeight="3376"/>
+	<SubTexture name="idle0001" x="0" y="0" width="3331" height="3239" frameX="-34" frameY="-97" frameWidth="3428" frameHeight="3376"/>
+	<SubTexture name="idle0002" x="3331" y="0" width="3381" height="3269" frameX="0" frameY="-65" frameWidth="3428" frameHeight="3376"/>
+	<SubTexture name="idle0003" x="3331" y="0" width="3381" height="3269" frameX="0" frameY="-65" frameWidth="3428" frameHeight="3376"/>
+	<SubTexture name="idle0004" x="0" y="3269" width="3383" height="3363" frameX="-45" frameY="-13" frameWidth="3428" frameHeight="3376"/>
+	<SubTexture name="idle0005" x="0" y="3269" width="3383" height="3363" frameX="-45" frameY="-13" frameWidth="3428" frameHeight="3376"/>
+	<SubTexture name="idle0006" x="3383" y="3269" width="3366" height="3302" frameX="-55" frameY="0" frameWidth="3428" frameHeight="3376"/>
+	<SubTexture name="idle0007" x="3383" y="3269" width="3366" height="3302" frameX="-55" frameY="0" frameWidth="3428" frameHeight="3376"/>
+</TextureAtlas>

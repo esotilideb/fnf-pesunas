@@ -18,10 +18,10 @@ class MainMenuState extends MusicBeatState
 		'story_mode',
 		'freeplay',
 		'options',
-		'credits'
 	];
 
-	var magenta:FlxSprite;
+	var people:FlxSprite;
+	var chaval:FlxSprite;
 	var camFollow:FlxObject;
 
 	override function create()
@@ -49,6 +49,16 @@ class MainMenuState extends MusicBeatState
         bg.animation.addByPrefix('ostia', 'Estrellas', 16, true);
         bg.animation.play('ostia');
         add(bg);
+
+		chaval = new FlxSprite(-900,-200);
+		chaval.frames = Paths.getSparrowAtlas('mainmenu/pibes/' + optionShit[curSelected]);
+		chaval.scrollFactor.set(0);
+		chaval.screenCenter(Y);
+		chaval.setGraphicSize(Std.int(chaval.width * 0.27));
+		chaval.animation.addByPrefix('Manos en el ano', 'idle', 24); //nothing
+		chaval.animation.play('Manos en el ano');
+		chaval.antialiasing = ClientPrefs.data.antialiasing;
+		add(chaval);
 		
 		var actualBG = new FlxSprite(600, 300).loadGraphic(Paths.image('mainmenu/bg'));
 		actualBG.screenCenter();
@@ -85,20 +95,25 @@ class MainMenuState extends MusicBeatState
 				 menuItem.setPosition(40,15);	
 				case 2:
 				 menuItem.setPosition(60,50);	
-				case 3:
+				/*case 3:
 				 menuItem.setPosition(520, -40);	
+				 menuItem.setGraphicSize(Std.int(menuItem.width * 0.5));*/
 
 			}
 		}
 
-		var psychVer:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + psychEngineVersion, 12);
-		psychVer.scrollFactor.set();
-		psychVer.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(psychVer);
-		var fnfVer:FlxText = new FlxText(12, FlxG.height - 24, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
-		fnfVer.scrollFactor.set();
-		fnfVer.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(fnfVer);
+		people = new FlxSprite(-950, -100);
+		people.frames = Paths.getSparrowAtlas('mainmenu/people');
+		people.screenCenter();
+		people.scrollFactor.set(0);
+		people.setGraphicSize(Std.int(people.width * 0.5));
+		people.antialiasing = false;
+		people.animation.addByPrefix('idle', 'people-normal', 24, true); //nothing
+		people.animation.addByPrefix('rebote', 'rebote', 24, true); //nothing
+		people.animation.addByPrefix('selected', 'seleccionado', 24, true); //nothing
+		people.animation.play('idle');
+		add(people);	
+
 		changeItem();
 
 		#if ACHIEVEMENTS_ALLOWED
@@ -118,6 +133,8 @@ class MainMenuState extends MusicBeatState
 	}
 
 	var selectedSomethin:Bool = false;
+	var canClick:Bool = true;
+	var usingMouse:Bool = false;
 
 	override function update(elapsed:Float)
 	{
@@ -130,11 +147,44 @@ class MainMenuState extends MusicBeatState
 
 		if (!selectedSomethin)
 		{
+			/*FlxG.mouse.visible = true;
+			if(usingMouse)
+				{
+					if(!FlxG.mouse.overlaps(people))
+						people.animation.play('idle');
+				}
+			
+			if (FlxG.mouse.overlaps(people))
+				{
+					if(canClick)
+					{
+						curSelected = people.ID;
+						usingMouse = true;
+						people.animation.play('selected');
+					}
+							
+					if(FlxG.mouse.pressed && canClick)
+						goToState();
+				}
+			
+				people.updateHitbox();*/
+				
 			if (controls.UI_UP_P)
 				changeItem(-1);
 
 			if (controls.UI_DOWN_P)
 				changeItem(1);
+
+			if(controls.UI_UP || controls.UI_DOWN)
+				{
+					chaval.x = 1200;
+					new FlxTimer().start(0.2, function(tmr:FlxTimer)
+						{
+							chaval.frames = Paths.getSparrowAtlas('mainmenu/pibes/' + optionShit[curSelected]);
+							chaval.animation.play('Manos en el ano');
+							FlxTween.tween(chaval,{x: -900},0.2,{ease:FlxEase.cubeOut});
+						});
+				}
 
 			if (controls.BACK)
 			{
@@ -200,6 +250,14 @@ class MainMenuState extends MusicBeatState
 
 		super.update(elapsed);
 	}
+
+	function goToState()
+		{
+			canClick = false;
+			selectedSomethin = true;
+
+			FlxG.switchState(new CreditsState());	
+		}
 
 	function changeItem(huh:Int = 0)
 	{
