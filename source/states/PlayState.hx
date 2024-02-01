@@ -63,7 +63,7 @@ import tea.SScript;
 /**
  * This is where all the Gameplay stuff happens and is managed
  *
- * here's some useful tips if you are making a mod in source:
+ * here's some useful tips if you are making a mod in source
  *
  * If you want to add your stage to the game, copy states/stages/Template.hx,
  * and put your stage code there, then, on PlayState, search for
