@@ -9,9 +9,7 @@ class Template extends BaseStage
 
 	override function create()
 	{
-		// Spawn your stage sprites here.
-		// Characters are not ready yet on this function, so you can't add things above them yet.
-		// Use createPost() if that's what you want to do.
+	
 	}
 	
 	override function createPost()
