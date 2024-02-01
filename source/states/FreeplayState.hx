@@ -45,7 +45,8 @@ class FreeplayState extends MusicBeatState
     {
         var songArray:Array<Array<String>> = [
             ['Lunar-magic', "WEEK 1 - Mago VS BF"],
-            ['fresh', "EXTRA - Mago VS Mago?"]
+            ['fresh', "WEEK 1 - Mago VS Mago?"],
+            ['Tops', "EXTRA - Pepe VS Nerd"]
         ];
 
         for (i in 0...songArray.length)
@@ -53,7 +54,9 @@ class FreeplayState extends MusicBeatState
             addSong(songArray[i][0], 1, "dad", songArray[i][1]);
         }
 
-        var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, 0xFF0500b1);
+		var bg = new FlxSprite().loadGraphic(Paths.image('freeplayshit/bg'));
+		bg.antialiasing = ClientPrefs.data.antialiasing;
+		bg.screenCenter();
         add(bg);
 
         var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0xFF002FFF, FlxColor.TRANSPARENT));
