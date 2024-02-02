@@ -265,6 +265,8 @@ class PlayState extends MusicBeatState
 	public var startCallback:Void->Void = null;
 	public var endCallback:Void->Void = null;
 
+	var effect:SMWPixelBlurShader;
+
 	override public function create()
 	{
 		//trace('Playback Rate: ' + playbackRate);
@@ -384,7 +386,8 @@ class PlayState extends MusicBeatState
 		switch (curStage)
 		{
 			case 'stage': new states.stages.StageWeek1(); //Week 1
-			case 'retroPlace': new states.stages.RetroPlace(); //camGame.bgColor = 0x98b1dc; Tops 
+			case 'PepeHouse': new states.stages.PepeHouse();
+			case 'RetroPlace': new states.stages.RetroPlace();
 		}
 
 		if(isPixelStage) {
@@ -524,14 +527,14 @@ class PlayState extends MusicBeatState
 		healthBar.leftToRight = false;
 		healthBar.scrollFactor.set();
 		healthBar.visible = !ClientPrefs.data.hideHud;
-		healthBar.alpha = ClientPrefs.data.healthBarAlpha;
+		healthBar.alpha = 0;
 		reloadHealthBarColors();
 		uiGroup.add(healthBar);
 
 		iconP1 = new HealthIcon(boyfriend.healthIcon, true);
 		iconP1.y = healthBar.y - 75;
 		iconP1.visible = !ClientPrefs.data.hideHud;
-		iconP1.alpha = ClientPrefs.data.healthBarAlpha;
+		iconP1.alpha = 0;
 		uiGroup.add(iconP1);
 
 		iconP2 = new HealthIcon(dad.healthIcon, false);
@@ -543,6 +546,7 @@ class PlayState extends MusicBeatState
 		scoreTxt = new FlxText(0, healthBar.y + 40, FlxG.width, "", 20);
 		scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
+		scoreTxt.alpha = 0;
 		scoreTxt.borderSize = 1.25;
 		scoreTxt.visible = !ClientPrefs.data.hideHud;
 		updateScore(false);
@@ -1226,8 +1230,24 @@ class PlayState extends MusicBeatState
 
 		// Song duration in a float, useful for the time left feature
 		songLength = FlxG.sound.music.length;
-		FlxTween.tween(timeBar, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
-		FlxTween.tween(timeTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+		switch (curStage) {
+			case 'PepeHouse':
+				new FlxTimer().start(1.2, function(deadTime:FlxTimer)
+					{
+						FlxTween.tween(timeBar, {alpha: 1}, 20, {ease: FlxEase.quadInOut});
+						FlxTween.tween(timeTxt, {alpha: 1}, 20, {ease: FlxEase.quadInOut});
+						FlxTween.tween(scoreTxt, {alpha: 1}, 15, {ease: FlxEase.quadInOut});
+						FlxTween.tween(iconP1, {alpha: ClientPrefs.data.healthBarAlpha}, 15, {ease: FlxEase.quadInOut});
+						FlxTween.tween(healthBar, {alpha: ClientPrefs.data.healthBarAlpha}, 15, {ease: FlxEase.quadInOut});
+					});
+
+			default:
+				scoreTxt.alpha = 1;
+				iconP1.alpha = ClientPrefs.data.healthBarAlpha;
+
+				FlxTween.tween(timeBar, {alpha: 1}, 0.5, {ease: FlxEase.quadInOut});
+				FlxTween.tween(timeTxt, {alpha: 1}, 0.5, {ease: FlxEase.quadInOut});
+		}
 
 		#if desktop
 		// Updating Discord Rich Presence (with Time Left)
@@ -1625,6 +1645,7 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
+
 		if(!inCutscene && !paused && !freezeCamera) {
 			FlxG.camera.followLerp = 0.04 * cameraSpeed * playbackRate;
 			if(!startingSong && !endingSong && boyfriend.getAnimationName().startsWith('idle')) {
@@ -3152,6 +3173,14 @@ class PlayState extends MusicBeatState
 			setOnScripts('mustHitSection', SONG.notes[curSection].mustHitSection);
 			setOnScripts('altAnim', SONG.notes[curSection].altAnim);
 			setOnScripts('gfSection', SONG.notes[curSection].gfSection);
+
+			switch (curStage) {
+				case 'PepeHouse':
+					if (SONG.notes[curSection].mustHitSection)
+						defaultCamZoom = 1.1;
+					else
+						defaultCamZoom = 0.6;
+			}
 		}
 		super.sectionHit();
 

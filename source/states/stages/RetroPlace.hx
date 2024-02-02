@@ -14,13 +14,16 @@ class RetroPlace extends BaseStage
 		bg.updateHitbox();
 		add(bg);
 
-		var nubes:BGSprite = new BGSprite('stages/1-1/nubes', -600, -200, 0.9, 0.9);
+		var nubes:BGSprite  = new BGSprite('stages/1-1/nubes', -600, -200, 0.9, 0.9);
 		nubes.updateHitbox();
 		add(nubes);
 
-		var blocks:BGSprite = new BGSprite('stages/1-1/bloque', -650, -200, 0.9, 0.9);
+		var blocks:BGSprite  = new BGSprite('stages/1-1/bloque', -650, -200, 0.9, 0.9);
 		add(blocks);
 
-		camGame.bgColor = 0x98b1dc;
+		/*retro = new BGSprite('stages/1-1/retro', -600, -200, 0.9, 0.9);
+		retro.updateHitbox();
+		retro.visible = true;
+		add(retro);*/
 	}
 }

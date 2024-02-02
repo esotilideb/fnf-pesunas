@@ -2,8 +2,19 @@
 	"animations": [
 		{
 			"offsets": [
-				4,
-				-300
+				505,
+				170
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "idle"
+		},
+		{
+			"offsets": [
+				575,
+				163
 			],
 			"loop": false,
 			"fps": 24,
@@ -13,8 +24,8 @@
 		},
 		{
 			"offsets": [
-				-30,
-				-289
+				573,
+				160
 			],
 			"loop": false,
 			"fps": 24,
@@ -24,8 +35,8 @@
 		},
 		{
 			"offsets": [
-				-62,
-				-192
+				473,
+				185
 			],
 			"loop": false,
 			"fps": 24,
@@ -35,8 +46,8 @@
 		},
 		{
 			"offsets": [
-				-38,
-				-302
+				469,
+				171
 			],
 			"loop": false,
 			"fps": 24,
@@ -46,34 +57,34 @@
 		},
 		{
 			"offsets": [
-				-41,
-				-297
+				533,
+				185
 			],
-			"loop": true,
+			"loop": false,
 			"fps": 24,
-			"anim": "idle",
+			"anim": "hey",
 			"indices": [],
-			"name": "idle"
+			"name": "hey"
 		}
 	],
-	"no_antialiasing": true,
-	"image": "characters/nerd",
+	"no_antialiasing": false,
+	"image": "characters/bf_ball",
 	"position": [
 		0,
-		0
+		350
 	],
-	"healthicon": "dad",
+	"healthicon": "bf-ball",
 	"flip_x": true,
 	"healthbar_colors": [
-		175,
-		102,
-		206
+		49,
+		176,
+		209
 	],
 	"camera_position": [
-		-170,
-		100
+		190,
+		-40
 	],
-	"sing_duration": 6.1,
-	"scale": 2.2,
-	"_editor_isPlayer": false
+	"sing_duration": 4,
+	"scale": 0.4,
+	"_editor_isPlayer": true
 }
