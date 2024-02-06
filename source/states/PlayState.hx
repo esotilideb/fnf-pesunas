@@ -9,6 +9,7 @@ import backend.Rating;
 
 import flixel.FlxBasic;
 import flixel.FlxObject;
+import openfl.Lib;
 import flixel.FlxSubState;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.util.FlxSort;
@@ -194,6 +195,12 @@ class PlayState extends MusicBeatState
 	public var healthGain:Float = 1;
 	public var healthLoss:Float = 1;
 
+	var canMove:Bool = false;
+	var isUsing:Bool = false;
+
+	var winx:Int;
+	var winy:Int;
+
 	public var guitarHeroSustains:Bool = false;
 	public var instakillOnMiss:Bool = false;
 	public var cpuControlled:Bool = false;
@@ -239,7 +246,9 @@ class PlayState extends MusicBeatState
 	// Discord RPC variables
 	var storyDifficultyText:String = "";
 	var detailsText:String = "";
+	var discordScore:String = "";
 	var detailsPausedText:String = "";
+	var discName:String = "lunarmagic";
 	#end
 
 	//Achievement shit
@@ -291,6 +300,9 @@ class PlayState extends MusicBeatState
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();
 
+		winx = Lib.application.window.x;
+		winy = Lib.application.window.y;
+
 		// Gameplay settings
 		healthGain = ClientPrefs.getGameplaySetting('healthgain');
 		healthLoss = ClientPrefs.getGameplaySetting('healthloss');
@@ -301,7 +313,6 @@ class PlayState extends MusicBeatState
 
 		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = initPsychCamera();
-		camGame.bgColor = 0x98b1dc;
 		camHUD = new FlxCamera();
 		camOther = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
@@ -326,10 +337,7 @@ class PlayState extends MusicBeatState
 		storyDifficultyText = Difficulty.getString();
 
 		// String that contains the mode defined here so it isn't necessary to call changePresence for each mode
-		if (isStoryMode)
-			detailsText = "Story Mode: " + WeekData.getCurrentWeek().weekName;
-		else
-			detailsText = "Freeplay";
+			detailsText = SONG.song;
 
 		// String for when the game is paused
 		detailsPausedText = "Paused - " + detailsText;
@@ -385,9 +393,9 @@ class PlayState extends MusicBeatState
 
 		switch (curStage)
 		{
-			case 'stage': new states.stages.StageWeek1(); //Week 1
-			case 'PepeHouse': new states.stages.PepeHouse();
-			case 'RetroPlace': new states.stages.RetroPlace();
+			case 'PepeHouse': new states.stages.PepeHouse(); //WEEK 1
+			case 'RetroPlace': new states.stages.RetroPlace(); //TOPS
+			case 'EteSech': new states.stages.EteSech(); //HORROR-PEPE.MIEDO
 		}
 
 		if(isPixelStage) {
@@ -527,14 +535,14 @@ class PlayState extends MusicBeatState
 		healthBar.leftToRight = false;
 		healthBar.scrollFactor.set();
 		healthBar.visible = !ClientPrefs.data.hideHud;
-		healthBar.alpha = 0;
+		healthBar.alpha = ClientPrefs.data.healthBarAlpha;
 		reloadHealthBarColors();
 		uiGroup.add(healthBar);
 
 		iconP1 = new HealthIcon(boyfriend.healthIcon, true);
 		iconP1.y = healthBar.y - 75;
 		iconP1.visible = !ClientPrefs.data.hideHud;
-		iconP1.alpha = 0;
+		iconP1.alpha = ClientPrefs.data.healthBarAlpha;
 		uiGroup.add(iconP1);
 
 		iconP2 = new HealthIcon(dad.healthIcon, false);
@@ -544,13 +552,22 @@ class PlayState extends MusicBeatState
 		uiGroup.add(iconP2);
 
 		scoreTxt = new FlxText(0, healthBar.y + 40, FlxG.width, "", 20);
-		scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		if (curStage == 'PepeHouse')
+			scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		else
+			scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
-		scoreTxt.alpha = 0;
-		scoreTxt.borderSize = 1.25;
+		scoreTxt.borderSize = 1.5;
 		scoreTxt.visible = !ClientPrefs.data.hideHud;
 		updateScore(false);
 		uiGroup.add(scoreTxt);
+
+		switch (curStage) {
+			case 'PepeHouse':
+				scoreTxt.alpha = 0;
+				iconP1.alpha = 0;
+				healthBar.alpha = 0;
+		}
 
 		botplayTxt = new FlxText(400, timeBar.y + 55, FlxG.width - 800, "BOTPLAY", 32);
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -639,6 +656,8 @@ class PlayState extends MusicBeatState
 					Paths.music(key);
 			}
 		}
+
+		discName = PlayState.SONG.song.replace(' ', '');
 
 		super.create();
 		Paths.clearUnusedMemory();
@@ -1128,20 +1147,28 @@ class PlayState extends MusicBeatState
 		if(totalPlayed != 0)
 		{
 			var percent:Float = CoolUtil.floorDecimal(ratingPercent * 100, 2);
-			str = '${percent}% - ${ratingFC}';
+			str = '${percent}% ${ratingFC}';
 		}
 
-		var tempScore:String = '
-		Score: ${songScore}' + (!instakillOnMiss ? '
-		Misses: ${songMisses}' : "") + '
-		Accuracy: ${str}';
+		var tempScore:String = '';
+		if (curStage == 'PepeHouse') {
+			tempScore = '
+			Score: ${songScore}' + (!instakillOnMiss ? '
+			Misses: ${songMisses}' : "") + '
+			Accuracy: ${str}';
+		}
+		else
+			tempScore = 'Score: ${songScore}' + (!instakillOnMiss ? ' / Misses: ${songMisses}' : "") + ' / Accuracy: ${str}';
 		// "tempScore" variable is used to prevent another memory leak, just in case
 		// "\n" here prevents the text from being cut off by beat zooms
+
 		scoreTxt.text = '${tempScore}\n';
 
 		if (!miss && !cpuControlled)
 			doScoreBop();
 
+		discordScore = scoreTxt.text;
+		DiscordClient.changePresence(detailsText, discName.toLowerCase(), discordScore.toLowerCase());
 		callOnScripts('onUpdateScore', [miss]);
 	}
 
@@ -1155,13 +1182,13 @@ class PlayState extends MusicBeatState
 		ratingFC = "";
 		if(songMisses == 0)
 		{
-			if (bads > 0 || shits > 0) ratingFC = 'FC';
-			else if (goods > 0) ratingFC = 'GFC';
-			else if (sicks > 0) ratingFC = 'SFC';
+			if (bads > 0 || shits > 0) ratingFC = '- FC';
+			else if (goods > 0) ratingFC = '- GFC';
+			else if (sicks > 0) ratingFC = '- PFC';
 		}
 		else {
-			if (songMisses < 10) ratingFC = 'SDCB';
-			else ratingFC = 'Clear';
+			if (songMisses < 10) ratingFC = '- SDCB';
+			else ratingFC = '';
 		}
 	}
 
@@ -1232,26 +1259,33 @@ class PlayState extends MusicBeatState
 		songLength = FlxG.sound.music.length;
 		switch (curStage) {
 			case 'PepeHouse':
-				new FlxTimer().start(1.2, function(deadTime:FlxTimer)
-					{
-						FlxTween.tween(timeBar, {alpha: 1}, 20, {ease: FlxEase.quadInOut});
-						FlxTween.tween(timeTxt, {alpha: 1}, 20, {ease: FlxEase.quadInOut});
-						FlxTween.tween(scoreTxt, {alpha: 1}, 15, {ease: FlxEase.quadInOut});
-						FlxTween.tween(iconP1, {alpha: ClientPrefs.data.healthBarAlpha}, 15, {ease: FlxEase.quadInOut});
-						FlxTween.tween(healthBar, {alpha: ClientPrefs.data.healthBarAlpha}, 15, {ease: FlxEase.quadInOut});
-					});
-
-			default:
-				scoreTxt.alpha = 1;
-				iconP1.alpha = ClientPrefs.data.healthBarAlpha;
-
-				FlxTween.tween(timeBar, {alpha: 1}, 0.5, {ease: FlxEase.quadInOut});
-				FlxTween.tween(timeTxt, {alpha: 1}, 0.5, {ease: FlxEase.quadInOut});
+				if (backend.BaseStage.exe == "but.exe/") {
+					new FlxTimer().start(10.5, function(deadTime:FlxTimer)
+						{
+							timeBar.alpha = 1;
+							timeTxt.alpha = 1;
+							scoreTxt.alpha = 1;
+							iconP1.alpha = ClientPrefs.data.healthBarAlpha;
+							healthBar.alpha = ClientPrefs.data.healthBarAlpha;
+							FlxG.camera.flash(FlxColor.WHITE, 1);
+						});
+				}
+				else {
+					new FlxTimer().start(1.2, function(deadTime:FlxTimer)
+						{
+							FlxTween.tween(timeBar, {alpha: 1}, 20, {ease: FlxEase.quadInOut});
+							FlxTween.tween(timeTxt, {alpha: 1}, 20, {ease: FlxEase.quadInOut});
+							FlxTween.tween(scoreTxt, {alpha: 1}, 15, {ease: FlxEase.quadInOut});
+							FlxTween.tween(iconP1, {alpha: ClientPrefs.data.healthBarAlpha}, 15, {ease: FlxEase.quadInOut});
+							FlxTween.tween(healthBar, {alpha: ClientPrefs.data.healthBarAlpha}, 15, {ease: FlxEase.quadInOut});
+						});
+				}
 		}
 
 		#if desktop
 		// Updating Discord Rich Presence (with Time Left)
-		if(autoUpdateRPC) DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), true, songLength);
+		if(autoUpdateRPC) DiscordClient.changePresence(detailsText, discName.toLowerCase(), discordScore.toLowerCase(), true, songLength);
+		trace('logo: ' + discName.toLowerCase());
 		#end
 		setOnScripts('songLength', songLength);
 		callOnScripts('onSongStart');
@@ -1495,7 +1529,7 @@ class PlayState extends MusicBeatState
 			var targetAlpha:Float = 1;
 			if (player < 1)
 			{
-				if(!ClientPrefs.data.opponentStrums) targetAlpha = 0;
+				if(!ClientPrefs.data.opponentStrums || curStage == 'PepeHouse') targetAlpha = 0;
 				else if(ClientPrefs.data.middleScroll) targetAlpha = 0.35;
 			}
 
@@ -1599,7 +1633,7 @@ class PlayState extends MusicBeatState
 	override public function onFocusLost():Void
 	{
 		#if desktop
-		if (health > 0 && !paused && autoUpdateRPC) DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+		if (health > 0 && !paused && autoUpdateRPC) DiscordClient.changePresence(detailsPausedText, discName.toLowerCase(), discordScore.toLowerCase());
 		#end
 
 		super.onFocusLost();
@@ -1613,9 +1647,9 @@ class PlayState extends MusicBeatState
 		if(!autoUpdateRPC) return;
 
 		if (showTime)
-			DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), true, songLength - Conductor.songPosition - ClientPrefs.data.noteOffset);
+			DiscordClient.changePresence(detailsText, discName.toLowerCase(), discordScore.toLowerCase(), true, songLength - Conductor.songPosition - ClientPrefs.data.noteOffset);
 		else
-			DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+			DiscordClient.changePresence(detailsText, discName.toLowerCase(), discordScore.toLowerCase());
 		#end
 	}
 
@@ -1661,6 +1695,15 @@ class PlayState extends MusicBeatState
 		callOnScripts('onUpdate', [elapsed]);
 
 		super.update(elapsed);
+
+		if (isUsing) {
+			if (canMove) {
+				Lib.application.window.move(FlxG.random.int(-500, 500), FlxG.random.int(-500,500));
+			} else {
+				Lib.application.window.move(winx, winy);
+				isUsing = false;
+			}
+		}
 
 		setOnScripts('curDecStep', curDecStep);
 		setOnScripts('curDecBeat', curDecBeat);
@@ -1845,7 +1888,9 @@ class PlayState extends MusicBeatState
 	public dynamic function updateIconsPosition()
 	{
 		var iconOffset:Int = 26;
-		if (SONG.song == "Tops") {
+		if (curStage == "PepeHouse") 
+			iconP1.x = iconP1.x;
+		else {
 			iconP1.x = healthBar.barCenter + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
 			iconP2.x = healthBar.barCenter - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
 		}
@@ -1893,7 +1938,7 @@ class PlayState extends MusicBeatState
 		openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 
 		#if desktop
-		if(autoUpdateRPC) DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+		if(autoUpdateRPC) DiscordClient.changePresence(detailsPausedText, discName.toLowerCase(), discordScore.toLowerCase());
 		#end
 	}
 
@@ -1954,7 +1999,7 @@ class PlayState extends MusicBeatState
 
 				#if desktop
 				// Game Over doesn't get his its variable because it's only used here
-				if(autoUpdateRPC) DiscordClient.changePresence("Game Over - " + detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+				if(autoUpdateRPC) DiscordClient.changePresence("Game Over - " + detailsText, discName.toLowerCase(), discordScore.toLowerCase());
 				#end
 				isDead = true;
 				return true;
@@ -1990,6 +2035,16 @@ class PlayState extends MusicBeatState
 		if(Math.isNaN(flValue2)) flValue2 = null;
 
 		switch(eventName) {
+			case 'horror pepe window shit':
+				switch(value1.toLowerCase().trim()) {
+					case 'true':
+						canMove = true;
+						isUsing = true;
+					case 'false':
+						canMove = false;
+						Lib.application.window.move(winx, winy);
+				}
+
 			case 'Hey!':
 				var value:Int = 2;
 				switch(value1.toLowerCase().trim()) {
@@ -2915,14 +2970,23 @@ class PlayState extends MusicBeatState
 
 			var char:Character = dad;
 			var animToPlay:String = singAnimations[Std.int(Math.abs(Math.min(singAnimations.length-1, note.noteData)))] + altAnim;
-			if(note.gfNote) char = gf;
+			if(note.gfNote) { char = gf; iconP2.changeIcon(gf.healthIcon);}
 
 			if(char != null)
 			{
+				iconP2.scale.set(1.2, 1.2);
+				iconP2.updateHitbox();
+
 				char.playAnim(animToPlay, true);
 				char.holdTimer = 0;
 			}
 		}
+
+	if(dad.curCharacter == 'horror_pepe' || dad.curCharacter == 'pepe'){
+		if (health > 0.3 + note.hitHealth){
+			health -= note.hitHealth + 0.0015;
+		}
+	}
 
 		vocals.volume = 1;
 		strumPlayAnim(true, Std.int(Math.abs(note.noteData)), Conductor.stepCrochet * 1.25 / 1000 / playbackRate);

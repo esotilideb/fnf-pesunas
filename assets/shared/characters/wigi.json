@@ -1,0 +1,79 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				319,
+				423
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "idle",
+			"loop": false,
+			"name": "idleluigi"
+		},
+		{
+			"offsets": [
+				418,
+				448
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singLEFT",
+			"loop": false,
+			"name": "leftluigi"
+		},
+		{
+			"offsets": [
+				290,
+				390
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singDOWN",
+			"loop": false,
+			"name": "downluigi"
+		},
+		{
+			"offsets": [
+				530,
+				570
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singUP",
+			"loop": false,
+			"name": "upluigi"
+		},
+		{
+			"offsets": [
+				400,
+				460
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singRIGHT",
+			"loop": false,
+			"name": "rightluigi"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/yosyluigimmamamia",
+	"position": [
+		0,
+		0
+	],
+	"healthicon": "face",
+	"flip_x": false,
+	"healthbar_colors": [
+		161,
+		161,
+		161
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 4,
+	"scale": 0.4,
+	"_editor_isPlayer": false
+}

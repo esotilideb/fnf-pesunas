@@ -1,0 +1,79 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				186,
+				101
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "idle",
+			"loop": false,
+			"name": "pepito_idle"
+		},
+		{
+			"offsets": [
+				280,
+				90
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singLEFT",
+			"loop": false,
+			"name": "pepito_left"
+		},
+		{
+			"offsets": [
+				201,
+				364
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singDOWN",
+			"loop": false,
+			"name": "pepito_down"
+		},
+		{
+			"offsets": [
+				120,
+				148
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singUP",
+			"loop": false,
+			"name": "pepito_up"
+		},
+		{
+			"offsets": [
+				240,
+				151
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singRIGHT",
+			"loop": false,
+			"name": "pepito_right"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/Pepito",
+	"position": [
+		0,
+		0
+	],
+	"healthicon": "face",
+	"flip_x": false,
+	"healthbar_colors": [
+		161,
+		161,
+		161
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 4,
+	"scale": 0.7,
+	"_editor_isPlayer": false
+}

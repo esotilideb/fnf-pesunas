@@ -8,7 +8,7 @@ import hxdiscord_rpc.Types;
 class DiscordClient
 {
 	public static var isInitialized:Bool = false;
-	private static final _defaultID:String = "863222024192262205";
+	private static final _defaultID:String = "1204257601538236426";
 	public static var clientID(default, set):String = _defaultID;
 	private static var presence:DiscordRichPresence = DiscordRichPresence.create();
 
@@ -79,7 +79,7 @@ class DiscordClient
 		isInitialized = true;
 	}
 
-	public static function changePresence(?details:String = 'In the Menus', ?state:Null<String>, ?smallImageKey : String, ?hasStartTimestamp : Bool, ?endTimestamp: Float)
+	public static function changePresence(?details:String = 'In the Menus', ?largeImage:String = "logo", ?state:Null<String>, ?smallImageKey : String, ?hasStartTimestamp : Bool, ?endTimestamp: Float)
 	{
 		var startTimestamp:Float = 0;
 		if (hasStartTimestamp) startTimestamp = Date.now().getTime();
@@ -87,8 +87,8 @@ class DiscordClient
 
 		presence.details = details;
 		presence.state = state;
-		presence.largeImageKey = 'icon';
-		presence.largeImageText = "Engine Version: " + states.MainMenuState.psychEngineVersion;
+		presence.largeImageKey = largeImage;
+		presence.largeImageText = "Magic Funkin' DEMO";
 		presence.smallImageKey = smallImageKey;
 		// Obtained times are in milliseconds so they are divided so Discord can use it
 		presence.startTimestamp = Std.int(startTimestamp / 1000);
