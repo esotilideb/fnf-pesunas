@@ -43,10 +43,14 @@ class FreeplayState extends MusicBeatState
 
     override function create()
     {
+        #if desktop
+          DiscordClient.changePresence("In the menus", "logo");
+        #end
         var songArray:Array<Array<String>> = [
             ['Lunar-magic', "WEEK 1 - Mago VS BF"],
-            ['fresh', "WEEK 1 - Mago VS Mago?"],
-            ['Tops', "EXTRA - Pepe VS Nerd"]
+            ['Dark-magic', "WEEK 1 - Mago VS Mago?"],
+            ['Tops', "EXTRA - Pepe VS Nerd"],
+            ['horror-pepe', "EXTRA - HORROR PEPAURI"]
         ];
 
         for (i in 0...songArray.length)
@@ -194,10 +198,17 @@ class FreeplayState extends MusicBeatState
                 try
                 {
                     PlayState.SONG = Song.loadFromJson(poop, songLowercase);
+
                     PlayState.isStoryMode = false;
                     PlayState.storyDifficulty = curDifficulty;
         
                     trace('CURRENT WEEK: ' + WeekData.getWeekFileName());
+                    trace(poop);
+
+                    if (poop == 'dark-magic')
+                        backend.BaseStage.exe = 'but.exe/';
+                    else
+                        backend.BaseStage.exe = '';
 
                     LoadingState.loadAndSwitchState(new PlayState());
                     FlxG.sound.music.volume = 0;       

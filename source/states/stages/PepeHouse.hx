@@ -10,31 +10,37 @@ class PepeHouse extends BaseStage
 	override function create()
 	{
 
-		var fg:BGSprite = new BGSprite('stages/pepe-casa/fg', -600, -200, 0.9, 0.9);
+		var fg:BGSprite = new BGSprite('stages/pepe-casa/' + backend.BaseStage.exe + 'fg', -600, -200, 0.9, 0.9);
 		fg.updateHitbox();
 		add(fg);
 
-		var arbol:BGSprite = new BGSprite('stages/pepe-casa/arbol', -600, -200, 0.9, 0.9);
+		var arbol:BGSprite = new BGSprite('stages/pepe-casa/' + backend.BaseStage.exe + 'arbol', -600, -200, 0.9, 0.9);
 		arbol.updateHitbox();
 		add(arbol);
 
-		var arbol1:BGSprite = new BGSprite('stages/pepe-casa/arboles', -600, -200, 0.9, 0.9);
+		var arbol1:BGSprite = new BGSprite('stages/pepe-casa/' + backend.BaseStage.exe + 'arboles', -600, -200, 0.9, 0.9);
 		arbol1.updateHitbox();
 		add(arbol1);
 
-		var luz:BGSprite = new BGSprite('stages/pepe-casa/luz2', -600, -200, 0.9, 0.9);
+		var luz:BGSprite = new BGSprite('stages/pepe-casa/' + backend.BaseStage.exe + 'luz2', -600, -200, 0.9, 0.9);
 		luz.updateHitbox();
 		add(luz);
 
-		var arbustos:BGSprite = new BGSprite('stages/pepe-casa/arbustos', -650, -200, 0.9, 0.9);
+		var arbustos:BGSprite = new BGSprite('stages/pepe-casa/' + backend.BaseStage.exe + 'arbustos', -650, -200, 0.9, 0.9);
 		add(arbustos);
 
-		var piso:BGSprite = new BGSprite('stages/pepe-casa/piso-casa', -600, -200, 0.9, 0.9);
+		if (backend.BaseStage.exe == "but.exe/") {
+			var puas2:BGSprite = new BGSprite('stages/pepe-casa/but.exe/coso2', -600, -200, 0.9, 0.9);
+			puas2.updateHitbox();
+			add(puas2);
+		}
+
+		var piso:BGSprite = new BGSprite('stages/pepe-casa/' + backend.BaseStage.exe + 'piso-casa', -600, -200, 0.9, 0.9);
 		piso.updateHitbox();
 		piso.scrollFactor.set(0.95, 0.95); //@Andree1x puto
 		add(piso);
 
-		var water = new BGSprite('stages/pepe-casa/agua', -600, -200, 0.9, 0.9, ['idle'], true);
+		var water = new BGSprite('stages/pepe-casa/' + backend.BaseStage.exe + 'agua', -600, -200, 0.9, 0.9, ['idle'], true);
 		water.updateHitbox();
 		add(water);
 
@@ -43,6 +49,15 @@ class PepeHouse extends BaseStage
 		people.antialiasing = true;
 		people.updateHitbox();
 		add(people);
+
+		if (backend.BaseStage.exe == "but.exe/") {
+			people.visible = false;
+
+			var puas3:BGSprite = new BGSprite('stages/pepe-casa/but.exe/coso3', -600, -200, 0.9, 0.9);
+			puas3.updateHitbox();
+			add(puas3);
+		}
+			
 	}
 
 	override function createPost() //crear post pa que se ponga encima...
@@ -52,14 +67,30 @@ class PepeHouse extends BaseStage
 			blackScreen.cameras = [game.camHUD];
 			add(blackScreen);
 			
-			var sol:BGSprite = new BGSprite('stages/pepe-casa/luz', -600, -200, 0.9, 0.9);
+			var sol:BGSprite = new BGSprite('stages/pepe-casa/' + backend.BaseStage.exe + 'luz', -600, -200, 0.9, 0.9);
 			sol.updateHitbox();
-			sol.alpha = 0.85; //sin alpha parece sol en chile🔥
+			sol.alpha = 0.65; //sin alpha parece sol en chile🔥
 			add(sol);
+
+			if (backend.BaseStage.exe == "but.exe/") {
+				var puas:BGSprite = new BGSprite('stages/pepe-casa/but.exe/coso', -600, 0, 0.9, 0.9);
+				puas.updateHitbox();
+				puas.scrollFactor.set(0.5, 0.5); //@Andree1x puto
+				add(puas);
+			}
 
 			new FlxTimer().start(1.2, function(deadTime:FlxTimer)
 				{
-					FlxTween.tween(blackScreen, {alpha: 0}, 20, { ease: FlxEase.quadInOut});
+					if (backend.BaseStage.exe == "but.exe/") {
+						new FlxTimer().start(11, function(deadTime:FlxTimer)
+							{
+								game.skipCountdown = true;
+								blackScreen.alpha = 0;
+								FlxG.camera.flash(FlxColor.WHITE, 1);
+							});
+					}
+					else
+						FlxTween.tween(blackScreen, {alpha: 0}, 20, { ease: FlxEase.quadInOut});
 				});
 		}
 }
