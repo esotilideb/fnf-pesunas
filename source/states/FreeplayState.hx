@@ -54,7 +54,7 @@ class FreeplayState extends MusicBeatState
             addSong(songArray[i][0], 1, "dad", songArray[i][1]);
         }
 
-		var bg = new FlxSprite().loadGraphic(Paths.image('freeplayshit/bg'));
+		var bg = new FlxSprite().makeGraphic(1280, 720, 0xFF0500B1);
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		bg.screenCenter();
         add(bg);
