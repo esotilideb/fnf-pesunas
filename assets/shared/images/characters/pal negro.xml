@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="pal negro.png">
+	<!-- Created with Adobe Animate version 22.0.3.179 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="pal negro0000" x="0" y="0" width="1200" height="1384"/>
+	<SubTexture name="pal negro0001" x="1200" y="0" width="1200" height="1384"/>
+	<SubTexture name="pal negro0002" x="2400" y="0" width="1200" height="1384"/>
+	<SubTexture name="pal negro0003" x="3600" y="0" width="1200" height="1384"/>
+	<SubTexture name="pal negro0004" x="4800" y="0" width="1200" height="1384"/>
+	<SubTexture name="pal negro0005" x="6000" y="0" width="1200" height="1384"/>
+	<SubTexture name="pal negro0006" x="0" y="1384" width="1200" height="1384"/>
+	<SubTexture name="pal negro0007" x="1200" y="1384" width="1200" height="1384"/>
+	<SubTexture name="pal negro0008" x="2400" y="1384" width="1200" height="1384"/>
+	<SubTexture name="pal negro0009" x="3600" y="1384" width="1200" height="1384"/>
+	<SubTexture name="pal negro0010" x="4800" y="1384" width="1200" height="1384"/>
+	<SubTexture name="pal negro0011" x="6000" y="1384" width="1200" height="1384"/>
+	<SubTexture name="pal negro0012" x="0" y="0" width="1200" height="1384"/>
+	<SubTexture name="pal negro0013" x="1200" y="0" width="1200" height="1384"/>
+	<SubTexture name="pal negro0014" x="2400" y="0" width="1200" height="1384"/>
+	<SubTexture name="pal negro0015" x="3600" y="0" width="1200" height="1384"/>
+	<SubTexture name="pal negro0016" x="4800" y="0" width="1200" height="1384"/>
+	<SubTexture name="pal negro0017" x="6000" y="0" width="1200" height="1384"/>
+	<SubTexture name="pal negro0018" x="0" y="1384" width="1200" height="1384"/>
+	<SubTexture name="pal negro0019" x="1200" y="1384" width="1200" height="1384"/>
+</TextureAtlas>

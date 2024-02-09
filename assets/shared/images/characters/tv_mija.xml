@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="tv_mija.png">
+	<!-- Created with Adobe Animate version 22.0.3.179 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="tv0000" x="0" y="0" width="1200" height="1200"/>
+	<SubTexture name="tv0001" x="1200" y="0" width="1200" height="1200"/>
+	<SubTexture name="tv0002" x="2400" y="0" width="1200" height="1200"/>
+	<SubTexture name="tv0003" x="3600" y="0" width="1200" height="1200"/>
+	<SubTexture name="tv0004" x="4800" y="0" width="1200" height="1200"/>
+	<SubTexture name="tv0005" x="6000" y="0" width="1200" height="1200"/>
+	<SubTexture name="tv0006" x="0" y="1200" width="1200" height="1200"/>
+	<SubTexture name="tv0007" x="1200" y="1200" width="1200" height="1200"/>
+	<SubTexture name="tv0008" x="2400" y="1200" width="1200" height="1200"/>
+	<SubTexture name="tv0009" x="3600" y="1200" width="1200" height="1200"/>
+	<SubTexture name="tv0010" x="4800" y="1200" width="1200" height="1200"/>
+	<SubTexture name="tv0011" x="6000" y="1200" width="1200" height="1200"/>
+	<SubTexture name="tv0012" x="0" y="0" width="1200" height="1200"/>
+	<SubTexture name="tv0013" x="1200" y="0" width="1200" height="1200"/>
+	<SubTexture name="tv0014" x="2400" y="0" width="1200" height="1200"/>
+	<SubTexture name="tv0015" x="3600" y="0" width="1200" height="1200"/>
+	<SubTexture name="tv0016" x="4800" y="0" width="1200" height="1200"/>
+	<SubTexture name="tv0017" x="6000" y="0" width="1200" height="1200"/>
+	<SubTexture name="tv0018" x="0" y="1200" width="1200" height="1200"/>
+	<SubTexture name="tv0019" x="1200" y="1200" width="1200" height="1200"/>
+	<SubTexture name="tv0020" x="2400" y="1200" width="1200" height="1200"/>
+	<SubTexture name="tv0021" x="3600" y="1200" width="1200" height="1200"/>
+	<SubTexture name="tv0022" x="4800" y="1200" width="1200" height="1200"/>
+	<SubTexture name="tv0023" x="6000" y="1200" width="1200" height="1200"/>
+	<SubTexture name="tv0024" x="0" y="0" width="1200" height="1200"/>
+	<SubTexture name="tv0025" x="1200" y="0" width="1200" height="1200"/>
+</TextureAtlas>

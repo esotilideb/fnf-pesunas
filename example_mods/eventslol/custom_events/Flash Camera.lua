@@ -1,0 +1,19 @@
+function onEvent(n,v1,v2)
+
+
+	if n == 'Flash Camera' then
+
+        makeGraphic('flash',1280,720,'ffffff')
+	      addLuaSprite('flash', true);
+	      setObjectCamera('flash', 'other')
+	      setLuaSpriteScrollFactor('flash',0,0)
+	      setProperty('flash.scale.x',3)
+	      setProperty('flash.scale.y',3)
+	      setProperty('flash.alpha',0)
+		setProperty('flash.alpha',1)
+		doTweenAlpha('flTw','flash',0,v1,'linear')
+	end
+
+
+
+end

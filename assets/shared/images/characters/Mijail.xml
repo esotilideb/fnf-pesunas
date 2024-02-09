@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Mijail.png">
+	<!-- Created using the Spritesheet and XML generator -->
+	<!-- https://uncertainprod.github.io/FNF-Spritesheet-XML-generator-Web -->
+	<SubTexture name="Mijail RIGHT 0002" x="636" y="707" width="648" height="667" frameX="-593" frameY="-207" frameWidth="1810" frameHeight="872"/>
+	<SubTexture name="Mijail RIGHT 0001" x="634" y="0" width="655" height="677" frameX="-594" frameY="-197" frameWidth="1810" frameHeight="872"/>
+	<SubTexture name="Mijail UP 0002" x="0" y="707" width="636" height="686" frameX="-590" frameY="-188" frameWidth="1810" frameHeight="872"/>
+	<SubTexture name="Mijail UP 0001" x="0" y="0" width="634" height="707" frameX="-591" frameY="-167" frameWidth="1810" frameHeight="872"/>
+	<SubTexture name="Mijail DOWN 0002" x="0" y="1393" width="634" height="655" frameX="-591" frameY="-219" frameWidth="1810" frameHeight="872"/>
+	<SubTexture name="Mijail DOWN 0001" x="634" y="1393" width="634" height="632" frameX="-591" frameY="-242" frameWidth="1810" frameHeight="872"/>
+	<SubTexture name="Mijail LEFT 0002" x="1950" y="0" width="642" height="668" frameX="-586" frameY="-206" frameWidth="1810" frameHeight="872"/>
+	<SubTexture name="Mijail LEFT 0001" x="1289" y="0" width="661" height="661" frameX="-566" frameY="-213" frameWidth="1810" frameHeight="872"/>
+	<SubTexture name="Mijail IDLE 0002" x="1950" y="668" width="633" height="672" frameX="-591" frameY="-202" frameWidth="1810" frameHeight="872"/>
+	<SubTexture name="Mijail IDLE 0001" x="1284" y="707" width="635" height="667" frameX="-590" frameY="-207" frameWidth="1810" frameHeight="872"/>
+</TextureAtlas>

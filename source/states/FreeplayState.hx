@@ -50,6 +50,7 @@ class FreeplayState extends MusicBeatState
             ['Lunar-magic', "WEEK 1 - Mago VS BF"],
             ['Dark-magic', "WEEK 1 - Mago VS Mago?"],
             ['Tops', "EXTRA - Pepe VS Nerd"],
+            ['dreams-awakened', "EXTRA - ..."],
             ['horror-pepe', "EXTRA - HORROR PEPAURI"]
         ];
 
@@ -136,6 +137,7 @@ class FreeplayState extends MusicBeatState
 		missingText.visible = false;
 		add(missingText);
 
+        changeSelection(0, true, true);
         Difficulty.list = Difficulty.defaultList;
         super.create();
     }
@@ -246,52 +248,59 @@ class FreeplayState extends MusicBeatState
         songs.push(new SongMetadata(songName, weekNum, songCharacter, desc));
     }
     
-    function changeSelection(change:Int = 0, playSound:Bool = true)
+    function changeSelection(change:Int = 0, playSound:Bool = true, pene:Bool = false)
     {
         if(playSound) FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
         curSelected += change;
     
-        changing = true;
+        changing = !pene;
 
         if (curSelected < 0)
             curSelected = songs.length - 1;
         if (curSelected >= songs.length)
             curSelected = 0;
         
-        FlxTween.tween(portrait, {y: portrait.y + 500}, 0.75, {ease: FlxEase.quadIn,
-            onComplete: function(twn:FlxTween)
-            {
-                portrait.animation.play(songs[curSelected].songName);
-                title.animation.play(songs[curSelected].songName);
-                scoreText.text = songs[curSelected].desc.toLowerCase();
-                scoreText.updateHitbox();
-
-                FlxTween.tween(portrait, {y: portrait.y - 500}, 0.75, {ease: FlxEase.quadOut});
-                FlxTween.tween(title, {y: title.y - 500}, 0.75, {ease: FlxEase.quadOut,
-                    onComplete: function(twn2:FlxTween)
-                    {
-                        changing = false;
-                    }
-                });
-                
-                FlxTween.tween(scoreText, {y: scoreText.y + 50}, 0.75, {ease: FlxEase.quadOut});
-
-                new FlxTimer().start(0.25, function(tmr:FlxTimer)
+        if (!pene) {
+            FlxTween.tween(portrait, {y: portrait.y + 500}, 0.75, {ease: FlxEase.quadIn,
+                onComplete: function(twn:FlxTween)
                 {
-                    FlxTween.tween(scoreText, {alpha: 1}, 0.5);
-                    FlxTween.tween(title, {alpha: 1}, 0.5);
-                    FlxTween.tween(portrait, {alpha: 1}, 0.5);
-                });
-            }
-        });
+                    portrait.animation.play(songs[curSelected].songName);
+                    title.animation.play(songs[curSelected].songName);
+                    scoreText.text = songs[curSelected].desc.toLowerCase();
+                    scoreText.updateHitbox();
 
-        FlxTween.tween(portrait, {alpha: 0}, 0.5);
+                    FlxTween.tween(portrait, {y: portrait.y - 500}, 0.75, {ease: FlxEase.quadOut});
+                    FlxTween.tween(title, {y: title.y - 500}, 0.75, {ease: FlxEase.quadOut,
+                        onComplete: function(twn2:FlxTween)
+                        {
+                            changing = false;
+                        }
+                    });
+                    
+                    FlxTween.tween(scoreText, {y: scoreText.y + 50}, 0.75, {ease: FlxEase.quadOut});
 
-        FlxTween.tween(title, {y: title.y + 500}, 0.75, {ease: FlxEase.quadIn});
-        FlxTween.tween(title, {alpha: 0}, 0.5);
+                    new FlxTimer().start(0.25, function(tmr:FlxTimer)
+                    {
+                        FlxTween.tween(scoreText, {alpha: 1}, 0.5);
+                        FlxTween.tween(title, {alpha: 1}, 0.5);
+                        FlxTween.tween(portrait, {alpha: 1}, 0.5);
+                    });
+                }
+            });
 
-        FlxTween.tween(scoreText, {y: scoreText.y - 50}, 0.75, {ease: FlxEase.quadIn});
-        FlxTween.tween(scoreText, {alpha: 0}, 0.5);
+            FlxTween.tween(portrait, {alpha: 0}, 0.5);
+
+            FlxTween.tween(title, {y: title.y + 500}, 0.75, {ease: FlxEase.quadIn});
+            FlxTween.tween(title, {alpha: 0}, 0.5);
+
+            FlxTween.tween(scoreText, {y: scoreText.y - 50}, 0.75, {ease: FlxEase.quadIn});
+            FlxTween.tween(scoreText, {alpha: 0}, 0.5);
+        } else {
+            portrait.animation.play(songs[curSelected].songName);
+            title.animation.play(songs[curSelected].songName);
+            scoreText.text = songs[curSelected].desc.toLowerCase();
+            scoreText.updateHitbox();
+        }
 
         Mods.currentModDirectory = songs[curSelected].folder;
         PlayState.storyWeek = songs[curSelected].week;
