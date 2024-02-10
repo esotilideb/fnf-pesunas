@@ -7,6 +7,9 @@ import backend.Song;
 import backend.Section;
 import backend.Rating;
 
+//shader
+import shaders.ShaderChroma;
+
 import flixel.FlxBasic;
 import flixel.FlxObject;
 import openfl.Lib;
@@ -182,6 +185,7 @@ class PlayState extends MusicBeatState
 	public var timeBar:Bar;
 	var songPercent:Float = 0;
 
+	var	chroma:ShaderChroma;
 	public var ratingsData:Array<Rating> = Rating.loadDefault();
 
 	private var generatedMusic:Bool = false;
@@ -222,6 +226,8 @@ class PlayState extends MusicBeatState
 	public var scoreTxt:FlxText;
 	var timeTxt:FlxText;
 	var scoreTxtTween:FlxTween;
+
+	var tiempoShader:Float;
 
 	public static var campaignScore:Int = 0;
 	public static var campaignMisses:Int = 0;
@@ -659,6 +665,8 @@ class PlayState extends MusicBeatState
 		}
 
 		discName = PlayState.SONG.song.replace(' ', '');
+
+		tiempoShader = 0.0;
 
 		super.create();
 		Paths.clearUnusedMemory();
@@ -1208,6 +1216,14 @@ class PlayState extends MusicBeatState
 		});*/
 	}
 
+	public function chromaShader(){
+		chroma = new ShaderChroma(FlxG.width, FlxG.height);
+		var chromafilt:ShaderFilter = new ShaderFilter(chroma);
+		FlxG.game.setFilters([chromafilt]);
+		FlxG.camera.filtersEnabled = true;
+
+	}
+
 	public function setSongTime(time:Float)
 	{
 		if(time < 0) time = 0;
@@ -1695,6 +1711,9 @@ class PlayState extends MusicBeatState
 		else FlxG.camera.followLerp = 0;
 		callOnScripts('onUpdate', [elapsed]);
 
+		tiempoShader += elapsed;
+	//	chroma.update(tiempoShader);
+
 		super.update(elapsed);
 
 		if (isUsing) {
@@ -2122,6 +2141,9 @@ class PlayState extends MusicBeatState
 						camFollow.y = flValue2;
 					}
 				}
+			case 'poner shader xdxdxd evento hecho en source puto lua':
+				chromaShader();
+
 
 			case 'Alt Idle Animation':
 				var char:Character = dad;
