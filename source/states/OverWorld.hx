@@ -14,6 +14,8 @@ import openfl.Assets;
 import haxe.Json;
 import backend.Paths;
 import flixel.util.FlxDirectionFlags;
+import backend.Song;
+import substates.PauseSubState;
 typedef PlayerSET =
 {
 	pX:Int,
@@ -23,24 +25,23 @@ typedef PlayerSET =
 class OverWorld extends MusicBeatState
 {
 	var map:FlxTilemap;
-    //putos pendejos porque hicieron el tilemap asi pinches pendejos jodanse
-	var tile1:FlxTilemap;
-	var tile2:FlxTilemap;
-	var tile3:FlxTilemap;
-	var tile4:FlxTilemap;
-	var tile5:FlxTilemap;
-	var tile6:FlxTilemap;
-	var tile7:FlxTilemap;
-	var tile8:FlxTilemap;
-	var tile9:FlxTilemap;
-	var tile10:FlxTilemap;
-	var tile11:FlxTilemap;
-	var tile12:FlxTilemap;
-	var tile13:FlxTilemap;
-	//pene sexo vagina
+	//var deco:FlxTilemap;
 	var mapData:Array<Int>;
+//	var decoData:Array<Int>; parece que flixel no puede hacer eso, que mamada
 	var player:FlxSprite;
 	var playerJSON:PlayerSET;
+	var isRunning:Bool;
+	var velocidadVal:Int;
+	var horizFloat:Float = 66.5;
+	var pasto:FlxSprite;
+	var nose:FlxSprite;
+	var idk:FlxSprite;
+	var plantaR:FlxSprite;
+	var plantaG:FlxSprite;
+	var plantaB:FlxSprite;
+	var casaPepeC:FlxSprite;
+	var arbol:FlxSprite;
+	var arbol2:FlxSprite;
 
 	override public function create():Void
 	{
@@ -48,64 +49,37 @@ class OverWorld extends MusicBeatState
 
 		mapData = converter(Paths.level("overworld", "overworld"));
 		map = new FlxTilemap();
-		map.loadMapFromArray(mapData, 20, 20, Paths.image("overWorld/middleTIERRAPLANA"), 95, 95);
-	//	map.setTilePropierties(0, NONE);
-	//	map.setTilePropierties(1, ANY);
-	//	map.setTilePropierties(2, ANY, Paths.image("overworld"));
-	//map.visible = false;
-	//map.setTilePropierties(0, NONE);
+		map.loadMapFromArray(mapData, 20, 11, Paths.image("overWorld/tilesOverd"), 66, 66);
+		map.auto = FULL;
+		map.setTileProperties(0, NONE);
+		map.setTileProperties(1, NONE);
+		map.setTileProperties(2, ANY);
+		map.setTileProperties(3, NONE);
+		map.setTileProperties(4, NONE);
+		map.setTileProperties(5, NONE);
+		map.setTileProperties(6, ANY);
+		map.setTileProperties(7, ANY);
+		map.setTileProperties(8, NONE);
+		map.setTileProperties(9, NONE);
+		map.setTileProperties(10, ANY);
+		map.setTileProperties(11, ANY);
+		map.setTileProperties(12, ANY);
+
+	map.setTileProperties(13, ANY);
+	map.setTileProperties(14, NONE);
+	map.setTileProperties(15, NONE);
 		add(map);
 
-		tile1 = new FlxTilemap();
-		tile1.loadMapFromArray(mapData, 96, 96, Paths.image("overWorld/cornerLEFT"), 96, 96);
-		tile1.setTileProperties(0, NONE);
-		tile1.setTileProperties(1, ANY);
-		add(tile1);
+		var casaPepe:FlxSprite = new FlxSprite(752, 175).loadGraphic(Paths.image("overWorld/pepeCasa"));
+		casaPepe.setGraphicSize(Std.int(casaPepe.width * 4));
+		casaPepe.antialiasing = false;
+		add(casaPepe);
 
-		tile2 = new FlxTilemap();
-		tile2.loadMapFromArray(mapData, 96, 96, Paths.image("overWorld/cornerRIGHT"), 96, 96);
-		add(tile2);
+		casaPepeC = new FlxSprite(720, 240).loadGraphic(Paths.image("overWorld/checkpoint"));
+		casaPepeC.setGraphicSize(Std.int(casaPepeC.width * 0.63));
+		casaPepeC.antialiasing = false;
+		add(casaPepeC);
 
-		tile3 = new FlxTilemap();
-	//	tile3.loadMapFromArray(mapData, 96, 96, Paths.image("overWorld/cornerUP"));
-		add(tile3);
-		
-		tile4 = new FlxTilemap();
-		tile4.loadMapFromArray(mapData, 3, 3, Paths.image("overWorld/LEFTend"));
-		add(tile4);
-		
-		tile5 = new FlxTilemap();
-		tile5.loadMapFromArray(mapData, 3, 3, Paths.image("overWorld/LEFTendTIERRA"), 3, 3);
-		add(tile5);
-
-		tile6 = new FlxTilemap();
-		tile6.loadMapFromArray(mapData, 3, 3, Paths.image("overWorld/LEFTendTIERRAPLANA"), 3, 3);
-		add(tile6);
-
-		tile7 = new FlxTilemap();
-		tile7.loadMapFromArray(mapData, 3, 3, Paths.image("overWorld/mar"), 3, 3);
-		add(tile7);
-
-		tile8 = new FlxTilemap();
-		tile8.loadMapFromArray(mapData, 3, 3, Paths.image("overWorld/middleCOSO"), 3, 3);
-		add(tile8);
-
-		tile9 = new FlxTilemap();
-		tile9.loadMapFromArray(mapData, 3, 3, Paths.image("overWorld/middleTIERRA"), 3, 3);
-		add(tile9);
-
-		tile10 = new FlxTilemap();
-		tile10.loadMapFromArray(mapData, 3, 3, Paths.image("overWorld/middleTIERRAPLANA"), 3, 3);
-		add(tile10);
-		tile11 = new FlxTilemap();
-		tile11.loadMapFromArray(mapData, 20, 12, Paths.image("overWorld/RIGHTend"), 95, 95);
-		add(tile11);
-		tile12 = new FlxTilemap();
-		tile12.loadMapFromArray(mapData, 20, 12, Paths.image("overWorld/RIGHTendTIERRA"), 95, 95);
-		add(tile12);
-		tile13 = new FlxTilemap();
-		tile13.loadMapFromArray(mapData, 20, 12, Paths.image("overWorld/RIGHTendTIERRAPLANA"), 95, 95);
-		add(tile13);
 		player = new FlxSprite(playerJSON.pX, playerJSON.pY);
 		player.frames = Paths.getSparrowAtlas('overWorld/BF_Map');
 		player.animation.addByPrefix('up', "Back", 4, false);
@@ -115,7 +89,82 @@ class OverWorld extends MusicBeatState
 		player.animation.play('down');
 		player.scale.x = 3.5;
 		player.scale.y = 3.5;
+		player.x = 130;
+		player.y = 400;
+
+
+
+		FlxG.sound.playMusic(Paths.music("placeholder"));
+
+		function anadirPasto(x:Int, y:Int){
+            pasto = new FlxSprite(x, y).loadGraphic(Paths.image("overWorld/decoracion/pasto"));
+			pasto.scale.set(0.6, 0.6);
+			add(pasto);
+		}
+		function anadirIdk(x:Int, y:Int){
+            idk = new FlxSprite(x, y).loadGraphic(Paths.image("overWorld/decoracion/IDK"));
+			idk.scale.set(0.6, 0.6);
+			add(idk);
+		}
+		function anadirNose(x:Int, y:Int){
+            nose = new FlxSprite(x, y).loadGraphic(Paths.image("overWorld/decoracion/nose"));
+			add(nose);
+		}
+		function anadirPlantaR(x:Int, y:Int){
+            plantaR = new FlxSprite(x, y).loadGraphic(Paths.image("overWorld/decoracion/PLANTAROSADA"));
+			plantaR.scale.set(0.7, 0.7);
+			add(plantaR);
+		}
+		function anadirPlantaG(x:Int, y:Int){
+            plantaG = new FlxSprite(x, y).loadGraphic(Paths.image("overWorld/decoracion/plantaVERDE"));
+			plantaG.scale.set(0.7, 0.7);
+			add(plantaG);
+		}
+		function anadirPlantaB(x:Int, y:Int){
+            plantaB = new FlxSprite(x, y).loadGraphic(Paths.image("overWorld/decoracion/plantaVERDEAGUA"));
+			plantaB.scale.set(0.7, 0.7);
+			add(plantaB);
+		}
+		function anadirArbol(x:Int, y:Int){
+            arbol = new FlxSprite(x, y).loadGraphic(Paths.image("overWorld/treer"));
+            arbol.scale.set(5.2, 5.2);
+			add(arbol);
+		}
+		function anadirArbol2(x:Int, y:Int){
+            arbol2 = new FlxSprite(x, y).loadGraphic(Paths.image("overWorld/treeb"));
+			arbol2.scale.set(5.2, 5.2);
+			add(arbol2);
+		}
+
+	//	anadirPlantaG(100, 300);
+	//	anadirPlantaG(200, 300);
+	anadirPasto(366, 503);
+	anadirPlantaR(350, 440);
+	//anadirPlantaR(100, 100);
+	anadirPasto(226, 144);
+	anadirPasto(487, 172);
+	anadirPasto(875, 338);
+	anadirPlantaR(975, 235);
+	anadirPlantaB(393, 112);
+	anadirPlantaG(-1, 330);
+	anadirPlantaG(240, 330);
+	anadirIdk(180, 350);
+	anadirIdk(900, 260);
+
 		add(player);
+
+		anadirArbol2(100, 0);
+		anadirArbol2(20, 45);
+		anadirArbol(100, 145);
+		anadirArbol2(24, 200);
+		anadirArbol(100, 235);
+		anadirArbol(300, 730);
+		anadirArbol2(510, 630);
+		anadirArbol(1050, 624);
+		anadirArbol2(945, 50);
+		anadirArbol(274, 12);
+
+		FlxG.mouse.visible = true;
 
 		super.create();
 	}
@@ -125,34 +174,66 @@ class OverWorld extends MusicBeatState
 		FlxG.collide(map, player);
 		movePlayer();
 
+		trace("x es" +FlxG.mouse.x);
+		trace("y es" + FlxG.mouse.y);
+
+		if(FlxG.overlap(player, casaPepeC)){
+			if (FlxG.keys.justPressed.Z) {
+				LoadingState.loadAndSwitchState(new PlayState());
+				PlayState.SONG = Song.loadFromJson("Lunar-magic", "Lunar-magic");
+				PauseSubState.isOverworld = true;
+			}
+		}
+
 		if (FlxG.keys.justPressed.D) {
 			MusicBeatState.switchState(new OverworldDross());
 		}
+		if (FlxG.keys.justPressed.ESCAPE) {
+			MusicBeatState.switchState(new MainMenuState());
+			FlxG.sound.playMusic(Paths.music("freakyMenu"));
+		}
+		//FlxG.camera.follow(player);
+
+	//	trace(velocidadVal);
 	}
 
 	private function movePlayer():Void
 	{
 		player.velocity.x = 0;
 		player.velocity.y = 0;
+		if(isRunning = true){
+			velocidadVal = 200;
+		}
+		if(isRunning = false){
+			velocidadVal = 130;
+		}
+		if(FlxG.keys.pressed.K){
+			isRunning = true;
+		}
 		if (FlxG.keys.pressed.LEFT)
 			{
 				player.animation.play('left');
-				player.velocity.x -= 130;
+				player.velocity.x -= velocidadVal;
+				isRunning = false;
 			}
 		if (FlxG.keys.pressed.RIGHT)
 			{
 				player.animation.play('right');
-				player.velocity.x += 130;
+				player.velocity.x += velocidadVal;
+				isRunning = false;
 			}
+			
 		if (FlxG.keys.pressed.UP)
 			{
 				player.animation.play('up');
-				player.velocity.y -= 130;
+				player.velocity.y -= velocidadVal;
+				isRunning = false;
 			}
 		if (FlxG.keys.pressed.DOWN)
 			{
 				player.animation.play('down');
-				player.velocity.y += 130;
+				player.velocity.y += velocidadVal;
+				isRunning = false;
 			}
 	}
 

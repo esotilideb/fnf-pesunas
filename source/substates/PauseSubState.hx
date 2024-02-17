@@ -11,13 +11,15 @@ import flixel.util.FlxStringUtil;
 import states.StoryMenuState;
 import states.FreeplayState;
 import options.OptionsState;
+import states.OverWorld;
 
 class PauseSubState extends MusicBeatSubstate
 {
 	var grpMenuShit:FlxTypedGroup<Alphabet>;
 
 	var menuItems:Array<String> = [];
-	var menuItemsOG:Array<String> = ['Resume', 'Restart Song', 'Change Difficulty', 'Options', 'Exit to menu'];
+	var textWea:String = "";
+	var menuItemsOG:Array<String>;
 	var difficultyChoices = [];
 	var curSelected:Int = 0;
 
@@ -27,6 +29,8 @@ class PauseSubState extends MusicBeatSubstate
 	var skipTimeTracker:Alphabet;
 	var curTime:Float = Math.max(0, Conductor.songPosition);
 
+	public static var isOverworld:Bool = false;
+
 	var missingTextBG:FlxSprite;
 	var missingText:FlxText;
 
@@ -35,6 +39,8 @@ class PauseSubState extends MusicBeatSubstate
 	public function new(x:Float, y:Float)
 	{
 		super();
+		
+		menuItemsOG = ['Resume', 'Restart Song', 'Change Difficulty', 'Options', textWea];
 		if(Difficulty.list.length < 2) menuItemsOG.remove('Change Difficulty'); //No need to change difficulty if there is only one!
 
 		if(PlayState.chartingMode)
@@ -152,6 +158,8 @@ class PauseSubState extends MusicBeatSubstate
 
 		regenMenu();
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
+
+   trace(textWea);
 	}
 
 	var holdTime:Float = 0;
@@ -318,7 +326,29 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.changedDifficulty = false;
 					PlayState.chartingMode = false;
 					FlxG.camera.followLerp = 0;
+
+					case "Exit to Overworld":
+						#if desktop DiscordClient.resetClientID(); #end
+						PlayState.deathCounter = 0;
+						PlayState.seenCutscene = false;
+	
+						Mods.loadTopMod();
+						if(PlayState.isStoryMode) {
+							MusicBeatState.switchState(new OverWorld());
+						} else {
+							MusicBeatState.switchState(new FreeplayState());
+						}
+						PlayState.cancelMusicFadeTween();
+						FlxG.sound.playMusic(Paths.music('freakyMenu'));
+						PlayState.changedDifficulty = false;
+						PlayState.chartingMode = false;
+						FlxG.camera.followLerp = 0;
 			}
+
+			if(isOverworld = true)
+				textWea = "Exit to Overworld";
+			else
+			textWea = "Exit to menu";
 		}
 	}
 
