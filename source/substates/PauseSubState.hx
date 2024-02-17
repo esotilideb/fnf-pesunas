@@ -11,7 +11,6 @@ import flixel.util.FlxStringUtil;
 import states.StoryMenuState;
 import states.FreeplayState;
 import options.OptionsState;
-import states.OverWorld;
 
 class PauseSubState extends MusicBeatSubstate
 {
@@ -40,7 +39,7 @@ class PauseSubState extends MusicBeatSubstate
 	{
 		super();
 		
-		menuItemsOG = ['Resume', 'Restart Song', 'Change Difficulty', 'Options', textWea];
+		menuItemsOG = ['Resume', 'Restart Song', 'Change Difficulty', 'Options', 'Exit to menu'];
 		if(Difficulty.list.length < 2) menuItemsOG.remove('Change Difficulty'); //No need to change difficulty if there is only one!
 
 		if(PlayState.chartingMode)
@@ -327,14 +326,14 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.chartingMode = false;
 					FlxG.camera.followLerp = 0;
 
-					case "Exit to Overworld":
+					case "Exit to menu":
 						#if desktop DiscordClient.resetClientID(); #end
 						PlayState.deathCounter = 0;
 						PlayState.seenCutscene = false;
 	
 						Mods.loadTopMod();
 						if(PlayState.isStoryMode) {
-							MusicBeatState.switchState(new OverWorld());
+							MusicBeatState.switchState(new StoryMenuState());
 						} else {
 							MusicBeatState.switchState(new FreeplayState());
 						}

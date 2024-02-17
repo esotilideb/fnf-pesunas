@@ -41,6 +41,8 @@ class OptionsState extends MusicBeatState
 		bg.color = 0xFFea71fd;
 		bg.updateHitbox();
 
+		FlxG.sound.playMusic(Paths.music("pepe_el_configurador"));
+
 		bg.screenCenter();
 		add(bg);
 
@@ -89,7 +91,9 @@ class OptionsState extends MusicBeatState
 				MusicBeatState.switchState(new PlayState());
 				FlxG.sound.music.volume = 0;
 			}
-			else MusicBeatState.switchState(new MainMenuState());
+			else{
+				FlxG.sound.playMusic(Paths.music('freakyMenu'));
+			} MusicBeatState.switchState(new MainMenuState());
 		}
 		else if (controls.ACCEPT) openSelectedSubstate(options[curSelected]);
 	}

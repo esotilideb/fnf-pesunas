@@ -42,6 +42,8 @@ class OverWorld extends MusicBeatState
 	var casaPepeC:FlxSprite;
 	var arbol:FlxSprite;
 	var arbol2:FlxSprite;
+	var arbusto:FlxSprite;
+
 
 	override public function create():Void
 	{
@@ -108,6 +110,7 @@ class OverWorld extends MusicBeatState
 		}
 		function anadirNose(x:Int, y:Int){
             nose = new FlxSprite(x, y).loadGraphic(Paths.image("overWorld/decoracion/nose"));
+			nose.scale.set(0.8, 0.8);
 			add(nose);
 		}
 		function anadirPlantaR(x:Int, y:Int){
@@ -135,7 +138,11 @@ class OverWorld extends MusicBeatState
 			arbol2.scale.set(5.2, 5.2);
 			add(arbol2);
 		}
-
+		function anadirArbusto(x:Int, y:Int){
+            arbusto = new FlxSprite(x, y).loadGraphic(Paths.image("overWorld/decoracion/arbusto"));
+			arbusto.scale.set(4, 4);
+			add(arbusto);
+		}
 	//	anadirPlantaG(100, 300);
 	//	anadirPlantaG(200, 300);
 	anadirPasto(366, 503);
@@ -148,8 +155,19 @@ class OverWorld extends MusicBeatState
 	anadirPlantaB(393, 112);
 	anadirPlantaG(-1, 330);
 	anadirPlantaG(240, 330);
-	anadirIdk(180, 350);
+	anadirIdk(160, 330);
 	anadirIdk(900, 260);
+	anadirNose(300, 525);
+	anadirNose(116, 592);
+	anadirNose(234, 217);
+	anadirNose(526, 100);
+	anadirNose(650, 240);
+	anadirNose(843, 486);
+	anadirArbusto(283, 523);
+	anadirArbusto(555, 448);
+	anadirArbusto(598, 474);
+	anadirArbusto(670, 459);
+	anadirArbusto(244, 132);
 
 		add(player);
 

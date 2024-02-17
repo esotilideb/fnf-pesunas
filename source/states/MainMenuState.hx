@@ -112,7 +112,7 @@ class MainMenuState extends MusicBeatState
 		people.animation.addByPrefix('rebote', 'rebote', 24, true); //nothing
 		people.animation.addByPrefix('selected', 'seleccionado', 24, true); //nothing
 		people.animation.play('idle');
-		add(people);	
+		add(people);
 
 		changeItem();
 
