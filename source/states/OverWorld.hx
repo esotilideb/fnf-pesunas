@@ -89,8 +89,8 @@ class OverWorld extends MusicBeatState
 		player.animation.addByPrefix('left', "Left", 4, false);
 		player.animation.addByPrefix('right', "Right", 4, false);
 		player.animation.play('down');
-		player.scale.x = 3.5;
-		player.scale.y = 3.5;
+		player.scale.x = 4.2;
+		player.scale.y = 4.2;
 		player.x = 130;
 		player.y = 400;
 
@@ -165,8 +165,8 @@ class OverWorld extends MusicBeatState
 	anadirNose(843, 486);
 	anadirArbusto(283, 523);
 	anadirArbusto(555, 448);
+	anadirArbusto(637, 448);
 	anadirArbusto(598, 474);
-	anadirArbusto(670, 459);
 	anadirArbusto(244, 132);
 
 		add(player);
