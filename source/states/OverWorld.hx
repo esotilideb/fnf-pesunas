@@ -96,7 +96,7 @@ class OverWorld extends MusicBeatState
 
 
 
-		FlxG.sound.playMusic(Paths.music("placeholder"));
+		FlxG.sound.playMusic(Paths.music("MapWorld_BETA"));
 
 		function anadirPasto(x:Int, y:Int){
             pasto = new FlxSprite(x, y).loadGraphic(Paths.image("overWorld/decoracion/pasto"));
@@ -143,6 +143,7 @@ class OverWorld extends MusicBeatState
 			arbusto.scale.set(4, 4);
 			add(arbusto);
 		}
+	// mierda para añadir objetos
 	//	anadirPlantaG(100, 300);
 	//	anadirPlantaG(200, 300);
 	anadirPasto(366, 503);
@@ -169,7 +170,11 @@ class OverWorld extends MusicBeatState
 	anadirArbusto(598, 474);
 	anadirArbusto(244, 132);
 
+	//jugador
+
 		add(player);
+		
+	// aksbnjsaiund
 
 		anadirArbol2(100, 0);
 		anadirArbol2(20, 45);
@@ -181,6 +186,7 @@ class OverWorld extends MusicBeatState
 		anadirArbol(1050, 624);
 		anadirArbol2(945, 50);
 		anadirArbol(274, 12);
+	//ola
 
 		FlxG.mouse.visible = true;
 
@@ -276,3 +282,38 @@ class OverWorld extends MusicBeatState
 		return arrayDeEnteros;
 	}
 }
+/*
+CUIDADO
+
+CULO JUMPCARE!!!!!!
+
+⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠘⠹⣶⣿⠷⢃⡆⠻⢈⣿⣿
+⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⢉⣴⣿⣷⢱⢠⡘⣿⣿
+⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣀⣴⣿⠿⣫⣾⢈⣸⣷⠹⣿
+⠄⠄⠄⠄⠄⠄⠄⠄⠄⣀⣤⣶⣾⣿⣿⣿⣷⣶⣶⣬⡩⣵⣿⣿⣿⡘⢹⣿⢠⣄
+⠄⠄⠄⠄⠄⠄⠄⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣮⢻⣿⣿⣞⡄⢿⣜⣿
+⠄⠄⠄⠄⠄⢀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣇⣿⣿⣋⠄⠙⠉⠛
+⠄⠄⠄⠄⢀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢸⣷⠇⠄⠄⠄⠄
+⠄⠄⠄⠄⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠄⣿⡄⠄⠄⠄⠄
+⡀⠄⠄⢠⣿⣿⣿⡿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠄⠄⠘⠇⠄⠄⠄⠄
+⣶⣾⣿⣷⡹⣿⣿⣿⣎⢿⣿⣿⣿⣿⣿⣿⣿⡿⠿⣛⣵⣿⣷⣶⣤⡀⠄⠄⠄⠄
+⣿⣿⣿⣿⣿⣮⣿⡿⠿⣛⣢⢩⣭⣭⣭⣭⣶⣿⣿⣿⣿⣿⣿⣿⣿⣷⠄⠄⠄⠄
+⣿⣿⣿⠿⣫⣾⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠄⠄⠄⠄
+⠿⢟⣭⣾⣿⣿⣿⣿⣿⣿⣿⣮⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠄⠄⠄⠄
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢛⣁⣀⣀⣀⣀⣀
+
+⣿⣿⣿⣿⣿⣿⡿⠿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿DENGER⡄⢽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⠟⢰⣾⢛⣃⣾⣿⣿⣿⣿⠟⠋⠙⠛⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⠡⣶⡾⢿⡄⠻⣿⣿⣿⣿⡟HAXEFLIXEL⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⠄⢸⣇⢸⡇⠱⣌⣛⣛⡛⣉⣤⣤⡤⠤⠭⠭⠉⠻⠿⠿⠿⢿⣿⣿⣿
+⣿⣿⣿⣿⡆⡄⢻⡀⠳⣷⣶⣷⠂⣰⣿⣿⡀⣶⠄⠄⠄⠄⠄⠄⠄⠄⠄⢸⣿⣿
+⣿⣿⣿⡿⣡⣿⣦⣌⠢⡙⠋⠄⢺⡿⠿⣩⣴⣿⠠⣤⣤⣤⣤⣤⣤⣤⣤⢀⣿⣿
+⣿⣿⣿⡇⢿⣿⣿⡏⢠⣄⣙⠂⢈⣴⣾⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿
+⣿⣿⣿⣿⣦⠻⣿⣷⠈⢿⣿⡐⣿⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿
+⣿⣿⣿⣿⣿⣆⠹⣿⡇⠈⢻⣧⢻⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿
+⣿⣿⣿⣿⣿⠟⣠⡿⢁⣾⠄⣿⢸⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿
+⣿⣿⣿⣿⡏⢸⡿⢁⣾⣿⣶⡇⣿⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿
+⣿⣿⣿⣿⡇⡾⠄⠬⠍⡙⠄⠑⠿⠿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿
+⣿⣿⣿⣿⡐⠧⣜⡻⢿⣏⡘⠂⠄⠐⣿⣿⣿⣿⠸⢛⣛⣛⣛⣛⣛⣛⠻⢸⣿⣿
+⣿⣿⣿⣿⣿⣷⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣾⣿⣿⣿⣿⣿⣿⣷⣾⣿
