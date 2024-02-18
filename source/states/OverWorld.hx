@@ -51,9 +51,9 @@ class OverWorld extends MusicBeatState
 
 		mapData = converter(Paths.level("overworld", "overworld"));
 		map = new FlxTilemap();
-		map.loadMapFromArray(mapData, 20, 11, Paths.image("overWorld/tilesOverd"), 66, 66);
+		map.loadMapFromArray(mapData, 22, 13, Paths.image("overWorld/tilesOverd"), 66, 66);
 		map.auto = FULL;
-		map.setTileProperties(0, NONE);
+		map.setTileProperties(0, ANY);
 		map.setTileProperties(1, NONE);
 		map.setTileProperties(2, ANY);
 		map.setTileProperties(3, NONE);
@@ -62,7 +62,7 @@ class OverWorld extends MusicBeatState
 		map.setTileProperties(6, ANY);
 		map.setTileProperties(7, ANY);
 		map.setTileProperties(8, NONE);
-		map.setTileProperties(9, NONE);
+		map.setTileProperties(9, ANY);
 		map.setTileProperties(10, ANY);
 		map.setTileProperties(11, ANY);
 		map.setTileProperties(12, ANY);
@@ -188,8 +188,7 @@ class OverWorld extends MusicBeatState
 		anadirArbol(274, 12);
 	//ola
 
-		FlxG.mouse.visible = true;
-
+		//FlxG.mouse.visible = true;
 		super.create();
 	}
 	override public function update(elapsed:Float):Void
@@ -198,8 +197,8 @@ class OverWorld extends MusicBeatState
 		FlxG.collide(map, player);
 		movePlayer();
 
-		trace("x es" +FlxG.mouse.x);
-		trace("y es" + FlxG.mouse.y);
+	//	trace("x es" +FlxG.mouse.x);
+	//	trace("y es" + FlxG.mouse.y);
 
 		if(FlxG.overlap(player, casaPepeC)){
 			if (FlxG.keys.justPressed.Z) {
@@ -317,3 +316,4 @@ CULO JUMPCARE!!!!!!
 ⣿⣿⣿⣿⡇⡾⠄⠬⠍⡙⠄⠑⠿⠿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿
 ⣿⣿⣿⣿⡐⠧⣜⡻⢿⣏⡘⠂⠄⠐⣿⣿⣿⣿⠸⢛⣛⣛⣛⣛⣛⣛⠻⢸⣿⣿
 ⣿⣿⣿⣿⣿⣷⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣾⣿⣿⣿⣿⣿⣿⣷⣾⣿
+*/
