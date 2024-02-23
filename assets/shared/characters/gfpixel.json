@@ -1,0 +1,45 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				-140,
+				-389
+			],
+			"anim": "danceRight",
+			"fps": 16,
+			"name": "danceright",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-140,
+				-389
+			],
+			"anim": "danceLeft",
+			"fps": 16,
+			"name": "danceleft",
+			"indices": []
+		}
+	],
+	"no_antialiasing": true,
+	"image": "characters/fairygf",
+	"position": [
+		0,
+		0
+	],
+	"healthicon": "gf",
+	"flip_x": false,
+	"healthbar_colors": [
+		165,
+		0,
+		77
+	],
+	"camera_position": [
+		-230,
+		210
+	],
+	"sing_duration": 4,
+	"scale": 10
+}

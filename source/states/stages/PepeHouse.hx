@@ -7,58 +7,119 @@ class PepeHouse extends BaseStage
 	// If you're moving your stage from PlayState to a stage file,
 	// you might have to rename some variables if they're missing, for example: camZooming -> game.camZooming
 
+	var fg:BGSprite;
+	var arbol:BGSprite;
+	var arbol1:BGSprite;
+	var luz:BGSprite;
+	var arbustos:BGSprite;
+	var piso:BGSprite;
+	var water:BGSprite;
+	var people:BGSprite;
+
+	var normalBG:FlxSpriteGroup;
+	var pixelBG:FlxSpriteGroup;
+
 	override function create()
 	{
 
-		var fg:BGSprite = new BGSprite('stages/pepe-casa/' + backend.BaseStage.exe + 'fg', -600, -200, 0.9, 0.9);
+		normalBG = new FlxSpriteGroup();
+		add(normalBG);
+
+		pixelBG = new FlxSpriteGroup();
+		add(pixelBG);
+
+		fg = new BGSprite('stages/pepe-casa/' + backend.BaseStage.exe + 'fg', -600, -200, 0.9, 0.9);
 		fg.updateHitbox();
-		add(fg);
+		normalBG.add(fg);
 
-		var arbol:BGSprite = new BGSprite('stages/pepe-casa/' + backend.BaseStage.exe + 'arbol', -600, -200, 0.9, 0.9);
+		arbol = new BGSprite('stages/pepe-casa/' + backend.BaseStage.exe + 'arbol', -600, -200, 0.9, 0.9);
 		arbol.updateHitbox();
-		add(arbol);
+		normalBG.add(arbol);
 
-		var arbol1:BGSprite = new BGSprite('stages/pepe-casa/' + backend.BaseStage.exe + 'arboles', -600, -200, 0.9, 0.9);
+		arbol1 = new BGSprite('stages/pepe-casa/' + backend.BaseStage.exe + 'arboles', -600, -200, 0.9, 0.9);
 		arbol1.updateHitbox();
-		add(arbol1);
+		normalBG.add(arbol1);
 
-		var luz:BGSprite = new BGSprite('stages/pepe-casa/' + backend.BaseStage.exe + 'luz2', -600, -200, 0.9, 0.9);
+		luz = new BGSprite('stages/pepe-casa/' + backend.BaseStage.exe + 'luz2', -600, -200, 0.9, 0.9);
 		luz.updateHitbox();
-		add(luz);
+		normalBG.add(luz);
 
-		var arbustos:BGSprite = new BGSprite('stages/pepe-casa/' + backend.BaseStage.exe + 'arbustos', -650, -200, 0.9, 0.9);
-		add(arbustos);
+		arbustos = new BGSprite('stages/pepe-casa/' + backend.BaseStage.exe + 'arbustos', -650, -200, 0.9, 0.9);
+		normalBG.add(arbustos);
 
 		if (backend.BaseStage.exe == "but.exe/") {
 			var puas2:BGSprite = new BGSprite('stages/pepe-casa/but.exe/coso2', -600, -200, 0.9, 0.9);
 			puas2.updateHitbox();
-			add(puas2);
+			normalBG.add(puas2);
 		}
 
-		var piso:BGSprite = new BGSprite('stages/pepe-casa/' + backend.BaseStage.exe + 'piso-casa', -600, -200, 0.9, 0.9);
+		piso = new BGSprite('stages/pepe-casa/' + backend.BaseStage.exe + 'piso-casa', -600, -200, 0.9, 0.9);
 		piso.updateHitbox();
 		piso.scrollFactor.set(0.95, 0.95); //@Andree1x puto
-		add(piso);
+		normalBG.add(piso);
 
-		var water = new BGSprite('stages/pepe-casa/' + backend.BaseStage.exe + 'agua', -600, -200, 0.9, 0.9, ['idle'], true);
+		water = new BGSprite('stages/pepe-casa/' + backend.BaseStage.exe + 'agua', -600, -200, 0.9, 0.9, ['idle'], true);
 		water.updateHitbox();
-		add(water);
+		normalBG.add(water);
 
-		var people = new BGSprite('stages/pepe-casa/bg_characters', 0, 460, 0.9, 0.9, ['bg_characters'], true);
+		people = new BGSprite('stages/pepe-casa/bg_characters', 0, 460, 0.9, 0.9, ['bg_characters'], true);
 		people.setGraphicSize(Std.int(people.width * 2.5));
 		people.antialiasing = true;
 		people.updateHitbox();
-		add(people);
+		normalBG.add(people);
+
+		//coders le mandan un saludo a mi amigaso meloxd
+
+		var bgPIXEL = new BGSprite('stages/pepe-casa/retro/BG1', -400, -600, 0.9, 0.9);
+		bgPIXEL.antialiasing = false;
+		//bgPIXEL.visible = false;
+		bgPIXEL.setGraphicSize(Std.int(bgPIXEL.width * 10));
+		bgPIXEL.scrollFactor.set(0.95, 0.95); //@Andree1x puto
+		pixelBG.add(bgPIXEL);
+
+		var casaPIXEL = new BGSprite('stages/pepe-casa/retro/BG2', 0, 0, 0.9, 0.9, ['BG2'], true);
+		casaPIXEL.antialiasing = false;
+		//casaPIXEL.visible = false;
+		casaPIXEL.setGraphicSize(Std.int(casaPIXEL.width * 10));
+		pixelBG.add(casaPIXEL);
+
+		var pisoPIXEL = new BGSprite('stages/pepe-casa/retro/BG3', 0, 0, 0.9, 0.9);
+		pisoPIXEL.antialiasing = false;
+		pisoPIXEL.scrollFactor.set(0.95, 0.95); //@Andree1x puto
+		pisoPIXEL.setGraphicSize(Std.int(pisoPIXEL.width * 10));
+		//pisoPIXEL.visible = false;
+		pixelBG.add(piso);
 
 		if (backend.BaseStage.exe == "but.exe/") {
 			people.visible = false;
 
 			var puas3:BGSprite = new BGSprite('stages/pepe-casa/but.exe/coso3', -600, -200, 0.9, 0.9);
 			puas3.updateHitbox();
-			add(puas3);
+			normalBG.add(puas3);
 		}
 			
 	}
+
+	override function stepHit() // me cago wn
+		{
+			if (curStep == 1)
+				normalBG.visible = false;
+
+			if (curStep == 1517){
+				FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom + 0.5}, 1.8, {
+					ease: FlxEase.quadInOut,
+					onComplete: function(twn:FlxTween)
+						{
+							game.triggerEvent('Change Character', 'bf', 'bf_pixel', 0);
+							game.triggerEvent('Change Character', 'gf', 'gfpixel', 0);
+							game.triggerEvent('Change Character', 'dad', 'Pepe_Pixel', 0);
+							normalBG.visible = false;
+							pixelBG.visible = true;
+						}
+				});
+				FlxG.camera.flash(FlxColor.WHITE, 2);
+			}
+		}
 
 	override function createPost() //crear post pa que se ponga encima...
 		{ 

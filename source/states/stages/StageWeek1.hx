@@ -4,6 +4,7 @@ import states.stages.objects.*;
 import objects.Character;
 
 //testeo hasta q alguien haga el bg porque yo no hare una puta mierda
+//gulps
 
 class StageWeek1 extends BaseStage
 {

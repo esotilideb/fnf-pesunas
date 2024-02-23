@@ -252,9 +252,9 @@ class PlayState extends MusicBeatState
 	// Discord RPC variables
 	var storyDifficultyText:String = "";
 	var detailsText:String = "";
-	var discordScore:String = "";
 	var detailsPausedText:String = "";
-	var discName:String = "lunarmagic";
+	var discordScore:String = "";
+	var discName:String = "logo";
 	#end
 
 	//Achievement shit

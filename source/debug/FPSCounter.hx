@@ -33,7 +33,7 @@ class FPSCounter extends TextField
 		currentFPS = 0;
 		selectable = false;
 		mouseEnabled = false;
-		defaultTextFormat = new TextFormat(Paths.font("mago1.ttf"), 30, color);
+		defaultTextFormat = new TextFormat(Paths.font("mago1.ttf"), 24, color);
 		autoSize = LEFT;
 		multiline = true;
 		text = "";

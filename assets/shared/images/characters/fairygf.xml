@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="fairygf.png">
+<SubTexture name="danceleft0000" x="62" y="0" width="32" height="41" frameX="-3" frameY="-5" frameWidth="50" frameHeight="53" />
+<SubTexture name="danceleft0001" x="62" y="0" width="32" height="41" frameX="-3" frameY="-5" frameWidth="50" frameHeight="53" />
+<SubTexture name="danceleft0002" x="0" y="42" width="30" height="41" frameX="-5" frameY="-5" frameWidth="50" frameHeight="53" />
+<SubTexture name="danceleft0003" x="0" y="42" width="30" height="41" frameX="-5" frameY="-5" frameWidth="50" frameHeight="53" />
+<SubTexture name="danceleft0004" x="0" y="0" width="31" height="42" frameX="-6" frameY="-4" frameWidth="50" frameHeight="53" />
+<SubTexture name="danceleft0005" x="0" y="0" width="31" height="42" frameX="-6" frameY="-4" frameWidth="50" frameHeight="53" />
+<SubTexture name="danceright0000" x="30" y="42" width="31" height="41" frameX="-10" frameY="-5" frameWidth="50" frameHeight="53" />
+<SubTexture name="danceright0001" x="30" y="42" width="31" height="41" frameX="-10" frameY="-5" frameWidth="50" frameHeight="53" />
+<SubTexture name="danceright0002" x="61" y="42" width="30" height="41" frameX="-8" frameY="-5" frameWidth="50" frameHeight="53" />
+<SubTexture name="danceright0003" x="61" y="42" width="30" height="41" frameX="-8" frameY="-5" frameWidth="50" frameHeight="53" />
+<SubTexture name="danceright0004" x="31" y="0" width="31" height="42" frameX="-6" frameY="-4" frameWidth="50" frameHeight="53" />
+<SubTexture name="danceright0005" x="31" y="0" width="31" height="42" frameX="-6" frameY="-4" frameWidth="50" frameHeight="53" />
+</TextureAtlas>
