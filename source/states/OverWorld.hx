@@ -51,9 +51,9 @@ class OverWorld extends MusicBeatState
 
 		mapData = converter(Paths.level("overworld", "overworld"));
 		map = new FlxTilemap();
-		map.loadMapFromArray(mapData, 22, 13, Paths.image("overWorld/tilesOverd"), 66, 66);
+		map.loadMapFromArray(mapData, 20, 11, Paths.image("overWorld/tilesOverd"), 66, 66);
 		map.auto = FULL;
-		map.setTileProperties(0, ANY);
+		map.setTileProperties(0, NONE);
 		map.setTileProperties(1, NONE);
 		map.setTileProperties(2, ANY);
 		map.setTileProperties(3, NONE);
@@ -62,7 +62,7 @@ class OverWorld extends MusicBeatState
 		map.setTileProperties(6, ANY);
 		map.setTileProperties(7, ANY);
 		map.setTileProperties(8, NONE);
-		map.setTileProperties(9, ANY);
+		map.setTileProperties(9, NONE);
 		map.setTileProperties(10, ANY);
 		map.setTileProperties(11, ANY);
 		map.setTileProperties(12, ANY);
@@ -89,14 +89,14 @@ class OverWorld extends MusicBeatState
 		player.animation.addByPrefix('left', "Left", 4, false);
 		player.animation.addByPrefix('right', "Right", 4, false);
 		player.animation.play('down');
-		player.scale.x = 4.2;
-		player.scale.y = 4.2;
+		player.scale.x = 3.5;
+		player.scale.y = 3.5;
 		player.x = 130;
 		player.y = 400;
 
 
 
-		FlxG.sound.playMusic(Paths.music("MapWorld_BETA"));
+		FlxG.sound.playMusic(Paths.music("placeholder"));
 
 		function anadirPasto(x:Int, y:Int){
             pasto = new FlxSprite(x, y).loadGraphic(Paths.image("overWorld/decoracion/pasto"));
@@ -143,7 +143,6 @@ class OverWorld extends MusicBeatState
 			arbusto.scale.set(4, 4);
 			add(arbusto);
 		}
-	// mierda para añadir objetos
 	//	anadirPlantaG(100, 300);
 	//	anadirPlantaG(200, 300);
 	anadirPasto(366, 503);
@@ -166,15 +165,11 @@ class OverWorld extends MusicBeatState
 	anadirNose(843, 486);
 	anadirArbusto(283, 523);
 	anadirArbusto(555, 448);
-	anadirArbusto(637, 448);
 	anadirArbusto(598, 474);
+	anadirArbusto(670, 459);
 	anadirArbusto(244, 132);
 
-	//jugador
-
 		add(player);
-		
-	// aksbnjsaiund
 
 		anadirArbol2(100, 0);
 		anadirArbol2(20, 45);
@@ -186,9 +181,9 @@ class OverWorld extends MusicBeatState
 		anadirArbol(1050, 624);
 		anadirArbol2(945, 50);
 		anadirArbol(274, 12);
-	//ola
 
-		//FlxG.mouse.visible = true;
+		FlxG.mouse.visible = true;
+
 		super.create();
 	}
 	override public function update(elapsed:Float):Void
@@ -197,8 +192,8 @@ class OverWorld extends MusicBeatState
 		FlxG.collide(map, player);
 		movePlayer();
 
-	//	trace("x es" +FlxG.mouse.x);
-	//	trace("y es" + FlxG.mouse.y);
+		trace("x es" +FlxG.mouse.x);
+		trace("y es" + FlxG.mouse.y);
 
 		if(FlxG.overlap(player, casaPepeC)){
 			if (FlxG.keys.justPressed.Z) {
@@ -281,39 +276,3 @@ class OverWorld extends MusicBeatState
 		return arrayDeEnteros;
 	}
 }
-/*
-CUIDADO
-
-CULO JUMPCARE!!!!!!
-
-⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠘⠹⣶⣿⠷⢃⡆⠻⢈⣿⣿
-⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⢉⣴⣿⣷⢱⢠⡘⣿⣿
-⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣀⣴⣿⠿⣫⣾⢈⣸⣷⠹⣿
-⠄⠄⠄⠄⠄⠄⠄⠄⠄⣀⣤⣶⣾⣿⣿⣿⣷⣶⣶⣬⡩⣵⣿⣿⣿⡘⢹⣿⢠⣄
-⠄⠄⠄⠄⠄⠄⠄⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣮⢻⣿⣿⣞⡄⢿⣜⣿
-⠄⠄⠄⠄⠄⢀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣇⣿⣿⣋⠄⠙⠉⠛
-⠄⠄⠄⠄⢀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢸⣷⠇⠄⠄⠄⠄
-⠄⠄⠄⠄⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠄⣿⡄⠄⠄⠄⠄
-⡀⠄⠄⢠⣿⣿⣿⡿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠄⠄⠘⠇⠄⠄⠄⠄
-⣶⣾⣿⣷⡹⣿⣿⣿⣎⢿⣿⣿⣿⣿⣿⣿⣿⡿⠿⣛⣵⣿⣷⣶⣤⡀⠄⠄⠄⠄
-⣿⣿⣿⣿⣿⣮⣿⡿⠿⣛⣢⢩⣭⣭⣭⣭⣶⣿⣿⣿⣿⣿⣿⣿⣿⣷⠄⠄⠄⠄
-⣿⣿⣿⠿⣫⣾⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠄⠄⠄⠄
-⠿⢟⣭⣾⣿⣿⣿⣿⣿⣿⣿⣮⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠄⠄⠄⠄
-⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢛⣁⣀⣀⣀⣀⣀
-
-⣿⣿⣿⣿⣿⣿⡿⠿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⣿⣿⣿DENGER⡄⢽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⣿⠟⢰⣾⢛⣃⣾⣿⣿⣿⣿⠟⠋⠙⠛⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⠡⣶⡾⢿⡄⠻⣿⣿⣿⣿⡟HAXEFLIXEL⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⠄⢸⣇⢸⡇⠱⣌⣛⣛⡛⣉⣤⣤⡤⠤⠭⠭⠉⠻⠿⠿⠿⢿⣿⣿⣿
-⣿⣿⣿⣿⡆⡄⢻⡀⠳⣷⣶⣷⠂⣰⣿⣿⡀⣶⠄⠄⠄⠄⠄⠄⠄⠄⠄⢸⣿⣿
-⣿⣿⣿⡿⣡⣿⣦⣌⠢⡙⠋⠄⢺⡿⠿⣩⣴⣿⠠⣤⣤⣤⣤⣤⣤⣤⣤⢀⣿⣿
-⣿⣿⣿⡇⢿⣿⣿⡏⢠⣄⣙⠂⢈⣴⣾⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿
-⣿⣿⣿⣿⣦⠻⣿⣷⠈⢿⣿⡐⣿⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿
-⣿⣿⣿⣿⣿⣆⠹⣿⡇⠈⢻⣧⢻⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿
-⣿⣿⣿⣿⣿⠟⣠⡿⢁⣾⠄⣿⢸⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿
-⣿⣿⣿⣿⡏⢸⡿⢁⣾⣿⣶⡇⣿⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿
-⣿⣿⣿⣿⡇⡾⠄⠬⠍⡙⠄⠑⠿⠿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿
-⣿⣿⣿⣿⡐⠧⣜⡻⢿⣏⡘⠂⠄⠐⣿⣿⣿⣿⠸⢛⣛⣛⣛⣛⣛⣛⠻⢸⣿⣿
-⣿⣿⣿⣿⣿⣷⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣾⣿⣿⣿⣿⣿⣿⣷⣾⣿
-*/

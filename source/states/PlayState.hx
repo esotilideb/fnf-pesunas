@@ -1,6 +1,5 @@
 package states;
 
-import states.stages.Mijail;
 import backend.Highscore;
 import backend.StageData;
 import backend.WeekData;
@@ -283,13 +282,6 @@ class PlayState extends MusicBeatState
 
 	var effect:SMWPixelBlurShader;
 
-	var barUp:FlxSprite;
-	var barDown:FlxSprite;
-	var tv:FlxSprite;
-	var redstar:FlxSprite;
-
-	var colorBg:FlxSprite;
-
 	override public function create()
 	{
 		//trace('Playback Rate: ' + playbackRate);
@@ -410,38 +402,7 @@ class PlayState extends MusicBeatState
 			case 'PepeHouse': new states.stages.PepeHouse(); //WEEK 1
 			case 'RetroPlace': new states.stages.RetroPlace(); //TOPS
 			case 'EteSech': new states.stages.EteSech(); //HORROR-PEPE.MIEDO
-			case 'caca':
-				new states.stages.Mijail();
-
-				colorBg = new FlxSprite().makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.WHITE);
-				colorBg.scrollFactor.set();
-				colorBg.screenCenter();
-				colorBg.visible = false;
-				add(colorBg);
-
-				tv = new FlxSprite(-10, 330);
-				tv.frames = Paths.getSparrowAtlas("characters/tv_mija");
-				tv.scale.set(0.7, 0.7);
-				tv.animation.addByPrefix("idle", "tv");
-				tv.animation.play("idle");
-				add(tv);
-
-				tv.x += 880;
-				tv.y += 80;
-
-				redstar = new FlxSprite(-10, 260);
-				redstar.frames = Paths.getSparrowAtlas("characters/pal negro");
-				redstar.scale.set(0.7, 0.7);
-				redstar.animation.addByPrefix("idle", "pal negro");
-				redstar.animation.play("idle");
-				redstar.visible = false;
-				add(redstar);
-
-				redstar.x += 880;
-				redstar.y += 80;
-
-				ogMid = ClientPrefs.data.middleScroll;
-				ClientPrefs.data.middleScroll = false;
+			case 'caca': new states.stages.Mijail();
 		}
 
 		if(isPixelStage) {
@@ -513,19 +474,6 @@ class PlayState extends MusicBeatState
 		}
 		stagesFunc(function(stage:BaseStage) stage.createPost());
 
-		barUp = new FlxSprite();
-		barUp.scrollFactor.set();
-		barUp.makeGraphic(FlxG.width, 125, FlxColor.BLACK);
-		add(barUp);
-		barUp.y = -barUp.height;
-		barUp.cameras = [camHUD];
-		
-		barDown = new FlxSprite(0, FlxG.height);
-		barDown.scrollFactor.set();
-		barDown.makeGraphic(FlxG.width, 125, FlxColor.BLACK);
-		add(barDown);
-		barDown.cameras = [camHUD];
-
 		comboGroup = new FlxSpriteGroup();
 		add(comboGroup);
 		noteGroup = new FlxTypedGroup<FlxBasic>();
@@ -550,7 +498,6 @@ class PlayState extends MusicBeatState
 		timeBar.visible = showTime;
 		uiGroup.add(timeBar);
 		uiGroup.add(timeTxt);
-
 
 		strumLineNotes = new FlxTypedGroup<StrumNote>();
 		noteGroup.add(strumLineNotes);
@@ -681,12 +628,6 @@ class PlayState extends MusicBeatState
 		startCallback();
 		RecalculateRating();
 
-		black = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-		black.scrollFactor.set();
-		if (curStage != "caca") black.alpha = 0;
-		black.cameras = [camHUD];
-		add(black);
-
 		//PRECACHING MISS SOUNDS BECAUSE I THINK THEY CAN LAG PEOPLE AND FUCK THEM UP IDK HOW HAXE WORKS
 		if(ClientPrefs.data.hitsoundVolume > 0) precacheList.set('hitsound', 'sound');
 		precacheList.set('missnote1', 'sound');
@@ -733,8 +674,6 @@ class PlayState extends MusicBeatState
 		CustomFadeTransition.nextCamera = camOther;
 		if(eventNotes.length < 1) checkEventNote();
 	}
-
-	var black:FlxSprite;
 
 	function set_songSpeed(value:Float):Float
 	{
@@ -1802,9 +1741,6 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (curStage == "caca")
-			camFollow.setPosition(cameraPosDefaultX + (cameraMoveX * FlxG.camera.zoom), cameraPosDefaultY + (cameraMoveY * FlxG.camera.zoom));
-
 		if(!endingSong && !inCutscene && allowDebugKeys)
 		{
 			if (controls.justPressed('debug_1'))
@@ -1938,7 +1874,7 @@ class PlayState extends MusicBeatState
 			checkEventNote();
 		}
 
-		//#if debug
+		#if debug
 		if(!endingSong && !startingSong) {
 			if (FlxG.keys.justPressed.ONE) {
 				KillNotes();
@@ -1949,7 +1885,7 @@ class PlayState extends MusicBeatState
 				clearNotesBefore(Conductor.songPosition);
 			}
 		}
-		//#end
+		#end
 
 		setOnScripts('cameraX', camFollow.x);
 		setOnScripts('cameraY', camFollow.y);
@@ -2112,9 +2048,6 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	var tweenBlack:FlxTween;
-	var ogColor:Array<FlxColor> = [];
-
 	public function triggerEvent(eventName:String, value1:String, value2:String, strumTime:Float) {
 		var flValue1:Null<Float> = Std.parseFloat(value1);
 		var flValue2:Null<Float> = Std.parseFloat(value2);
@@ -2210,91 +2143,7 @@ class PlayState extends MusicBeatState
 				}
 			case 'poner shader xdxdxd evento hecho en source puto lua':
 				chromaShader();
-			case 'eventosCul':
-				switch(Std.parseInt(value1))
-				{
-					case 0: //flash
-						//var time:Float = (value2 != "" ? Std.parseFloat(value2) : 1);
-						camHUD.flash(FlxColor.WHITE, 2.5);
-					case 1: //hide char
-						switch(value2)
-						{
-							case "dad" | "0":
-								dad.visible = !dad.visible;
-							case "gf" | "1":
-								gf.visible = !gf.visible;
-							case "bf" | "boyfriend" | "2":
-								boyfriend.visible = !boyfriend.visible;
-						}
-					case 2: //zoom
-						FlxG.camera.zoom += Std.parseFloat(value2);
-					case 3: //blackshit
-						if (black != null) black.alpha = 1 - black.alpha;
-					case 4: //blackshit fade
-						if (black != null) {
-							if (tweenBlack != null) tweenBlack.cancel();
-							tweenBlack = FlxTween.tween(black, {alpha: 0}, Std.parseFloat(value2), {
-								onComplete: function(twn:FlxTween)
-								{
-									tweenBlack.cancel();
-									tweenBlack = null;
-								}
-							});
-						}
-					case 5: //good apple
-						if (value2 == "a") // white
-						{
-							opponentStrums.forEach(function(spr:FlxSprite)
-							{
-								FlxTween.tween(spr, {x: spr.x - 310, alpha: 0, angle: -360}, 0.5, {ease: FlxEase.quartOut, type: ONESHOT});
-							});
-							playerStrums.forEach(function(spr:FlxSprite)
-							{
-								FlxTween.tween(spr, {x: spr.x - 310, angle: -360}, 0.5, {ease: FlxEase.quartOut, type: ONESHOT});
-								//colorBg.visible = true;
-								//FlxG.camera.flash(FlxColor.WHITE, 1);
-							});
-							FlxTween.tween(barUp, {y: 0}, 0.5, {ease: FlxEase.quartOut, type: ONESHOT});
-							FlxTween.tween(barDown, {y: FlxG.height - barUp.height}, 0.5, {ease: FlxEase.quartOut, type: ONESHOT});
-						}
-						else if (value2 == "b") // black
-						{
-							opponentStrums.forEach(function(spr:FlxSprite)
-							{
-								FlxTween.tween(spr, {x: spr.x + 310, alpha: 1, angle: 0}, 0.5, {ease: FlxEase.quartOut, type: ONESHOT});
-							});
-							playerStrums.forEach(function(spr:FlxSprite)
-							{
-								FlxTween.tween(spr, {x: spr.x + 310, angle: 0}, 0.5, {ease: FlxEase.quartOut, type: ONESHOT});
-								//colorBg.visible = false;
-								//FlxG.camera.flash(FlxColor.WHITE, 1);
-							});
-							FlxTween.tween(barUp, {y: -barUp.height}, 0.5, {ease: FlxEase.quartOut, type: ONESHOT});
-							FlxTween.tween(barDown, {y: FlxG.height}, 0.5, {ease: FlxEase.quartOut, type: ONESHOT});
-						}
-					case 6: //reset cam
-						trace("ya lo arregle lol");
-					case 7: //bad apple
-						if (value2 == "a") {
-							colorBg.visible = true;
-							ogColor = [tv.color, redstar.color];
 
-							tv.color = FlxColor.BLACK;
-							redstar.color = FlxColor.BLACK;
-						} else {
-							colorBg.visible = false;
-
-							tv.color = ogColor[0];
-							redstar.color = ogColor[1];
-						}
-					case 8: //change tv
-						tv.visible = !tv.visible;
-						redstar.visible = !redstar.visible;
-					case 9:
-						cameraPosDefaultX = redstar.getMidpoint().x;
-						cameraPosDefaultY = redstar.getMidpoint().y;
-						redstarSet = true;
-				}
 
 			case 'Alt Idle Animation':
 				var char:Character = dad;
@@ -2404,10 +2253,6 @@ class PlayState extends MusicBeatState
 						}
 				}
 				reloadHealthBarColors();
-				if (curStage == "caca") {
-					moveCamera(true);
-					FlxG.camera.snapToTarget();
-				}
 
 			case 'Change Scroll Speed':
 				if (songSpeedType != "constant")
@@ -2478,7 +2323,6 @@ class PlayState extends MusicBeatState
 		callOnScripts('onMoveCamera', [isDad ? 'dad' : 'boyfriend']);
 	}
 
-	var redstarSet:Bool = false;
 	var cameraTwn:FlxTween;
 	public function moveCamera(isDad:Bool)
 	{
@@ -2505,15 +2349,7 @@ class PlayState extends MusicBeatState
 				});
 			}
 		}
-
-		if (!redstarSet) {
-			cameraPosDefaultX = camFollow.x;
-			cameraPosDefaultY = camFollow.y;
-		}
 	}
-
-	var cameraPosDefaultX:Float = 0;
-	var cameraPosDefaultY:Float = 0;
 
 	public function tweenCamIn() {
 		if (Paths.formatToSongPath(SONG.song) == 'tutorial' && cameraTwn == null && FlxG.camera.zoom != 1.3) {
@@ -2542,7 +2378,6 @@ class PlayState extends MusicBeatState
 
 
 	public var transitioning = false;
-	var ogMid:Bool = false;
 	public function endSong()
 	{
 		//Should kill you if you tried to cheat
@@ -2570,8 +2405,6 @@ class PlayState extends MusicBeatState
 		camZooming = false;
 		inCutscene = false;
 		updateTime = false;
-
-		if (curStage == "caca") ClientPrefs.data.middleScroll = ogMid;
 
 		deathCounter = 0;
 		seenCutscene = false;
@@ -3139,9 +2972,6 @@ class PlayState extends MusicBeatState
 		vocals.volume = 0;
 	}
 
-	var cameraMoveX:Float = 0;
-	var cameraMoveY:Float = 0;
-
 	function opponentNoteHit(note:Note):Void
 	{
 		var result:Dynamic = callOnLuas('opponentNoteHit', [notes.members.indexOf(note), Math.abs(note.noteData), note.noteType, note.isSustainNote]);
@@ -3149,25 +2979,6 @@ class PlayState extends MusicBeatState
 
 		if (Paths.formatToSongPath(SONG.song) != 'tutorial')
 			camZooming = true;
-
-		if (curStage == "caca")
-		{
-			switch (note.noteData)
-			{
-				case 0:
-					cameraMoveX = -50;
-					cameraMoveY = 0;
-				case 1:
-					cameraMoveX = 0;
-					cameraMoveY = 50;
-				case 2:
-					cameraMoveX = 0;
-					cameraMoveY = -50;
-				case 3:
-					cameraMoveX = 50;
-					cameraMoveY = 0;
-			}
-		}
 
 		if(note.noteType == 'Hey!' && dad.animOffsets.exists('hey')) {
 			dad.playAnim('hey', true);
@@ -3415,11 +3226,8 @@ class PlayState extends MusicBeatState
 			gf.dance();
 		if (boyfriend != null && beat % boyfriend.danceEveryNumBeats == 0 && !boyfriend.getAnimationName().startsWith('sing') && !boyfriend.stunned)
 			boyfriend.dance();
-		if (dad != null && beat % dad.danceEveryNumBeats == 0 && !dad.getAnimationName().startsWith('sing') && !dad.stunned) {
+		if (dad != null && beat % dad.danceEveryNumBeats == 0 && !dad.getAnimationName().startsWith('sing') && !dad.stunned)
 			dad.dance();
-
-			if (curStage == "caca") cameraMoveX = cameraMoveY = 0;
-		}
 	}
 
 	public function playerDance():Void

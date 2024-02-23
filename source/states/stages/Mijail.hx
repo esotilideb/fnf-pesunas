@@ -1,7 +1,6 @@
 package states.stages;
 
 import states.stages.objects.*;
-import flixel.FlxSprite;
 
 class Mijail extends BaseStage
 {
