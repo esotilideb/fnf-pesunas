@@ -13,16 +13,21 @@ class MainMenuState extends MusicBeatState
 	public static var curSelected:Int = 0;
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
+	var chavalitems:FlxTypedGroup<FlxSprite>;
 
 	var optionShit:Array<String> = [
 		'story_mode',
 		'freeplay',
 		'options',
+		'credits'
 	];
 
 	var people:FlxSprite;
-	var chaval:FlxSprite;
 	var camFollow:FlxObject;
+	var bg:FlxSprite;
+
+	var chavalOgPos:Array<Array<Float>> = [];
+	var chavalOffset:Array<Array<Int>> = [[0, 127], [0, 46], [0, 42], [325, 355]];
 
 	override function create()
 	{
@@ -41,24 +46,17 @@ class MainMenuState extends MusicBeatState
 
 		persistentUpdate = persistentDraw = true;
 
-		var bg = new FlxSprite(600, 300);
+		bg = new FlxSprite(600, 300);
         bg.frames = Paths.getSparrowAtlas('mainmenu/menu_estrellas');
 		bg.scrollFactor.set(0);
         bg.screenCenter();
         bg.antialiasing = false;
-        bg.animation.addByPrefix('ostia', 'Estrellas', 16, true);
+        bg.animation.addByPrefix('ostia', 'Estrellas0000', 16, true);
         bg.animation.play('ostia');
         add(bg);
 
-		chaval = new FlxSprite(-900,-200);
-		chaval.frames = Paths.getSparrowAtlas('mainmenu/pibes/' + optionShit[curSelected]);
-		chaval.scrollFactor.set(0);
-		chaval.screenCenter(Y);
-		chaval.setGraphicSize(Std.int(chaval.width * 0.27));
-		chaval.animation.addByPrefix('Manos en el ano', 'idle', 24); //nothing
-		chaval.animation.play('Manos en el ano');
-		chaval.antialiasing = ClientPrefs.data.antialiasing;
-		add(chaval);
+		chavalitems = new FlxTypedGroup<FlxSprite>();
+		add(chavalitems);
 		
 		var actualBG = new FlxSprite(600, 300).loadGraphic(Paths.image('mainmenu/bg'));
 		actualBG.screenCenter();
@@ -73,46 +71,71 @@ class MainMenuState extends MusicBeatState
 
 		for (i in 0...optionShit.length)
 		{
-			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
-			var menuItem:FlxSprite = new FlxSprite(0, (i * 140) + offset);
-			menuItem.antialiasing = ClientPrefs.data.antialiasing;
-			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
-			menuItem.animation.addByPrefix('idle', "menu_" + optionShit[i], 24);
-			menuItem.animation.addByPrefix('selected', optionShit[i] + "_select", 24);
-			menuItem.animation.play('idle');
-			menuItem.setGraphicSize(Std.int(menuItem.width * 0.95));
-			menuItems.add(menuItem);
-			var scr:Float = (optionShit.length - 4) * 0.135;
-			if (optionShit.length < 6)
-				scr = 0;
-			menuItem.scrollFactor.set(0);
-			menuItem.updateHitbox();
-			switch (i)
-			{
-				case 0:
-				 menuItem.setPosition(25,25);		
-				case 1:
-				 menuItem.setPosition(40,15);	
-				case 2:
-				 menuItem.setPosition(60,50);	
-				/*case 3:
-				 menuItem.setPosition(520, -40);	
-				 menuItem.setGraphicSize(Std.int(menuItem.width * 0.5));*/
+			var spr:FlxSprite = new FlxSprite();
+			spr.frames = Paths.getSparrowAtlas('mainmenu/pibes/' + optionShit[i]);
+			spr.animation.addByPrefix('Manos en el ano', 'idle', 24, (i == 3)); //nothing
+			spr.animation.play('Manos en el ano', true);
+			spr.antialiasing = ClientPrefs.data.antialiasing;
+			spr.alpha = 0;
+			spr.scale.set(600 / spr.height, 600 / spr.height);
+			spr.scrollFactor.set();
+			spr.updateHitbox();
+			spr.setPosition(FlxG.width, FlxG.height - spr.width);
+			chavalitems.add(spr);
 
+			chavalOgPos.push([spr.x - spr.width, spr.y]);
+			
+			if (i != 3) {
+				var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
+				var menuItem:FlxSprite = new FlxSprite(0, (i * 140) + offset);
+				menuItem.antialiasing = ClientPrefs.data.antialiasing;
+				menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
+				menuItem.animation.addByPrefix('idle', "menu_" + optionShit[i], 24);
+				menuItem.animation.addByPrefix('selected', optionShit[i] + "_select", 24);
+				menuItem.animation.play('idle');
+				menuItem.setGraphicSize(Std.int(menuItem.width * 0.95));
+				menuItems.add(menuItem);
+				var scr:Float = (optionShit.length - 4) * 0.135;
+				if (optionShit.length < 6)
+					scr = 0;
+				menuItem.scrollFactor.set(0);
+				menuItem.updateHitbox();
+				switch (i)
+				{
+					case 0:
+					menuItem.setPosition(25,25);		
+					case 1:
+					menuItem.setPosition(40,15);	
+					case 2:
+					menuItem.setPosition(60,50);	
+					/*case 3:
+					menuItem.setPosition(520, -40);	
+					menuItem.setGraphicSize(Std.int(menuItem.width * 0.5));*/
+
+				}
+			} else {
+				spr.scale.set(650 / spr.height, 650 / spr.height);
+				spr.updateHitbox();
+				spr.setPosition(FlxG.width, FlxG.height - spr.width);
+				
+				people = new FlxSprite(-950, -100);
+				people.frames = Paths.getSparrowAtlas('mainmenu/people');
+				people.screenCenter();
+				people.scrollFactor.set(0);
+				people.setGraphicSize(Std.int(people.width * 0.5));
+				people.antialiasing = false;
+				people.animation.addByPrefix('idle', 'people-normal', 24, true); //nothing
+				people.animation.addByPrefix('rebote', 'rebote', 24, true); //nothing
+				people.animation.addByPrefix('selected', 'seleccionado', 24, true); //nothing
+				people.animation.play('idle');
+				menuItems.add(people);
 			}
 		}
 
-		people = new FlxSprite(-950, -100);
-		people.frames = Paths.getSparrowAtlas('mainmenu/people');
-		people.screenCenter();
-		people.scrollFactor.set(0);
-		people.setGraphicSize(Std.int(people.width * 0.5));
-		people.antialiasing = false;
-		people.animation.addByPrefix('idle', 'people-normal', 24, true); //nothing
-		people.animation.addByPrefix('rebote', 'rebote', 24, true); //nothing
-		people.animation.addByPrefix('selected', 'seleccionado', 24, true); //nothing
-		people.animation.play('idle');
-		add(people);
+		for (i in 0...optionShit.length)
+		{
+			chavalitems.members[i].setPosition(chavalOgPos[i][0] + chavalOffset[i][0], chavalOgPos[i][1] + chavalOffset[i][1]);
+		}
 
 		changeItem();
 
@@ -138,15 +161,23 @@ class MainMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
+		if (FlxG.sound.music != null)
+			Conductor.songPosition = FlxG.sound.music.time;
+		
 		if (FlxG.sound.music.volume < 0.8)
 		{
 			FlxG.sound.music.volume += 0.5 * elapsed;
 			if (FreeplayState.vocals != null)
 				FreeplayState.vocals.volume += 0.5 * elapsed;
 		}
-
+		
 		if (!selectedSomethin)
 		{
+			for (i in 0...optionShit.length)
+			{
+				chavalitems.members[i].setPosition(chavalOgPos[i][0] + chavalOffset[i][0], chavalOgPos[i][1] + chavalOffset[i][1]);
+			}
+			
 			/*FlxG.mouse.visible = true;
 			if(usingMouse)
 				{
@@ -174,17 +205,6 @@ class MainMenuState extends MusicBeatState
 
 			if (controls.UI_DOWN_P)
 				changeItem(1);
-
-			if(controls.UI_UP || controls.UI_DOWN)
-				{
-					chaval.x = 1200;
-					new FlxTimer().start(0.2, function(tmr:FlxTimer)
-						{
-							chaval.frames = Paths.getSparrowAtlas('mainmenu/pibes/' + optionShit[curSelected]);
-							chaval.animation.play('Manos en el ano');
-							FlxTween.tween(chaval,{x: -900},0.2,{ease:FlxEase.cubeOut});
-						});
-				}
 
 			if (controls.BACK)
 			{
@@ -265,6 +285,9 @@ class MainMenuState extends MusicBeatState
 		menuItems.members[curSelected].animation.play('idle');
 		menuItems.members[curSelected].updateHitbox();
 
+		var oldGuy = chavalitems.members[curSelected];
+		var oldX = chavalOgPos[curSelected][0] + chavalOffset[curSelected][0];
+
 		curSelected += huh;
 
 		if (curSelected >= menuItems.length)
@@ -272,10 +295,55 @@ class MainMenuState extends MusicBeatState
 		if (curSelected < 0)
 			curSelected = menuItems.length - 1;
 
+		var newGuy = chavalitems.members[curSelected];
+		var newX = chavalOgPos[curSelected][0] + chavalOffset[curSelected][0] + newGuy.width;
+
+		selectedSomethin = true;
+
+		if (huh != 0) {
+			FlxTween.tween(oldGuy, {x: oldX + oldGuy.width}, 0.5, {ease: FlxEase.quadIn});
+			FlxTween.tween(oldGuy, {alpha: 0}, 0.5, {
+				onComplete: function(twn:FlxTween)
+				{
+					newGuy.x += newGuy.width;
+					FlxTween.tween(newGuy, {x: newX - newGuy.width}, 0.5, {ease: FlxEase.quadOut});
+					FlxTween.tween(newGuy, {alpha: 1}, 0.5, {
+						onComplete: function(twn2:FlxTween)
+						{
+							selectedSomethin = false;
+						}
+					});
+				}
+			});
+		} else {
+			newGuy.x += newGuy.width;
+			FlxTween.tween(newGuy, {x: newX - newGuy.width}, 0.5, {ease: FlxEase.quadOut});
+				FlxTween.tween(newGuy, {alpha: 1}, 0.5, {
+					onComplete: function(twn2:FlxTween)
+					{
+						selectedSomethin = false;
+					}
+			});
+		}
+
 		menuItems.members[curSelected].animation.play('selected');
 		menuItems.members[curSelected].centerOffsets();
 
 		camFollow.setPosition(menuItems.members[curSelected].getGraphicMidpoint().x,
 			menuItems.members[curSelected].getGraphicMidpoint().y - (menuItems.length > 4 ? menuItems.length * 8 : 0));
+	}
+
+	override function beatHit()
+	{
+		super.beatHit();
+
+		for (i in 0...chavalitems.members.length) {
+			var spr = chavalitems.members[i];
+			var beatEvery:Int = 1;
+
+			if (i == 2) beatEvery = 3;
+
+			if (curBeat % beatEvery == 0 && i != 3) spr.animation.play('Manos en el ano', true);
+		}
 	}
 }
