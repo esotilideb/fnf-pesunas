@@ -70,25 +70,23 @@ class PepeHouse extends BaseStage
 
 		//coders le mandan un saludo a mi amigaso meloxd
 
-		var bgPIXEL = new BGSprite('stages/pepe-casa/retro/BG1', -400, -600, 0.9, 0.9);
+		var bgPIXEL = new BGSprite('stages/pepe-casa/retro/BG1',800, 700, 0.9, 0.9);
 		bgPIXEL.antialiasing = false;
-		//bgPIXEL.visible = false;
 		bgPIXEL.setGraphicSize(Std.int(bgPIXEL.width * 10));
-		bgPIXEL.scrollFactor.set(0.95, 0.95); //@Andree1x puto
+		bgPIXEL.scrollFactor.set(0.95, 0.95);
 		pixelBG.add(bgPIXEL);
 
-		var casaPIXEL = new BGSprite('stages/pepe-casa/retro/BG2', 0, 0, 0.9, 0.9, ['BG2'], true);
+		var casaPIXEL = new BGSprite('stages/pepe-casa/retro/BG2', 800, 800, 0.9, 0.9, ['BG2'], true);
 		casaPIXEL.antialiasing = false;
-		//casaPIXEL.visible = false;
-		casaPIXEL.setGraphicSize(Std.int(casaPIXEL.width * 10));
+		casaPIXEL.setGraphicSize(Std.int(casaPIXEL.width * 8));
 		pixelBG.add(casaPIXEL);
 
-		var pisoPIXEL = new BGSprite('stages/pepe-casa/retro/BG3', 0, 0, 0.9, 0.9);
+		var pisoPIXEL = new BGSprite('stages/pepe-casa/retro/B3', 800, 800, 0.9, 0.9);
 		pisoPIXEL.antialiasing = false;
-		pisoPIXEL.scrollFactor.set(0.95, 0.95); //@Andree1x puto
-		pisoPIXEL.setGraphicSize(Std.int(pisoPIXEL.width * 10));
-		//pisoPIXEL.visible = false;
-		pixelBG.add(piso);
+		pisoPIXEL.scrollFactor.set(0.95, 0.95);
+		pisoPIXEL.setGraphicSize(Std.int(pisoPIXEL.width * 8));
+		pixelBG.add(pisoPIXEL);
+		pixelBG.visible = false;
 
 		if (backend.BaseStage.exe == "but.exe/") {
 			people.visible = false;
@@ -102,10 +100,8 @@ class PepeHouse extends BaseStage
 
 	override function stepHit() // me cago wn
 		{
-			if (curStep == 1)
-				normalBG.visible = false;
 
-			if (curStep == 1517){
+			if (curStep == 1514){
 				FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom + 0.5}, 1.8, {
 					ease: FlxEase.quadInOut,
 					onComplete: function(twn:FlxTween)
@@ -113,6 +109,11 @@ class PepeHouse extends BaseStage
 							game.triggerEvent('Change Character', 'bf', 'bf_pixel', 0);
 							game.triggerEvent('Change Character', 'gf', 'gfpixel', 0);
 							game.triggerEvent('Change Character', 'dad', 'Pepe_Pixel', 0);
+
+							game.boyfriend.y = boyfriend.y + 50;
+							game.dad.y = dad.y + 50;
+							game.gf.y = gf.y + 50;
+
 							normalBG.visible = false;
 							pixelBG.visible = true;
 						}
