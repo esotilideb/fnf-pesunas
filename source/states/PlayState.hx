@@ -37,6 +37,8 @@ import states.editors.CharacterEditorState;
 import substates.PauseSubState;
 import substates.GameOverSubstate;
 
+import backend.TVShader;
+import backend.NoiseShader;
 #if !flash
 import flixel.addons.display.FlxRuntimeShader;
 import openfl.filters.ShaderFilter;
@@ -442,6 +444,11 @@ class PlayState extends MusicBeatState
 
 				ogMid = ClientPrefs.data.middleScroll;
 				ClientPrefs.data.middleScroll = false;
+
+				var noise:NoiseShader = new NoiseShader();
+				var shader:TVShader = new TVShader();
+				FlxG.game.setFilters([new ShaderFilter(noise), new ShaderFilter(shader/*.shader*/)]);
+				FlxG.camera.filtersEnabled = true;
 		}
 
 		if(isPixelStage) {
@@ -2571,7 +2578,12 @@ class PlayState extends MusicBeatState
 		inCutscene = false;
 		updateTime = false;
 
-		if (curStage == "caca") ClientPrefs.data.middleScroll = ogMid;
+		if (curStage == "caca") 
+		{
+			ClientPrefs.data.middleScroll = ogMid;
+			FlxG.game.setFilters([]);
+			FlxG.camera.filtersEnabled = false;
+		}
 
 		deathCounter = 0;
 		seenCutscene = false;

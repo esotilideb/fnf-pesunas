@@ -140,6 +140,10 @@ class MusicBeatState extends FlxUIState
 		if(FlxTransitionableState.skipNextTransIn) FlxG.switchState(nextState);
 		else startTransition(nextState);
 		FlxTransitionableState.skipNextTransIn = false;
+
+		ClientPrefs.data.middleScroll = FlxG.save.data.middleScroll;
+		FlxG.game.setFilters([]);
+		FlxG.camera.filtersEnabled = false;
 	}
 
 	public static function resetState() {
