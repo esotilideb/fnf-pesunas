@@ -1,13 +1,31 @@
 package backend;
 
+import openfl.display.BitmapData;
+import openfl.display.ShaderInput;
 import flixel.system.FlxAssets.FlxShader;
+import flixel.FlxSprite;
 
-class TVShader extends FlxShader
+class TVShader
+{
+    public var shader:TVShit;
+    public var sprite:FlxSprite;
+
+    public function new()
+    {
+        shader = new TVShit();
+    }
+
+    public function update(elapsed:Float){
+        trace("alo");
+    }
+}
+
+class TVShit extends FlxShader
 {
     @:glFragmentSource('
         #pragma header
 
-        float zoom = 1;
+        float zoom = 0.8;
         void main()
         {
             vec2 uv = openfl_TextureCoordv;
@@ -19,10 +37,10 @@ class TVShader extends FlxShader
             uv = (uv + 1.)*.5;
             
             vec4 tex = vec4( 
-                texture2D(bitmap, uv).r,
+                texture2D(bitmap, uv + 0.003).r,
                 texture2D(bitmap, uv).g,
-                texture2D(bitmap, uv).b, 
-                1.0
+                texture2D(bitmap, uv - 0.003).b, 
+                texture2D(bitmap, uv).a
             );
             
             tex *= smoothstep(uv.x,uv.x+0.01,1.)*smoothstep(uv.y,uv.y+0.01,1.)*smoothstep(-0.01,0.,uv.x)*smoothstep(-0.01,0.,uv.y);
@@ -31,7 +49,7 @@ class TVShader extends FlxShader
             gl_FragColor = tex + pow(avg,8.);
         }
     ')
-
+    
     override public function new()
     {
         super();

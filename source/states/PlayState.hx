@@ -291,6 +291,7 @@ class PlayState extends MusicBeatState
 	var tv:FlxSprite;
 	var redstar:FlxSprite;
 
+	var tvShader:TVShader;
 	var colorBg:FlxSprite;
 
 	override public function create()
@@ -445,19 +446,6 @@ class PlayState extends MusicBeatState
 
 				ogMid = ClientPrefs.data.middleScroll;
 				ClientPrefs.data.middleScroll = false;
-
-				defaultCamZoom *= 1/4;
-				camHUD.zoom *= 1/4;
-
-				var shader:TVShader = new TVShader();
-				FlxG.game.filtersEnabled = true;
-
-				camGame.setFilters([new ShaderFilter(shader)]);
-				camHUD.setFilters([new ShaderFilter(shader)]);
-				camHUD.filtersEnabled = true;
-				FlxG.camera.filtersEnabled = true;
-				FlxG.camera.zoom = defaultCamZoom = 0.9 * 0.8;
-				camHUD.zoom = 0.8;
 		}
 
 		if(isPixelStage) {
@@ -1778,6 +1766,8 @@ class PlayState extends MusicBeatState
 	var freezeCamera:Bool = false;
 	var allowDebugKeys:Bool = true;
 
+	public var ayudaShader:Bool = false;
+
 	override public function update(elapsed:Float)
 	{
 
@@ -1884,7 +1874,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (camZooming)
+		if (camZooming || ayudaShader)
 		{
 			FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom * ((curStage == "caca") ? 0.8 : 1), FlxG.camera.zoom, FlxMath.bound(1 - (elapsed * 3.125 * camZoomingDecay * playbackRate), 0, 1));
 			camHUD.zoom = FlxMath.lerp(1 * ((curStage == "caca") ? 0.8 : 1), camHUD.zoom, FlxMath.bound(1 - (elapsed * 3.125 * camZoomingDecay * playbackRate), 0, 1));
