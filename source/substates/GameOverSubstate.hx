@@ -172,10 +172,4 @@ class GameOverSubstate extends MusicBeatSubstate
 			PlayState.instance.callOnScripts('onGameOverConfirm', [true]);
 		}
 	}
-
-	override function destroy()
-	{
-		instance = null;
-		super.destroy();
-	}
 }

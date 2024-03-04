@@ -1,6 +1,7 @@
 package states.stages;
 
 import states.stages.objects.*;
+import openfl.filters.ShaderFilter;
 
 class PepeHouse extends BaseStage
 {
@@ -18,6 +19,10 @@ class PepeHouse extends BaseStage
 
 	var normalBG:FlxSpriteGroup;
 	var pixelBG:FlxSpriteGroup;
+
+	var blackScreen:FlxSprite;
+
+	var effect:SMWPixelBlurShader;
 
 	override function create()
 	{
@@ -88,6 +93,10 @@ class PepeHouse extends BaseStage
 		pixelBG.add(pisoPIXEL);
 		pixelBG.visible = false;
 
+		effect = new SMWPixelBlurShader();
+		effect.setStrength(1, 1);
+		game.camGame.setFilters([new ShaderFilter(effect.shader)]);
+
 		if (backend.BaseStage.exe == "but.exe/") {
 			people.visible = false;
 
@@ -98,33 +107,9 @@ class PepeHouse extends BaseStage
 			
 	}
 
-	override function stepHit() // me cago wn
-		{
-
-			if (curStep == 1514){
-				FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom + 0.5}, 1.8, {
-					ease: FlxEase.quadInOut,
-					onComplete: function(twn:FlxTween)
-						{
-							game.triggerEvent('Change Character', 'bf', 'bf_pixel', 0);
-							game.triggerEvent('Change Character', 'gf', 'gfpixel', 0);
-							game.triggerEvent('Change Character', 'dad', 'Pepe_Pixel', 0);
-
-							game.boyfriend.y = boyfriend.y + 50;
-							game.dad.y = dad.y + 50;
-							game.gf.y = gf.y + 50;
-
-							normalBG.visible = false;
-							pixelBG.visible = true;
-						}
-				});
-				FlxG.camera.flash(FlxColor.WHITE, 2);
-			}
-		}
-
 	override function createPost() //crear post pa que se ponga encima...
 		{ 
-			var blackScreen = new FlxSprite().makeGraphic(FlxG.width * 2, FlxG.height * 2, 0xFF000000);
+			blackScreen = new FlxSprite().makeGraphic(FlxG.width * 2, FlxG.height * 2, 0xFF000000);
 			blackScreen.screenCenter();
 			blackScreen.cameras = [game.camHUD];
 			add(blackScreen);
@@ -155,4 +140,89 @@ class PepeHouse extends BaseStage
 						FlxTween.tween(blackScreen, {alpha: 0}, 20, { ease: FlxEase.quadInOut});
 				});
 		}
+
+		override function stepHit()
+			{
+	
+				if (curStep == 1508) { // transiretro...
+					new FlxTimer().start(1.1, function(gef:FlxTimer)
+						{
+							FlxTween.num(1, 40, 0.7, function(v)
+								{
+									effect.setStrength(v, v);
+								});
+							new FlxTimer().start(0.7, function(gef:FlxTimer)
+								{
+									effect.setStrength(1, 1);
+								}); //no tengo idea como funcionan los shaders asi que improvise :vin:
+						});
+					FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, 1.8, {
+						ease: FlxEase.quadInOut,
+						onComplete: function(twn:FlxTween)
+							{
+								game.triggerEvent('Change Character', 'bf', 'bf_pixel', 0);
+								game.triggerEvent('Change Character', 'dad', 'Pepe_Pixel', 0);
+								game.triggerEvent('Camera Follow Pos', '905', '900', 0);
+	
+								game.scoreTxt.setFormat(Paths.font("mago1.ttf"), 20, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+								game.scoreTxt.borderSize = 2;
+	
+								game.boyfriend.y = boyfriend.y + 120;
+								game.dad.y = dad.y + 175;
+								game.gf.visible = false;
+	
+								normalBG.visible = false;
+								pixelBG.visible = true;
+							}
+					});
+					FlxG.camera.flash(FlxColor.WHITE, 2);
+				}
+				
+				if (curStep == 2525){
+					new FlxTimer().start(1.1, function(gef:FlxTimer)
+						{
+							FlxTween.num(1, 40, 0.7, function(v)
+								{
+									effect.setStrength(v, v);
+								});
+							new FlxTimer().start(0.7, function(gef:FlxTimer)
+								{
+									effect.setStrength(1, 1);
+								}); //2
+						});
+	
+					FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, 1.8, {
+						ease: FlxEase.quadInOut,
+						onComplete: function(twn:FlxTween)
+							{
+								game.triggerEvent('Change Character', 'bf', 'bf-lunar', 0);
+								game.triggerEvent('Change Character', 'dad', 'PepeNormal', 0);
+						
+								game.triggerEvent('Camera Follow Pos', '', '', 0);
+		
+								game.scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+								game.scoreTxt.borderSize = 1.5;
+
+								blackScreen.alpha = 1;
+								game.scoreTxt.alpha = 0;
+								game.iconP1.alpha = 0;
+								game.healthBar.alpha = 0;
+								game.timeBar.alpha = 0;
+								game.timeTxt.alpha = 0;
+
+								FlxTween.tween(game.timeBar, {alpha: 1}, 20, {ease: FlxEase.quadInOut});
+								FlxTween.tween(game.timeTxt, {alpha: 1}, 20, {ease: FlxEase.quadInOut});
+								FlxTween.tween(game.scoreTxt, {alpha: 1}, 15, {ease: FlxEase.quadInOut});
+								FlxTween.tween(game.iconP1, {alpha: ClientPrefs.data.healthBarAlpha}, 15, {ease: FlxEase.quadInOut});
+								FlxTween.tween(game.healthBar, {alpha: ClientPrefs.data.healthBarAlpha}, 15, {ease: FlxEase.quadInOut});
+								FlxTween.tween(blackScreen, {alpha: 0}, 20, { ease: FlxEase.quadInOut});
+
+								game.gf.visible = true;
+		
+								normalBG.visible = true;
+								pixelBG.visible = false;
+							}
+					});
+				}
+			}
 }

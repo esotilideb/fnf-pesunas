@@ -26,38 +26,9 @@ function onCreatePost()
     setProperty('scoreTxt.x', 150)
     setProperty('scoreTxt.y', 60)
 
-    --timer
-    makeLuaSprite('timer', 'hud/timer', 1000, 0);
-	setObjectCamera('timer','hud')
-    if downscroll then
-        setProperty('timer.y', 0);
-    else
-        setProperty('timer.y', 350);
-    end
-	addLuaSprite('timer', false);
-
-	loadGraphic('timeBar.bg','timeBar')
-	setProperty("timeBar.visible", false)
-    setProperty('timeTxt.x',935)
-
-    if downscroll then
-        setProperty('timeTxt.y', 160);
-    else
-        setProperty('timeTxt.y', 510);
-    end
-
 	loadGraphic('songLength.bg','songLength')
 	setProperty('songLength.x', getProperty('songLength.x') + 30)
 	setProperty('songLength.y', getProperty('songLength.y') + 30)
 end
-
-function onUpdate(elapsed)
-    if mustHitSection then 
-        doTweenAlpha("skibidi", timeTxt, 0.4, 0.25, "linear")
-        doTweenAlpha("toilet", timer, 0.4, 0.25, "linear")
-    else 
-        doTweenAlpha("skibidi", timeTxt, 1, 0.25, "linear")
-        doTweenAlpha("toilet", timer, 1, 0.25, "linear")
-    end
 
 end

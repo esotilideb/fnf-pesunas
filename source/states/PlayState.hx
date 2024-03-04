@@ -226,6 +226,7 @@ class PlayState extends MusicBeatState
 	public var songMisses:Int = 0;
 	public var scoreTxt:FlxText;
 	var timeTxt:FlxText;
+	var timeTxtTween:FlxTween;
 	var scoreTxtTween:FlxTween;
 
 	var tiempoShader:Float;
@@ -536,17 +537,21 @@ class PlayState extends MusicBeatState
 		Conductor.songPosition = -5000 / Conductor.songPosition;
 		var showTime:Bool = (ClientPrefs.data.timeBarType != 'Disabled');
 		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
-		timeTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		timeTxt.setFormat(Paths.font("mago1.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		timeTxt.scrollFactor.set();
 		timeTxt.alpha = 0;
 		timeTxt.borderSize = 2;
 		timeTxt.visible = updateTime = showTime;
 		if(ClientPrefs.data.timeBarType == 'Song Name') timeTxt.text = SONG.song;
 
-		timeBar = new Bar(0, timeTxt.y + (timeTxt.height / 4), 'timeBar', function() return songPercent, 0, 1);
+		timeBar = new Bar(0, timeTxt.y + (timeTxt.height / 4), 'clock', function() return songPercent, 0, 1);
 		timeBar.scrollFactor.set();
 		timeBar.screenCenter(X);
 		timeBar.alpha = 0;
+		timeBar.scale.set(3, 3);
+		timeBar.leftBar.visible = false;
+		timeBar.rightBar.visible = false;
+		timeBar.antialiasing = false;
 		timeBar.visible = showTime;
 		uiGroup.add(timeBar);
 		uiGroup.add(timeTxt);
@@ -1842,6 +1847,23 @@ class PlayState extends MusicBeatState
 
 			if(ClientPrefs.data.timeBarType != 'Song Name')
 				timeTxt.text = FlxStringUtil.formatTime(secondsTotal, false);
+
+			if (secondsTotal >= 10 && ClientPrefs.data.scoreZoom) { //bro como en mago capitorre
+
+				if(!ClientPrefs.data.scoreZoom)
+					return;
+		
+				if(timeTxtTween != null)
+					timeTxtTween.cancel();
+		
+				scoreTxt.scale.x = 1.075;
+				scoreTxt.scale.y = 1.075;
+				timeTxtTween = FlxTween.tween(scoreTxt.scale, {x: 1, y: 1}, 0.2, {
+					onComplete: function(twn:FlxTween) {
+						timeTxtTween = null;
+					}
+				});
+			}
 		}
 
 		if (camZooming)
@@ -3455,8 +3477,12 @@ class PlayState extends MusicBeatState
 
 			switch (curStage) {
 				case 'PepeHouse':
-					if (SONG.notes[curSection].mustHitSection)
-						defaultCamZoom = 1.1;
+					if (!isCameraOnForcedPos) {
+						if (SONG.notes[curSection].mustHitSection)
+							defaultCamZoom = 1.1;
+						else
+							defaultCamZoom = 0.6;
+					}
 					else
 						defaultCamZoom = 0.6;
 			}

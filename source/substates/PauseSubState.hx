@@ -377,13 +377,6 @@ class PauseSubState extends MusicBeatSubstate
 		MusicBeatState.resetState();
 	}
 
-	override function destroy()
-	{
-		pauseMusic.destroy();
-
-		super.destroy();
-	}
-
 	function changeSelection(change:Int = 0):Void
 	{
 		curSelected += change;
