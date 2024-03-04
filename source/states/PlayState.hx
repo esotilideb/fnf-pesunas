@@ -37,6 +37,8 @@ import states.editors.CharacterEditorState;
 import substates.PauseSubState;
 import substates.GameOverSubstate;
 
+import backend.TVShader;
+import backend.NoiseShader;
 #if !flash
 import flixel.addons.display.FlxRuntimeShader;
 import openfl.filters.ShaderFilter;
@@ -443,6 +445,19 @@ class PlayState extends MusicBeatState
 
 				ogMid = ClientPrefs.data.middleScroll;
 				ClientPrefs.data.middleScroll = false;
+
+				defaultCamZoom *= 1/4;
+				camHUD.zoom *= 1/4;
+
+				var shader:TVShader = new TVShader();
+				FlxG.game.filtersEnabled = true;
+
+				camGame.setFilters([new ShaderFilter(shader)]);
+				camHUD.setFilters([new ShaderFilter(shader)]);
+				camHUD.filtersEnabled = true;
+				FlxG.camera.filtersEnabled = true;
+				FlxG.camera.zoom = defaultCamZoom = 0.9 * 0.8;
+				camHUD.zoom = 0.8;
 		}
 
 		if(isPixelStage) {
@@ -514,18 +529,20 @@ class PlayState extends MusicBeatState
 		}
 		stagesFunc(function(stage:BaseStage) stage.createPost());
 
-		barUp = new FlxSprite();
+		barUp = new FlxSprite(-100);
 		barUp.scrollFactor.set();
-		barUp.makeGraphic(FlxG.width, 125, FlxColor.BLACK);
+		barUp.makeGraphic(FlxG.width + 200, 225, FlxColor.BLACK);
 		add(barUp);
 		barUp.y = -barUp.height;
 		barUp.cameras = [camHUD];
 		
-		barDown = new FlxSprite(0, FlxG.height);
+		barDown = new FlxSprite(-100, FlxG.height);
 		barDown.scrollFactor.set();
-		barDown.makeGraphic(FlxG.width, 125, FlxColor.BLACK);
+		barDown.makeGraphic(FlxG.width + 200, 225, FlxColor.BLACK);
 		add(barDown);
 		barDown.cameras = [camHUD];
+
+		barUp.visible = barDown.visible = false;
 
 		comboGroup = new FlxSpriteGroup();
 		add(comboGroup);
@@ -686,10 +703,11 @@ class PlayState extends MusicBeatState
 		startCallback();
 		RecalculateRating();
 
-		black = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		black = new FlxSprite().makeGraphic(Math.floor(FlxG.width * 1.5), Math.floor(FlxG.height * 1.5), FlxColor.BLACK);
 		black.scrollFactor.set();
 		if (curStage != "caca") black.alpha = 0;
 		black.cameras = [camHUD];
+		black.screenCenter();
 		add(black);
 
 		//PRECACHING MISS SOUNDS BECAUSE I THINK THEY CAN LAG PEOPLE AND FUCK THEM UP IDK HOW HAXE WORKS
@@ -1868,8 +1886,8 @@ class PlayState extends MusicBeatState
 
 		if (camZooming)
 		{
-			FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom, FlxG.camera.zoom, FlxMath.bound(1 - (elapsed * 3.125 * camZoomingDecay * playbackRate), 0, 1));
-			camHUD.zoom = FlxMath.lerp(1, camHUD.zoom, FlxMath.bound(1 - (elapsed * 3.125 * camZoomingDecay * playbackRate), 0, 1));
+			FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom * ((curStage == "caca") ? 0.8 : 1), FlxG.camera.zoom, FlxMath.bound(1 - (elapsed * 3.125 * camZoomingDecay * playbackRate), 0, 1));
+			camHUD.zoom = FlxMath.lerp(1 * ((curStage == "caca") ? 0.8 : 1), camHUD.zoom, FlxMath.bound(1 - (elapsed * 3.125 * camZoomingDecay * playbackRate), 0, 1));
 		}
 
 		FlxG.watch.addQuick("secShit", curSection);
@@ -2266,6 +2284,7 @@ class PlayState extends MusicBeatState
 					case 5: //good apple
 						if (value2 == "a") // white
 						{
+							barUp.visible = barDown.visible = true;
 							opponentStrums.forEach(function(spr:FlxSprite)
 							{
 								FlxTween.tween(spr, {x: spr.x - 310, alpha: 0, angle: -360}, 0.5, {ease: FlxEase.quartOut, type: ONESHOT});
@@ -2276,8 +2295,8 @@ class PlayState extends MusicBeatState
 								//colorBg.visible = true;
 								//FlxG.camera.flash(FlxColor.WHITE, 1);
 							});
-							FlxTween.tween(barUp, {y: 0}, 0.5, {ease: FlxEase.quartOut, type: ONESHOT});
-							FlxTween.tween(barDown, {y: FlxG.height - barUp.height}, 0.5, {ease: FlxEase.quartOut, type: ONESHOT});
+							FlxTween.tween(barUp, {y: -100}, 0.5, {ease: FlxEase.quartOut, type: ONESHOT});
+							FlxTween.tween(barDown, {y: FlxG.height - (barUp.height - 100)}, 0.5, {ease: FlxEase.quartOut, type: ONESHOT});
 						}
 						else if (value2 == "b") // black
 						{
@@ -2291,7 +2310,7 @@ class PlayState extends MusicBeatState
 								//colorBg.visible = false;
 								//FlxG.camera.flash(FlxColor.WHITE, 1);
 							});
-							FlxTween.tween(barUp, {y: -barUp.height}, 0.5, {ease: FlxEase.quartOut, type: ONESHOT});
+							FlxTween.tween(barUp, {y: -(barUp.height - 100)}, 0.5, {ease: FlxEase.quartOut, type: ONESHOT});
 							FlxTween.tween(barDown, {y: FlxG.height}, 0.5, {ease: FlxEase.quartOut, type: ONESHOT});
 						}
 					case 6: //reset cam
@@ -2308,6 +2327,8 @@ class PlayState extends MusicBeatState
 
 							tv.color = ogColor[0];
 							redstar.color = ogColor[1];
+
+							barUp.visible = barDown.visible = false;
 						}
 					case 8: //change tv
 						tv.visible = !tv.visible;
@@ -2593,7 +2614,12 @@ class PlayState extends MusicBeatState
 		inCutscene = false;
 		updateTime = false;
 
-		if (curStage == "caca") ClientPrefs.data.middleScroll = ogMid;
+		if (curStage == "caca") 
+		{
+			ClientPrefs.data.middleScroll = ogMid;
+			FlxG.game.setFilters([]);
+			FlxG.camera.filtersEnabled = false;
+		}
 
 		deathCounter = 0;
 		seenCutscene = false;
