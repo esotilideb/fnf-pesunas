@@ -414,6 +414,7 @@ class PlayState extends MusicBeatState
 			case 'PepeHouse': new states.stages.PepeHouse(); //WEEK 1
 			case 'RetroPlace': new states.stages.RetroPlace(); //TOPS
 			case 'EteSech': new states.stages.EteSech(); //HORROR-PEPE.MIEDO
+			case 'goat': new states.stages.Dross();
 			case 'caca':
 				new states.stages.Mijail();
 

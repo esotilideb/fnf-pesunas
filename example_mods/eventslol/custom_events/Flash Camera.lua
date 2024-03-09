@@ -3,6 +3,7 @@ function onEvent(n,v1,v2)
 
 	if n == 'Flash Camera' then
 
+	   makeLuaSprite('flash', 'ffffff', 0, 0);
         makeGraphic('flash',1280,720,'ffffff')
 	      addLuaSprite('flash', true);
 	      setObjectCamera('flash', 'other')

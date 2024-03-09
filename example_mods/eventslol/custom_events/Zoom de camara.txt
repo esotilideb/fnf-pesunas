@@ -1,0 +1,4 @@
+Sets Camera Zoom, poggers
+
+Value 1: nivel de zoom (1,2,3,4,etc)
+no colocar nivel 0
