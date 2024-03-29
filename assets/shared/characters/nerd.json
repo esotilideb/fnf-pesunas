@@ -1,79 +1,123 @@
 {
 	"animations": [
 		{
-			"offsets": [
-				4,
-				-300
-			],
 			"loop": false,
-			"fps": 24,
-			"anim": "singLEFT",
-			"indices": [],
-			"name": "left"
-		},
-		{
 			"offsets": [
 				-30,
-				-289
+				-65
 			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singDOWN",
-			"indices": [],
-			"name": "down"
+			"anim": "idle",
+			"fps": 12,
+			"name": "Idle",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-62,
-				-192
+				-79
 			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singUP",
-			"indices": [],
-			"name": "up"
+			"anim": "singLEFT",
+			"fps": 12,
+			"name": "Left",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
-				-38,
-				-302
+				-45,
+				-75
 			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singRIGHT",
-			"indices": [],
-			"name": "right"
+			"anim": "singDOWN",
+			"fps": 12,
+			"name": "Down",
+			"indices": []
 		},
 		{
+			"loop": false,
+			"offsets": [
+				-30,
+				-82
+			],
+			"anim": "singUP",
+			"fps": 12,
+			"name": "Up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-40,
+				-70
+			],
+			"anim": "singRIGHT",
+			"fps": 12,
+			"name": "Right",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-62,
+				-79
+			],
+			"anim": "singLEFTmiss",
+			"fps": 12,
+			"name": "MissLeft",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-46,
+				-75
+			],
+			"anim": "singDOWNmiss",
+			"fps": 12,
+			"name": "MissDown",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-30,
+				-82
+			],
+			"anim": "singUPmiss",
+			"fps": 12,
+			"name": "MissUp",
+			"indices": []
+		},
+		{
+			"loop": false,
 			"offsets": [
 				-41,
-				-297
+				-69
 			],
-			"loop": true,
-			"fps": 24,
-			"anim": "idle",
-			"indices": [],
-			"name": "idle"
+			"anim": "singRIGHTmiss",
+			"fps": 12,
+			"name": "MissRight",
+			"indices": []
 		}
 	],
 	"no_antialiasing": true,
-	"image": "characters/nerd",
+	"image": "characters/NerdOurple",
 	"position": [
 		0,
-		0
+		350
 	],
-	"healthicon": "dad",
+	"healthicon": "nerd",
 	"flip_x": true,
 	"healthbar_colors": [
-		175,
-		102,
-		206
+		200,
+		80,
+		0
 	],
 	"camera_position": [
-		-170,
-		100
+		420,
+		-210
 	],
-	"sing_duration": 6.1,
-	"scale": 2.2,
-	"_editor_isPlayer": false
+	"sing_duration": 4,
+	"scale": 4,
+	"_editor_isPlayer": true
 }

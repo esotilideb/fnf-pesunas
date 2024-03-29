@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="NerdOurple.png">
+	<!-- Made using Maru Aseprite JSON to XML converter -->
+	<SubTexture name="Idle00000" x="0" y="0" width="400" height="250"/>
+	<SubTexture name="Idle00001" x="400" y="0" width="400" height="250"/>
+	<SubTexture name="Idle00002" x="800" y="0" width="400" height="250"/>
+	<SubTexture name="Idle00003" x="1200" y="0" width="400" height="250"/>
+	<SubTexture name="Idle00004" x="1600" y="0" width="400" height="250"/>
+	<SubTexture name="Idle00005" x="1600" y="0" width="400" height="250"/>
+	<SubTexture name="Left00000" x="0" y="250" width="400" height="250"/>
+	<SubTexture name="Left00001" x="400" y="250" width="400" height="250"/>
+	<SubTexture name="Right00000" x="800" y="250" width="400" height="250"/>
+	<SubTexture name="Right00001" x="1200" y="250" width="400" height="250"/>
+	<SubTexture name="Down00000" x="1600" y="250" width="400" height="250"/>
+	<SubTexture name="Down00001" x="0" y="500" width="400" height="250"/>
+	<SubTexture name="Up00000" x="400" y="500" width="400" height="250"/>
+	<SubTexture name="Up00001" x="800" y="500" width="400" height="250"/>
+	<SubTexture name="MissRight00000" x="1200" y="500" width="400" height="250"/>
+	<SubTexture name="MissRight00001" x="1600" y="500" width="400" height="250"/>
+	<SubTexture name="MissUp00000" x="0" y="750" width="400" height="250"/>
+	<SubTexture name="MissUp00001" x="400" y="750" width="400" height="250"/>
+	<SubTexture name="MissLeft00000" x="800" y="750" width="400" height="250"/>
+	<SubTexture name="MissLeft00001" x="1200" y="750" width="400" height="250"/>
+	<SubTexture name="MissDown00000" x="1600" y="750" width="400" height="250"/>
+	<SubTexture name="MissDown00001" x="0" y="1000" width="400" height="250"/>
+</TextureAtlas>

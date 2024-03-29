@@ -415,9 +415,9 @@ class PlayState extends MusicBeatState
 		switch (curStage)
 		{
 			case 'PepeHouse': new states.stages.PepeHouse(); //WEEK 1
-			case 'RetroPlace': new states.stages.RetroPlace(); //TOPS
 			case 'EteSech': new states.stages.EteSech(); //HORROR-PEPE.MIEDO
-			case 'goat': new states.stages.Dross();
+			case 'goat': new states.stages.Dross(); //adivina
+			case 'Apoco': new states.stages.Apoco(); //tops
 			case 'caca':
 				new states.stages.Mijail();
 

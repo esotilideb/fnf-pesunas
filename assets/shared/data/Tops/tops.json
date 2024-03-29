@@ -1,7 +1,7 @@
 {
 	"song": {
 		"player1": "nerd",
-		"player2": "pepe",
+		"player2": "pepetops",
 		"events": [
 			[
 				0,
@@ -9781,10 +9781,10 @@
 				"mustHitSection": false
 			}
 		],
-		"gfVersion": "gf",
+		"gfVersion": "wigi",
 		"song": "Tops",
 		"needsVoices": true,
-		"stage": "retroPlace",
+		"stage": "Apoco",
 		"bpm": 107,
 		"speed": 3.2
 	}

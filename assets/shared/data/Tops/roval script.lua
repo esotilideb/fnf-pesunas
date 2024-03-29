@@ -71,7 +71,6 @@ tiposease = {"linear","quadIn","quadOut","quadInOut","cubeIn","cubeOut","cubeInO
 function onCreatePost()
     zoom = getProperty('defaultCamZoom'); --Zoom que tiene el stage
     velocidad = getProperty('cameraSpeed'); --Velocidad al que va la camara - Se lo cambia con eventos o desde aca
-
     makeLuaSprite('negro', '', -100, -100); --lo puse negro pq en un principio lo estaba, pero lo cambie para mejor configuracion
     makeGraphic('negro', 1280*2, 720*2, 'FFFFFF');
     setScrollFactor('negro', 0, 0); --Set Scroll factor = Determina cuanto se mueve al mover la camara, con 0 no se mueve, con 1 se mueve mucho
@@ -79,7 +78,7 @@ function onCreatePost()
     setProperty('negro.alpha',0); --Es invisible hasta que lo actives
     addLuaSprite('negro', false); --Se ubica ATRAS de los personajes
 
-
+    setProperty('camGame.bgColor', getColorFromHex('99b1dd'))
 
     makeLuaSprite('flash', '', -100, -100); 
     makeGraphic('flash', 1280*2, 720*2, 'FFFFFF'); --Esto si es blanco p
