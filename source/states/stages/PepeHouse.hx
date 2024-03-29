@@ -2,6 +2,7 @@ package states.stages;
 
 import states.stages.objects.*;
 import openfl.filters.ShaderFilter;
+import objects.Character;
 
 class PepeHouse extends BaseStage
 {
@@ -24,8 +25,12 @@ class PepeHouse extends BaseStage
 
 	var effect:SMWPixelBlurShader;
 
+	var realGF:Character;
+
 	override function create()
 	{
+
+		game.skipCountdown = true;
 
 		normalBG = new FlxSpriteGroup();
 		add(normalBG);
@@ -104,6 +109,13 @@ class PepeHouse extends BaseStage
 			puas3.updateHitbox();
 			normalBG.add(puas3);
 		}
+
+		if (backend.BaseStage.exe == "but.exe/")
+			realGF = new Character(750, 440, 'gfDark');
+		else
+			realGF = new Character(750, 440, 'gf');
+
+		add(realGF);
 			
 	}
 
@@ -129,100 +141,112 @@ class PepeHouse extends BaseStage
 			new FlxTimer().start(1.2, function(deadTime:FlxTimer)
 				{
 					if (backend.BaseStage.exe == "but.exe/") {
-						new FlxTimer().start(11, function(deadTime:FlxTimer)
-							{
-								game.skipCountdown = true;
-								blackScreen.alpha = 0;
-								FlxG.camera.flash(FlxColor.WHITE, 1);
-							});
+						game.defaultCamZoom = 0.3;
+						game.dad.alpha = 0;
+						game.isCameraOnForcedPos = true;
+						FlxTween.tween(blackScreen, {alpha: 0}, 19, { ease: FlxEase.quadInOut});
+						FlxTween.tween(FlxG.camera, {zoom: 0.8}, 19, {
+							ease: FlxEase.quadInOut,
+							onComplete: function(twn:FlxTween)
+								{
+									game.isCameraOnForcedPos = false;
+									game.dad.alpha = 1;
+									FlxG.camera.flash(FlxColor.WHITE, 1);
+								}
+						});
 					}
 					else
 						FlxTween.tween(blackScreen, {alpha: 0}, 20, { ease: FlxEase.quadInOut});
 				});
 		}
 
-		override function stepHit()
-			{
+		override public function beatHit() { if(curBeat % 2 == 0)  realGF.dance(); }
+
+	override function stepHit()
+		{
 	
-				if (curStep == 1508) { // transiretro...
-					new FlxTimer().start(1.1, function(gef:FlxTimer)
-						{
-							FlxTween.num(1, 40, 0.7, function(v)
-								{
-									effect.setStrength(v, v);
-								});
-							new FlxTimer().start(0.7, function(gef:FlxTimer)
-								{
-									effect.setStrength(1, 1);
-								}); //no tengo idea como funcionan los shaders asi que improvise :vin:
-						});
-					FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, 1.8, {
-						ease: FlxEase.quadInOut,
-						onComplete: function(twn:FlxTween)
+			if (backend.BaseStage.exe != "but.exe/") {
+
+					if (curStep == 1508) { // transiretro...
+						new FlxTimer().start(1.1, function(gef:FlxTimer)
 							{
-								game.triggerEvent('Change Character', 'bf', 'bf_pixel', 0);
-								game.triggerEvent('Change Character', 'dad', 'Pepe_Pixel', 0);
-								game.triggerEvent('Camera Follow Pos', '905', '900', 0);
-	
-								game.scoreTxt.setFormat(Paths.font("mago1.ttf"), 20, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-								game.scoreTxt.borderSize = 2;
-	
-								game.boyfriend.y = boyfriend.y + 120;
-								game.dad.y = dad.y + 175;
-								game.gf.visible = false;
-	
-								normalBG.visible = false;
-								pixelBG.visible = true;
-							}
-					});
-					FlxG.camera.flash(FlxColor.WHITE, 2);
-				}
-				
-				if (curStep == 2525){
-					new FlxTimer().start(1.1, function(gef:FlxTimer)
-						{
-							FlxTween.num(1, 40, 0.7, function(v)
+								FlxTween.num(1, 40, 0.7, function(v)
+									{
+										effect.setStrength(v, v);
+									});
+								new FlxTimer().start(0.7, function(gef:FlxTimer)
+									{
+										effect.setStrength(1, 1);
+									}); //no tengo idea como funcionan los shaders asi que improvise :vin:
+							});
+						FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, 1.8, {
+							ease: FlxEase.quadInOut,
+							onComplete: function(twn:FlxTween)
 								{
-									effect.setStrength(v, v);
-								});
-							new FlxTimer().start(0.7, function(gef:FlxTimer)
-								{
-									effect.setStrength(1, 1);
-								}); //2
+									game.triggerEvent('Change Character', 'bf', 'bf_pixel', 0);
+									game.triggerEvent('Change Character', 'dad', 'Pepe_Pixel', 0);
+									realGF.visible = false;
+									game.triggerEvent('Camera Follow Pos', '905', '900', 0);
+		
+									game.scoreTxt.setFormat(Paths.font("mago1.ttf"), 20, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+									game.scoreTxt.borderSize = 2;
+		
+									game.boyfriend.y = boyfriend.y + 120;
+									game.dad.y = dad.y + 175;
+		
+									normalBG.visible = false;
+									pixelBG.visible = true;
+								}
 						});
-	
-					FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, 1.8, {
-						ease: FlxEase.quadInOut,
-						onComplete: function(twn:FlxTween)
+					}
+					
+					if (curStep == 2525){
+						new FlxTimer().start(1.1, function(gef:FlxTimer)
 							{
-								game.triggerEvent('Change Character', 'bf', 'bf-lunar', 0);
-								game.triggerEvent('Change Character', 'dad', 'PepeNormal', 0);
-						
-								game.triggerEvent('Camera Follow Pos', '', '', 0);
+								FlxTween.num(1, 40, 0.7, function(v)
+									{
+										effect.setStrength(v, v);
+									});
+								new FlxTimer().start(0.7, function(gef:FlxTimer)
+									{
+										effect.setStrength(1, 1);
+									}); //2
+							});
 		
-								game.scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-								game.scoreTxt.borderSize = 1.5;
+						FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, 1.8, {
+							ease: FlxEase.quadInOut,
+							onComplete: function(twn:FlxTween)
+								{
+									game.triggerEvent('Change Character', 'bf', 'bf-lunar', 0);
+									game.triggerEvent('Change Character', 'dad', 'PepeNormal', 0);
+									realGF.visible = true;
+							
+									game.triggerEvent('Camera Follow Pos', '', '', 0);
+			
+									game.scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+									game.scoreTxt.borderSize = 1.5;
 
-								blackScreen.alpha = 1;
-								game.scoreTxt.alpha = 0;
-								game.iconP1.alpha = 0;
-								game.healthBar.alpha = 0;
-								game.timeBar.alpha = 0;
-								game.timeTxt.alpha = 0;
+									blackScreen.alpha = 1;
+									game.scoreTxt.alpha = 0;
+									game.iconP1.alpha = 0;
+									game.healthBar.alpha = 0;
+									game.timeBar.alpha = 0;
+									game.timeTxt.alpha = 0;
 
-								FlxTween.tween(game.timeBar, {alpha: 1}, 20, {ease: FlxEase.quadInOut});
-								FlxTween.tween(game.timeTxt, {alpha: 1}, 20, {ease: FlxEase.quadInOut});
-								FlxTween.tween(game.scoreTxt, {alpha: 1}, 15, {ease: FlxEase.quadInOut});
-								FlxTween.tween(game.iconP1, {alpha: ClientPrefs.data.healthBarAlpha}, 15, {ease: FlxEase.quadInOut});
-								FlxTween.tween(game.healthBar, {alpha: ClientPrefs.data.healthBarAlpha}, 15, {ease: FlxEase.quadInOut});
-								FlxTween.tween(blackScreen, {alpha: 0}, 20, { ease: FlxEase.quadInOut});
+									FlxTween.tween(game.timeBar, {alpha: 1}, 20, {ease: FlxEase.quadInOut});
+									FlxTween.tween(game.timeTxt, {alpha: 1}, 20, {ease: FlxEase.quadInOut});
+									FlxTween.tween(game.scoreTxt, {alpha: 1}, 15, {ease: FlxEase.quadInOut});
+									FlxTween.tween(game.iconP1, {alpha: ClientPrefs.data.healthBarAlpha}, 15, {ease: FlxEase.quadInOut});
+									FlxTween.tween(game.healthBar, {alpha: ClientPrefs.data.healthBarAlpha}, 15, {ease: FlxEase.quadInOut});
+									FlxTween.tween(blackScreen, {alpha: 0}, 20, { ease: FlxEase.quadInOut});
 
-								game.gf.visible = true;
-		
-								normalBG.visible = true;
-								pixelBG.visible = false;
-							}
-					});
+									game.gf.visible = true;
+			
+									normalBG.visible = true;
+									pixelBG.visible = false;
+								}
+						});
+					}
 				}
 			}
 }

@@ -16,8 +16,8 @@ opacidadflash = 1 -- SI ACTIVAS PANTALLA NEGRA, COMO QUIERES QUE EMPIECE EL FLAS
 
 dadx1 = 0; --Eje X de camara de dad (Menos = Izquierda  Mas = Derecha)
 dady1 = 0; --Eje Y de camara de dad (Menos = Arriba  Mas = Abajo)
-bfx1 = 0; --Eje X de camara de bf (Menos = Izquierda  Mas = Derecha)
-bfy1 = 0; --Eje Y de camara de bf (Menos = Arriba  Mas = Abajo)
+bfx1 = -170; --Eje X de camara de bf (Menos = Izquierda  Mas = Derecha)
+bfy1 = 120; --Eje Y de camara de bf (Menos = Arriba  Mas = Abajo)
 gfx1 = 0; --Eje X de camara de gf (Menos = Izquierda  Mas = Derecha) Recomiendo usarlo para otra posicion de camara extra si gf no canta
 gfy1 = 0; --Eje Y de camara de gf (Menos = Arriba  Mas = Abajo) Recomiendo usarlo para otra posicion de camara extra si gf no canta
 centrox1 = 0;

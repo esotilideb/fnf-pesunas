@@ -230,6 +230,7 @@ class PlayState extends MusicBeatState
 	var timeTxt:FlxText;
 	var timeTxtTween:FlxTween;
 	var scoreTxtTween:FlxTween;
+	var cat:FlxSprite;
 
 	var tiempoShader:Float;
 
@@ -293,6 +294,8 @@ class PlayState extends MusicBeatState
 
 	var tvShader:TVShader;
 	var colorBg:FlxSprite;
+
+	var meloXDsegundo:Character;
 
 	override public function create()
 	{
@@ -639,6 +642,12 @@ class PlayState extends MusicBeatState
 				iconP1.alpha = 0;
 				healthBar.alpha = 0;
 		}
+
+		cat = new FlxSprite().loadGraphic(Paths.image('fuck u'));
+		cat.screenCenter();
+		cat.alpha = 0;
+		cat.antialiasing = false;
+		uiGroup.add(cat);
 
 		botplayTxt = new FlxText(400, timeBar.y + 55, FlxG.width - 800, "BOTPLAY", 32);
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -1264,12 +1273,12 @@ class PlayState extends MusicBeatState
 		ratingFC = "";
 		if(songMisses == 0)
 		{
-			if (bads > 0 || shits > 0) ratingFC = '- FC';
-			else if (goods > 0) ratingFC = '- GFC';
-			else if (sicks > 0) ratingFC = '- PFC';
+			if (bads > 0 || shits > 0) ratingFC = '- [FC]';
+			else if (goods > 0) ratingFC = '- [GFC]';
+			else if (sicks > 0) ratingFC = '- [PFC]';
 		}
 		else {
-			if (songMisses < 10) ratingFC = '- SDCB';
+			if (songMisses < 10) ratingFC = '- [SDCB]';
 			else ratingFC = '';
 		}
 	}
@@ -1845,6 +1854,7 @@ class PlayState extends MusicBeatState
 		}
 		else if (!paused && updateTime)
 		{
+
 			var curTime:Float = Math.max(0, Conductor.songPosition - ClientPrefs.data.noteOffset);
 			songPercent = (curTime / songLength);
 
@@ -1856,23 +1866,6 @@ class PlayState extends MusicBeatState
 
 			if(ClientPrefs.data.timeBarType != 'Song Name')
 				timeTxt.text = FlxStringUtil.formatTime(secondsTotal, false);
-
-			if (secondsTotal >= 10 && ClientPrefs.data.scoreZoom) { //bro como en mago capitorre
-
-				if(!ClientPrefs.data.scoreZoom)
-					return;
-		
-				if(timeTxtTween != null)
-					timeTxtTween.cancel();
-		
-				scoreTxt.scale.x = 1.075;
-				scoreTxt.scale.y = 1.075;
-				timeTxtTween = FlxTween.tween(scoreTxt.scale, {x: 1, y: 1}, 0.2, {
-					onComplete: function(twn:FlxTween) {
-						timeTxtTween = null;
-					}
-				});
-			}
 		}
 
 		if (camZooming || ayudaShader)
@@ -2057,8 +2050,19 @@ class PlayState extends MusicBeatState
 		#end
 	}
 
+	var catTween:FlxTween;
 	function openChartEditor()
 	{
+		/*if (catTween != null)
+			catTween.cancel(); //esto es lo ultimo en bromas xdxdxd
+
+		FlxG.sound.play(Paths.sound('vine boom'), 1);
+		catTween = FlxTween.tween(cat, {alpha: 1}, 0.15, {ease: FlxEase.sineOut, onComplete: function(twn:FlxTween)
+			{
+				catTween = FlxTween.tween(cat, {alpha : 0}, 2, {ease: FlxEase.sineOut});
+			}}); troleito de una build tal vez lo deje para la build final*/
+
+
 		FlxG.camera.followLerp = 0;
 		persistentUpdate = false;
 		paused = true;
@@ -3221,7 +3225,13 @@ class PlayState extends MusicBeatState
 
 			var char:Character = dad;
 			var animToPlay:String = singAnimations[Std.int(Math.abs(Math.min(singAnimations.length-1, note.noteData)))] + altAnim;
-			if(note.gfNote) { char = gf; iconP2.changeIcon(gf.healthIcon);}
+			if(note.gfNote) { 
+				char = gf; 
+				meloXDsegundo = gf;
+				iconP2.changeIcon(gf.healthIcon);
+				if (curStage == 'PepeHouse')
+					iconP1.changeIcon(gf.healthIcon);
+			}
 
 			if(char != null)
 			{
@@ -3233,7 +3243,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-	if(dad.curCharacter == 'horror_pepe' || dad.curCharacter == 'pepe'){
+	if(dad.curCharacter == 'horror_pepe' || dad.curCharacter == 'pepe' || dad.curCharacter == 'pepe negro'){
 		if (health > 0.3 + note.hitHealth){
 			health -= note.hitHealth + 0.0015;
 		}
@@ -3292,6 +3302,7 @@ class PlayState extends MusicBeatState
 			if(note.gfNote)
 			{
 				char = gf;
+				iconP1.changeIcon(gf.healthIcon);
 				animCheck = 'cheer';
 			}
 
@@ -3299,6 +3310,8 @@ class PlayState extends MusicBeatState
 		if(char != gf){
 			iconP1.scale.set(1.2, 1.2);
 			iconP1.updateHitbox();
+
+			iconP1.changeIcon(boyfriend.healthIcon);
 		}
 
 			if(char != null)
@@ -3497,11 +3510,15 @@ class PlayState extends MusicBeatState
 					if (!isCameraOnForcedPos) {
 						if (SONG.notes[curSection].mustHitSection)
 							defaultCamZoom = 1.1;
-						else
-							defaultCamZoom = 0.6;
+						else {
+							if (meloXDsegundo == gf)
+								defaultCamZoom = 0.8;
+							else
+								defaultCamZoom = 0.6;
+						}
 					}
 					else
-						defaultCamZoom = 0.6;
+						defaultCamZoom = 0.8;
 			}
 		}
 		super.sectionHit();

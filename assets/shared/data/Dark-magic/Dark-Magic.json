@@ -1,7 +1,7 @@
 {
 	"song": {
 		"player1": "bf-lunar-dark",
-		"player2": "dad",
+		"player2": "pepe negro",
 		"notes": [
 			{
 				"lengthInSteps": 16,
@@ -4697,7 +4697,7 @@
 				"mustHitSection": true
 			}
 		],
-		"gfVersion": "gf",
+		"gfVersion": "pepeDark",
 		"events": [
 			[
 				0,

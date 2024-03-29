@@ -25,6 +25,8 @@ class MainMenuState extends MusicBeatState
 	var people:FlxSprite;
 	var camFollow:FlxObject;
 	var bg:FlxSprite;
+	var catTween:FlxTween;
+	var cat:FlxSprite;
 
 	var chavalOgPos:Array<Array<Float>> = [];
 	var chavalOffset:Array<Array<Int>> = [[0, 127], [0, 46], [0, 42], [325, 355]];
@@ -62,6 +64,11 @@ class MainMenuState extends MusicBeatState
 		actualBG.screenCenter();
 		actualBG.scrollFactor.set(0);
 		add(actualBG);
+
+		cat = new FlxSprite().loadGraphic(Paths.image('fuck u'));
+		cat.screenCenter();
+		cat.alpha = 0;
+		cat.antialiasing = false;
 
 		camFollow = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
@@ -131,6 +138,7 @@ class MainMenuState extends MusicBeatState
 				menuItems.add(people);
 			}
 		}
+		add(cat);
 
 		for (i in 0...optionShit.length)
 		{
@@ -229,7 +237,7 @@ class MainMenuState extends MusicBeatState
 						switch (optionShit[curSelected])
 						{
 							case 'story_mode':
-								MusicBeatState.switchState(new OverWorld());
+								FlxG.switchState(new OverWorld());
 							case 'freeplay':
 								MusicBeatState.switchState(new FreeplayState());
 							case 'credits':
@@ -256,8 +264,14 @@ class MainMenuState extends MusicBeatState
 			#if desktop
 			if (controls.justPressed('debug_1'))
 			{
-				selectedSomethin = true;
-				MusicBeatState.switchState(new MasterEditorMenu());
+				if (catTween != null)
+					catTween.cancel(); //esto es lo ultimo en bromas xdxdxd
+		
+				FlxG.sound.play(Paths.sound('vine boom'), 1);
+				catTween = FlxTween.tween(cat, {alpha: 1}, 0.15, {ease: FlxEase.sineOut, onComplete: function(twn:FlxTween)
+					{
+						catTween = FlxTween.tween(cat, {alpha : 0}, 2, {ease: FlxEase.sineOut});
+					}});
 			}
 
 			if (FlxG.keys.justPressed.Q)
