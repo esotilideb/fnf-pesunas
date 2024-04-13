@@ -43,6 +43,14 @@ class OverWorld extends MusicBeatState
 	var arbol:FlxSprite;
 	var arbol2:FlxSprite;
 	var arbusto:FlxSprite;
+	
+	var drossMail:FlxSprite;
+	var drossMailO:FlxSprite;
+	var drossMailP:FlxSprite;
+
+	var canWalk:Bool;
+
+	var clickCounter:Int;
 
 
 	override public function create():Void
@@ -188,7 +196,41 @@ class OverWorld extends MusicBeatState
 		anadirArbol(274, 12);
 	//ola
 
-		//FlxG.mouse.visible = true;
+	
+	var black:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+	black.alpha = 0.5;
+	add(black);
+
+	drossMail = new FlxSprite(300, 100).loadGraphic(Paths.image("DrossMail"));
+	drossMail.frames = Paths.getSparrowAtlas("DrossMail");
+	drossMail.animation.addByPrefix('idleM', 'mailDefault');
+	drossMail.animation.addByPrefix('open', 'mailOpen', 24, false);
+	drossMail.animation.addByPrefix('showingT', 'showingText', 24, false);
+	drossMail.animation.play('idleM');
+
+	drossMailO = new FlxSprite(140, 100).loadGraphic(Paths.image("DrossMail"));
+	drossMailO.frames = Paths.getSparrowAtlas("DrossMail");
+	drossMailO.animation.addByPrefix('idleM', 'mailDefault');
+	drossMailO.animation.addByPrefix('open', 'mailOpen', 24, false);
+	drossMailO.animation.addByPrefix('showingT', 'showingText', 24, false);
+
+	drossMailP = new FlxSprite(300, 20).loadGraphic(Paths.image("DrossMail"));
+	drossMailP.frames = Paths.getSparrowAtlas("DrossMail");
+	drossMailP.animation.addByPrefix('idleM', 'mailDefault');
+	drossMailP.animation.addByPrefix('open', 'mailOpen', 24, false);
+	drossMailP.animation.addByPrefix('showingT', 'showingText', 24, false);
+	//drossMail.screenCenter();
+	
+	add(drossMail);
+	add(drossMailO);
+	add(drossMailP);
+	FlxG.mouse.visible = true;
+
+	drossMailO.visible = false;
+	drossMailP.visible = false;
+
+	FlxG.camera.y = 200;
+	FlxG.camera.x = -200;
 		super.create();
 	}
 	override public function update(elapsed:Float):Void
@@ -200,6 +242,8 @@ class OverWorld extends MusicBeatState
 	//	trace("x es" +FlxG.mouse.x);
 	//	trace("y es" + FlxG.mouse.y);
 
+	
+
 		if(FlxG.overlap(player, casaPepeC)){
 			if (FlxG.keys.justPressed.Z) {
 				LoadingState.loadAndSwitchState(new PlayState());
@@ -209,7 +253,7 @@ class OverWorld extends MusicBeatState
 		}
 
 		if (FlxG.keys.justPressed.D) {
-			MusicBeatState.switchState(new OverworldDross());
+		//	MusicBeatState.switchState(new OverworldDross());
 		}
 		if (FlxG.keys.justPressed.ESCAPE) {
 			MusicBeatState.switchState(new MainMenuState());
@@ -218,6 +262,37 @@ class OverWorld extends MusicBeatState
 		//FlxG.camera.follow(player);
 
 	//	trace(velocidadVal);
+
+   trace(clickCounter);
+
+   if(clickCounter == 2){
+	drossMailO.visible = false;
+	drossMail.visible = false;
+	drossMailP.visible = false;
+	FlxG.sound.play(Paths.sound('Listo'));
+	MusicBeatState.switchState(new FreeplayState());
+   }
+
+	if(FlxG.mouse.justPressed && FlxG.mouse.overlaps(drossMail)){
+			
+		drossMailO.animation.play('open');
+		drossMailO.visible = true;
+		drossMail.visible = false;
+		clickCounter++;
+		FlxTween.tween(FlxG.camera, {zoom: 1.25}, 1.2, {ease:FlxEase.quadInOut});
+			new FlxTimer().start(1.5, function(deadTime:FlxTimer)
+				{
+		FlxG.camera.flash(FlxColor.WHITE, 1);
+		drossMailP.animation.play('showingT');
+		drossMailO.visible = false;
+		drossMailP.visible = true;
+		drossMail.visible = false;
+		FlxG.sound.play(Paths.sound('aparicion_makiabelika'));
+		FlxTween.tween(FlxG.camera, {zoom: 1}, 1.5, {ease:FlxEase.quadInOut});
+				});
+			
+	}
+	
 	}
 
 	private function movePlayer():Void

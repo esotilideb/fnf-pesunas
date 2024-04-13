@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="DrossMail.png">
+	<!-- Created with Adobe Animate version 19.2.1.408 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="mailDefault0000" x="0" y="0" width="665" height="462"/>
+	<SubTexture name="mailOpen0000" x="665" y="0" width="1017" height="479"/>
+	<SubTexture name="mailOpen0001" x="665" y="0" width="1017" height="479"/>
+	<SubTexture name="mailOpen0002" x="0" y="479" width="804" height="462" frameX="-170" frameY="-4" frameWidth="1017" frameHeight="479"/>
+	<SubTexture name="mailOpen0003" x="0" y="479" width="804" height="462" frameX="-170" frameY="-4" frameWidth="1017" frameHeight="479"/>
+	<SubTexture name="mailOpen0004" x="804" y="479" width="665" height="463" frameX="-170" frameY="-3" frameWidth="1017" frameHeight="479"/>
+	<SubTexture name="mailOpen0005" x="804" y="479" width="665" height="463" frameX="-170" frameY="-3" frameWidth="1017" frameHeight="479"/>
+	<SubTexture name="mailOpen0006" x="0" y="942" width="665" height="463" frameX="-170" frameY="-3" frameWidth="1017" frameHeight="479"/>
+	<SubTexture name="mailOpen0007" x="0" y="942" width="665" height="463" frameX="-170" frameY="-3" frameWidth="1017" frameHeight="479"/>
+	<SubTexture name="mailOpen0008" x="0" y="942" width="665" height="463" frameX="-170" frameY="-3" frameWidth="1017" frameHeight="479"/>
+	<SubTexture name="mailOpen0009" x="0" y="942" width="665" height="463" frameX="-170" frameY="-3" frameWidth="1017" frameHeight="479"/>
+	<SubTexture name="mailOpen0010" x="0" y="942" width="665" height="463" frameX="-170" frameY="-3" frameWidth="1017" frameHeight="479"/>
+	<SubTexture name="mailOpen0011" x="0" y="942" width="665" height="463" frameX="-170" frameY="-3" frameWidth="1017" frameHeight="479"/>
+	<SubTexture name="mailOpen0012" x="0" y="942" width="665" height="463" frameX="-170" frameY="-3" frameWidth="1017" frameHeight="479"/>
+	<SubTexture name="mailOpen0013" x="0" y="942" width="665" height="463" frameX="-170" frameY="-3" frameWidth="1017" frameHeight="479"/>
+	<SubTexture name="mailOpen0014" x="0" y="942" width="665" height="463" frameX="-170" frameY="-3" frameWidth="1017" frameHeight="479"/>
+	<SubTexture name="mailOpen0015" x="0" y="942" width="665" height="463" frameX="-170" frameY="-3" frameWidth="1017" frameHeight="479"/>
+	<SubTexture name="mailOpen0016" x="0" y="942" width="665" height="463" frameX="-170" frameY="-3" frameWidth="1017" frameHeight="479"/>
+	<SubTexture name="mailOpen0017" x="0" y="942" width="665" height="463" frameX="-170" frameY="-3" frameWidth="1017" frameHeight="479"/>
+	<SubTexture name="mailOpen0018" x="0" y="942" width="665" height="463" frameX="-170" frameY="-3" frameWidth="1017" frameHeight="479"/>
+	<SubTexture name="showingText0000" x="665" y="942" width="666" height="462" frameX="0" frameY="-117" frameWidth="666" frameHeight="703"/>
+	<SubTexture name="showingText0001" x="665" y="942" width="666" height="462" frameX="0" frameY="-135" frameWidth="666" frameHeight="703"/>
+	<SubTexture name="showingText0002" x="1331" y="942" width="666" height="479" frameX="0" frameY="-152" frameWidth="666" frameHeight="703"/>
+	<SubTexture name="showingText0003" x="0" y="1421" width="666" height="509" frameX="0" frameY="-157" frameWidth="666" frameHeight="703"/>
+	<SubTexture name="showingText0004" x="666" y="1421" width="666" height="628" frameX="0" frameY="-49" frameWidth="666" frameHeight="703"/>
+	<SubTexture name="showingText0005" x="1332" y="1421" width="666" height="658" frameX="0" frameY="-29" frameWidth="666" frameHeight="703"/>
+	<SubTexture name="showingText0006" x="0" y="2079" width="666" height="684" frameX="0" frameY="-8" frameWidth="666" frameHeight="703"/>
+	<SubTexture name="showingText0007" x="666" y="2079" width="666" height="691" frameX="0" frameY="-6" frameWidth="666" frameHeight="703"/>
+	<SubTexture name="showingText0008" x="1332" y="2079" width="666" height="697" frameX="0" frameY="-4" frameWidth="666" frameHeight="703"/>
+	<SubTexture name="showingText0009" x="0" y="2776" width="666" height="699" frameX="0" frameY="-2" frameWidth="666" frameHeight="703"/>
+	<SubTexture name="showingText0010" x="666" y="2776" width="659" height="703" frameX="-4" frameY="0" frameWidth="666" frameHeight="703"/>
+	<SubTexture name="showingText0011" x="666" y="2776" width="659" height="703" frameX="-4" frameY="0" frameWidth="666" frameHeight="703"/>
+	<SubTexture name="showingText0012" x="666" y="2776" width="659" height="703" frameX="-4" frameY="0" frameWidth="666" frameHeight="703"/>
+	<SubTexture name="showingText0013" x="666" y="2776" width="659" height="703" frameX="-4" frameY="0" frameWidth="666" frameHeight="703"/>
+	<SubTexture name="showingText0014" x="666" y="2776" width="659" height="703" frameX="-4" frameY="0" frameWidth="666" frameHeight="703"/>
+	<SubTexture name="showingText0015" x="666" y="2776" width="659" height="703" frameX="-4" frameY="0" frameWidth="666" frameHeight="703"/>
+</TextureAtlas>
