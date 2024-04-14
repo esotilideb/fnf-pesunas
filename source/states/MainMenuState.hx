@@ -9,6 +9,12 @@ import options.OptionsState;
 
 class MainMenuState extends MusicBeatState
 {
+	var magosexual:Array<String> = [
+		'magicfunkin'
+	];
+	var allowedKeys:String = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	var magosexualBuffer:String = '';
+	
 	public static var psychEngineVersion:String = '0.7.2h'; // This is also used for Discord RPC
 	public static var curSelected:Int = 0;
 
@@ -169,6 +175,25 @@ class MainMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
+		if (FlxG.keys.firstJustPressed() != FlxKey.NONE)
+		{
+			var keyPressed:FlxKey = FlxG.keys.firstJustPressed();
+			var keyName:String = Std.string(keyPressed);
+			if(allowedKeys.contains(keyName)) {
+				magosexualBuffer += keyName;
+				if(magosexualBuffer.length >= 32) magosexualBuffer = magosexualBuffer.substring(1);
+
+				for (wordRaw in magosexual)
+				{
+					var word:String = wordRaw.toUpperCase();
+					if (magosexualBuffer.contains(word))
+					{
+							MusicBeatState.switchState(new MagicVideo());
+					}
+				}
+			}
+		}
+		
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
 		
