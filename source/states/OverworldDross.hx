@@ -24,7 +24,7 @@ class OverworldDross extends FlxState
 
 	override public function create():Void
 	{
-        FlxG.camera.zoom = 2.5;
+        FlxG.camera.zoom = 3.5;
 
         var bg:FlxSprite = new FlxSprite(640, 664).loadGraphic(Paths.image('overWorld/drossmap'));
 		bg.antialiasing = false;
