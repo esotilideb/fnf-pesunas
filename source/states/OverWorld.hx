@@ -102,8 +102,6 @@ class OverWorld extends MusicBeatState
 		player.x = 130;
 		player.y = 400;
 
-
-
 		FlxG.sound.playMusic(Paths.music("MapWorld_BETA"));
 
 		function anadirPasto(x:Int, y:Int){
@@ -253,7 +251,7 @@ class OverWorld extends MusicBeatState
 		}
 
 		if (FlxG.keys.justPressed.D) {
-		//	MusicBeatState.switchState(new OverworldDross());
+			MusicBeatState.switchState(new OverworldDross());
 		}
 		if (FlxG.keys.justPressed.ESCAPE) {
 			MusicBeatState.switchState(new MainMenuState());

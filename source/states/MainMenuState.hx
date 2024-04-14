@@ -175,7 +175,7 @@ class MainMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		if (FlxG.keys.firstJustPressed() != FlxKey.NONE)
+		/*if (FlxG.keys.firstJustPressed() != FlxKey.NONE)
 		{
 			var keyPressed:FlxKey = FlxG.keys.firstJustPressed();
 			var keyName:String = Std.string(keyPressed);
@@ -192,7 +192,7 @@ class MainMenuState extends MusicBeatState
 					}
 				}
 			}
-		}
+		}*/
 		
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
