@@ -9,13 +9,11 @@ import options.OptionsState;
 
 class MainMenuState extends MusicBeatState
 {
-	# if MAGORAP_EASTER_EGG
 	var magosexual:Array<String> = [
 		'magicfunkin'
 	];
 	var allowedKeys:String = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	var magosexualBuffer:String = '';
-	#end
 	
 	public static var psychEngineVersion:String = '0.7.2h'; // This is also used for Discord RPC
 	public static var curSelected:Int = 0;
@@ -177,7 +175,6 @@ class MainMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		#if MAGORAP_EASTER_EGG
 		if (FlxG.keys.firstJustPressed() != FlxKey.NONE)
 		{
 			var keyPressed:FlxKey = FlxG.keys.firstJustPressed();
@@ -196,7 +193,6 @@ class MainMenuState extends MusicBeatState
 				}
 			}
 		}
-		#end
 		
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
