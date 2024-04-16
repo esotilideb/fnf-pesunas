@@ -14,6 +14,7 @@ class Mijail extends BaseStage
 	{
 		trace("el pepe");
 
+		game.camGame.bgColor = 0x00000000;
 		shader = new TVShader();
 		shaderHUD = new TVShader();
 		
