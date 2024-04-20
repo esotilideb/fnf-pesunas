@@ -205,9 +205,16 @@ class TitleState extends MusicBeatState
 		// bg.updateHitbox();
 		add(bg);
 
+		var shit:FlxSprite = new FlxSprite(Paths.image('menuDesat'));
+		add(shit);
+
+		var pepito:FlxSprite = new FlxSprite(Paths.image('title/pepito'));
+		add(pepito);
+
 		logoBl = new FlxSprite(titleJSON.titlex, titleJSON.titley);
-		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
+		logoBl.frames = Paths.getSparrowAtlas('title/logoBumpin');
 		logoBl.antialiasing = ClientPrefs.data.antialiasing;
+		logoBl.screenCenter();
 
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 		logoBl.animation.play('bump');
@@ -400,6 +407,8 @@ class TitleState extends MusicBeatState
 			
 			if(pressedEnter)
 			{
+
+				//MusicBeatState.switchState(new BuildBroma());
 				titleText.color = FlxColor.WHITE;
 				titleText.alpha = 1;
 				
@@ -586,9 +595,11 @@ class TitleState extends MusicBeatState
 					addMoreText('Night');
 				case 16:
 					addMoreText('Funkin'); // credTextShit.text += '\nFunkin';
+					//MusicBeatState.switchState(new BuildBroma());
 
 				case 17:
 					skipIntro();
+				//	MusicBeatState.switchState(new BuildBroma());
 			}
 		}
 	}
@@ -636,6 +647,8 @@ class TitleState extends MusicBeatState
 						remove(credGroup);
 						FlxG.camera.flash(FlxColor.WHITE, 0.6);
 						transitioning = false;
+
+						//MusicBeatState.switchState(new BuildBroma());
 					});
 				}
 				else
