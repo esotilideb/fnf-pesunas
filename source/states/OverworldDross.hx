@@ -24,6 +24,8 @@ class OverworldDross extends FlxState
 	var walls:FlxTilemap;
 	var invisible:FlxSprite;
 
+	var colision:FlxSprite;
+
 	override public function create():Void
 	{
         FlxG.camera.zoom = 2;
@@ -50,6 +52,7 @@ class OverworldDross extends FlxState
 		invisible.antialiasing = false;
 		invisible.visible = false;
 		add(invisible);
+
 
 		super.create();
 

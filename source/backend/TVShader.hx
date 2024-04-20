@@ -37,9 +37,9 @@ class TVShit extends FlxShader
             uv = (uv + 1.)*.5;
             
             vec4 tex = vec4( 
-                texture2D(bitmap, uv + 0.003).r,
+                texture2D(bitmap, uv + 0.002).r,
                 texture2D(bitmap, uv).g,
-                texture2D(bitmap, uv - 0.003).b, 
+                texture2D(bitmap, uv - 0.002).b, 
                 texture2D(bitmap, uv).a
             );
             
