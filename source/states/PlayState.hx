@@ -1995,12 +1995,15 @@ class PlayState extends MusicBeatState
 
 	public dynamic function updateIconsPosition()
 	{
+		var newShitOffset:Float = 0;
+		if (curStage == "caca" && healthBar.percent > 80) newShitOffset = FlxG.random.float(-15, 15);
+
 		var iconOffset:Int = 26;
 		if (curStage == "PepeHouse") 
 			iconP1.x = iconP1.x;
 		else {
 			iconP1.x = healthBar.barCenter + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
-			iconP2.x = healthBar.barCenter - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
+			iconP2.x = (healthBar.barCenter - (150 * iconP2.scale.x) / 2 - iconOffset * 2) + newShitOffset;
 		}
 	}
 
@@ -2331,6 +2334,7 @@ class PlayState extends MusicBeatState
 					case 9:
 						cameraPosDefaultX = redstar.getMidpoint().x;
 						cameraPosDefaultY = redstar.getMidpoint().y;
+						iconP2.visible = false;
 						redstarSet = true;
 				}
 
@@ -2615,6 +2619,17 @@ class PlayState extends MusicBeatState
 			FlxG.game.setFilters([]);
 			FlxG.camera.filtersEnabled = false;
 		}
+
+		var bools:Array<Array<Dynamic>> = FlxG.save.data.songBool;
+		var songname = StringTools.replace(curSong.toLowerCase(), " ", "-");
+
+		for (i in 0...bools.length) {
+			if (bools[i][0].toLowerCase() == songname) bools[i][1] = true;
+			trace(bools[i]);
+		}
+
+		FlxG.save.data.songBool = bools;
+		FlxG.save.flush();
 
 		deathCounter = 0;
 		seenCutscene = false;

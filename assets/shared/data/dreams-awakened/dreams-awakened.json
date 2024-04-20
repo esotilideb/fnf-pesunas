@@ -7214,6 +7214,16 @@
 				]
 			],
 			[
+				30000,
+				[
+					[
+						"Play Animation",
+						"animacion",
+						"dad"
+					]
+				]
+			],
+			[
 				30600,
 				[
 					[
@@ -8615,7 +8625,7 @@
 			]
 		],
 		"player2": "mijail",
-		"song": "dreams-awakened",
+		"song": "Dreams Awakened",
 		"needsVoices": true,
 		"stage": "caca",
 		"speed": 2.9,

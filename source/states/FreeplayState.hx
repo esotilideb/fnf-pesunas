@@ -6,8 +6,10 @@ import backend.Song;
 
 import objects.HealthIcon;
 import objects.MusicPlayer;
+import flixel.input.keyboard.FlxKey;
 
 import substates.GameplayChangersSubstate;
+import openfl.events.KeyboardEvent;
 import substates.ResetScoreSubState;
 
 import flixel.math.FlxMath;
@@ -46,12 +48,14 @@ class FreeplayState extends MusicBeatState
         #if desktop
           DiscordClient.changePresence("In the menus", "logo");
         #end
+
+        
         var songArray:Array<Array<String>> = [
             ['Lunar-magic', "WEEK 1 - Mago VS BF"],
             ['Dark-magic', "WEEK 1 - Mago VS Mago?"],
             ['Tops', "EXTRA - Pepe VS Nerd"],
-            ['dreams-awakened', "EXTRA - ..."],
-            ['horror-pepe', "EXTRA - HORROR PEPAURI"]
+            ['dreams-awakened', "EXTRA - ..."]/*,
+            ['horror-pepe', "EXTRA - HORROR PEPAURI"]*/
         ];
 
         for (i in 0...songArray.length)
@@ -139,8 +143,89 @@ class FreeplayState extends MusicBeatState
 
         changeSelection(0, true, true);
         Difficulty.list = Difficulty.defaultList;
+
+        var playedAllSongs:Bool = true;
+        for (i in 0...4)
+        {
+            if (!FlxG.save.data.songBool[i][1])
+                playedAllSongs = false;
+        }
+            
+        if (playedAllSongs)
+            FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyCheck);
+        
         super.create();
     }
+    
+    private function keyCheck(event:KeyboardEvent):Void
+    {
+        var key:FlxKey = event.keyCode;
+            
+        if (curNumCode > 0) 
+        {
+            if (key == codes[0][curNumCode])
+            {
+                if (curNumCode == codes[0].length-1)
+                {
+                    persistentUpdate = false;
+                    var songLowercase:String = Paths.formatToSongPath("horror-pepe");
+                    var poop:String = Highscore.formatSong('horror-pepe', curDifficulty);
+            
+                    try
+                    {
+                        PlayState.SONG = Song.loadFromJson(poop, songLowercase);
+
+                        PlayState.isStoryMode = false;
+                        PlayState.storyDifficulty = curDifficulty;
+            
+                        trace('CURRENT WEEK: ' + WeekData.getWeekFileName());
+                        trace(poop);
+
+                        LoadingState.loadAndSwitchState(new PlayState());
+                        FlxG.sound.music.volume = 0;       
+
+                        #if (MODS_ALLOWED && cpp)
+                        DiscordClient.loadModRPC();
+                        #end
+                    }
+                    catch(e:Dynamic)
+                    {
+                        trace('ERROR! $e');
+            
+                        var errorStr:String = e.toString();
+                        if(errorStr.startsWith('[file_contents,assets/data/')) errorStr = 'Missing file: ' + errorStr.substring(34, errorStr.length-1); //Missing chart
+                        missingText.text = 'ERROR WHILE LOADING CHART:\n$errorStr';
+                        missingText.screenCenter(Y);
+                        missingText.visible = true;
+                        missingTextBG.visible = true;
+                        FlxG.sound.play(Paths.sound('cancelMenu'));
+                    }
+                }
+                else
+                {
+                    curNumCode += 1;
+                }
+            }
+            else
+            {
+                curNumCode = 0;
+            }
+        }
+            
+        if (curNumCode == 0) 
+        {
+            for (i in 0...codes.length)
+            {
+                if (key == codes[i][0])
+                {
+                    curNumCode = 1;
+                }
+            }
+        }
+    }
+
+    var codes:Array<Array<FlxKey>> = [[H, O, R, R, O, R]];
+    var curNumCode:Int = 0;
 
     var changing:Bool = false;
     override function update(elapsed:Float)
@@ -231,12 +316,6 @@ class FreeplayState extends MusicBeatState
                     missingTextBG.visible = true;
                     FlxG.sound.play(Paths.sound('cancelMenu'));
                 }
-            }
-            else if(controls.RESET)
-            {
-                persistentUpdate = false;
-                openSubState(new ResetScoreSubState(songs[curSelected].songName, curDifficulty, songs[curSelected].songCharacter));
-                FlxG.sound.play(Paths.sound('scrollMenu'));
             }
         }
         

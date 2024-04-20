@@ -45,6 +45,20 @@ class MainMenuState extends MusicBeatState
 		#end
 		Mods.loadTopMod();
 
+		if (FlxG.save.data.songBool == null)
+		{
+			FlxG.save.data.songBool = [
+				['Lunar-magic', false],
+				['Dark-magic', false],
+				['Tops', false],
+				['dreams-awakened', false],
+				['horror-pepe', false],
+				['Goat-Heavyhearted', false]
+			];
+		}
+	
+		FlxG.save.flush();
+		
 		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
@@ -132,16 +146,15 @@ class MainMenuState extends MusicBeatState
 				spr.updateHitbox();
 				spr.setPosition(FlxG.width, FlxG.height - spr.width);
 				
-				people = new FlxSprite(-950, -100);
-				people.frames = Paths.getSparrowAtlas('mainmenu/people');
-				people.screenCenter();
-				people.scrollFactor.set(0);
-				people.setGraphicSize(Std.int(people.width * 0.5));
+				people = new FlxSprite().loadGraphic(Paths.image('mainmenu/people', "shared"), true, 541, 483);
+				people.scrollFactor.set();
 				people.antialiasing = false;
-				people.animation.addByPrefix('idle', 'people-normal', 24, true); //nothing
-				people.animation.addByPrefix('rebote', 'rebote', 24, true); //nothing
-				people.animation.addByPrefix('selected', 'seleccionado', 24, true); //nothing
+				people.animation.add('idle', [0], 24, true); //nothing
+				people.animation.add('selected', [0, 1, 1, 2, 2, 3], 24, false); //nothing
 				people.animation.play('idle');
+				people.scale.set(0.5, 0.5);
+				people.updateHitbox();
+				people.setPosition(FlxG.width - people.width, FlxG.height - people.height);
 				menuItems.add(people);
 			}
 		}

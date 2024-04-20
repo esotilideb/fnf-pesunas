@@ -1,213 +1,230 @@
 package states;
 
-import objects.AttachedSprite;
+import flixel.addons.display.FlxBackdrop;
+import flash.text.TextField;
+import flixel.FlxG;
+import flixel.FlxSprite;
+import flixel.addons.display.FlxGridOverlay;
+import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.system.frontEnds.SoundFrontEnd;
+import flixel.math.FlxMath;
+import flixel.text.FlxText;
+import flixel.util.FlxColor;
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
+
+#if MODS_ALLOWED
+import sys.FileSystem;
+import sys.io.File;
+#end
+import lime.utils.Assets;
+
+using StringTools;
 
 class CreditsState extends MusicBeatState
 {
-	var curSelected:Int = -1;
+	var curSelected:Int = 0;
 
-	private var grpOptions:FlxTypedGroup<Alphabet>;
-	private var iconArray:Array<AttachedSprite> = [];
-	private var creditsStuff:Array<Array<String>> = [];
+	private var iconGrp:FlxTypedGroup<FlxSprite>;
+	private var creditsStuff:Array<Array<Dynamic>> = [];
 
-	var bg:FlxSprite;
 	var descText:FlxText;
-	var intendedColor:FlxColor;
+	var frase:FlxText;
+
+	var intendedColor:Int;
 	var colorTween:FlxTween;
-	var descBox:AttachedSprite;
 
 	var offsetThing:Float = -75;
+	
+	var arrowL:FlxSprite;
+	var arrowR:FlxSprite;
+
+	var bg:FlxSprite;
+	var grid:FlxBackdrop;
+
+	var colorGuide:FlxSprite;
+	var lol:FlxSprite;
 
 	override function create()
 	{
-		#if desktop
-		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In the Menus", null);
-		#end
-
 		persistentUpdate = true;
-		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-		bg.antialiasing = ClientPrefs.data.antialiasing;
-		add(bg);
+
+
+		colorGuide = new FlxSprite().makeGraphic(1, 1, FlxColor.WHITE);
+		colorGuide.alpha = 0;
+		add(colorGuide);
+
+		bg = new FlxSprite().loadGraphic(Paths.image("menu", "shared"));
 		bg.screenCenter();
+        add(bg);
+
+        grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0xFF002FFF, FlxColor.TRANSPARENT));
+		grid.velocity.set(40, 40);
+        grid.alpha = 0.5;
+		add(grid);
 		
-		grpOptions = new FlxTypedGroup<Alphabet>();
-		add(grpOptions);
+		var tv = new FlxSprite().loadGraphic(Paths.image("creditAssets/tv", "shared"));
+		tv.screenCenter();
+		tv.y -= 50;
+		add(tv);
 
-		#if MODS_ALLOWED
-		for (mod in Mods.parseList().enabled) pushModCreditsToList(mod);
-		#end
+		var barUp = new FlxSprite().loadGraphic(Paths.image("creditAssets/barUp", "shared"));
+		barUp.screenCenter(X);
+		add(barUp);
 
-		var defaultList:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
-			['Psych Engine Team'],
-			['Shadow Mario',		'shadowmario',		'Main Programmer and Head of Psych Engine',					 'https://ko-fi.com/shadowmario',		'444444'],
-			['Riveren',				'riveren',			'Main Artist/Animator of Psych Engine',						 'https://twitter.com/riverennn',		'14967B'],
-			[''],
-			['Former Engine Members'],
-			['bb-panzu',			'bb',				'Ex-Programmer of Psych Engine',							 'https://twitter.com/bbsub3',			'3E813A'],
-			['shubs',				'',					'Ex-Programmer of Psych Engine\nI don\'t support them.',	 '',									'A1A1A1'],
-			[''],
-			['Engine Contributors'],
-			['CrowPlexus',			'crowplexus',		'Input System v3, Major Help and Other PRs',				 'https://twitter.com/crowplexus',		'A1A1A1'],
-			['Keoiki',				'keoiki',			'Note Splash Animations and Latin Alphabet',				 'https://twitter.com/Keoiki_',			'D2D2D2'],
-			['SqirraRNG',			'sqirra',			'Crash Handler and Base code for\nChart Editor\'s Waveform', 'https://twitter.com/gedehari',		'E1843A'],
-			['EliteMasterEric',		'mastereric',		'Runtime Shaders support',									 'https://twitter.com/EliteMasterEric',	'FFBD40'],
-			['PolybiusProxy',		'proxy',			'.MP4 Video Loader Library (hxCodec)',						 'https://twitter.com/polybiusproxy',	'DCD294'],
-			['Tahir',				'tahir',			'Implementing & Maintaining SScript and Other PRs',			 'https://twitter.com/tahirk618',		'A04397'],
-			['iFlicky',				'flicky',			'Composer of Psync and Tea Time\nMade the Dialogue Sounds',	 'https://twitter.com/flicky_i',		'9E29CF'],
-			['KadeDev',				'kade',				'Fixed some issues on Chart Editor and Other PRs',			 'https://twitter.com/kade0912',		'64A250'],
-			['superpowers04',		'superpowers04',	'LUA JIT Fork',												 'https://twitter.com/superpowers04',	'B957ED'],
-			['CheemsAndFriends',	'face',	'Creator of FlxAnimate\n(Icon will be added later, merry christmas!)',	 'https://twitter.com/CheemsnFriendos',	'A1A1A1'],
-			[''],
-			["Funkin' Crew"],
-			['ninjamuffin99',		'ninjamuffin99',	"Programmer of Friday Night Funkin'",						 'https://twitter.com/ninja_muffin99',	'CF2D2D'],
-			['PhantomArcade',		'phantomarcade',	"Animator of Friday Night Funkin'",							 'https://twitter.com/PhantomArcade3K',	'FADC45'],
-			['evilsk8r',			'evilsk8r',			"Artist of Friday Night Funkin'",							 'https://twitter.com/evilsk8r',		'5ABD4B'],
-			['kawaisprite',			'kawaisprite',		"Composer of Friday Night Funkin'",							 'https://twitter.com/kawaisprite',		'378FC7']
+		var barDown = new FlxSprite().loadGraphic(Paths.image("creditAssets/barDown", "shared"));
+		barDown.screenCenter(X);
+		barDown.y = FlxG.height - barDown.height;
+		add(barDown);
+
+		iconGrp = new FlxTypedGroup<FlxSprite>();
+		add(iconGrp);
+
+		var pisspoop:Array<Array<Dynamic>> = [ //Name - Icon name - Trabajo - Frase - BG Color
+			["AngieGB", "angie", "Director, Animador y Artista", "Vas a caer pixel art", 0xFF9be330],
+			["Luk9as", "yo", 'Coder', "Pene", 0xFFFF3931]
 		];
 		
-		for(i in defaultList) {
+		for(i in pisspoop){
 			creditsStuff.push(i);
 		}
+
+		grid.color = creditsStuff[0][4];
+		bg.color = creditsStuff[0][4];
 	
 		for (i in 0...creditsStuff.length)
 		{
-			var isSelectable:Bool = !unselectableCheck(i);
-			var optionText:Alphabet = new Alphabet(FlxG.width / 2, 300, creditsStuff[i][0], !isSelectable);
-			optionText.isMenuItem = true;
-			optionText.targetY = i;
-			optionText.changeX = false;
-			optionText.snapToPosition();
-			grpOptions.add(optionText);
+			var icon:FlxSprite = new FlxSprite().loadGraphic(Paths.image("papuIcons/" + creditsStuff[i][1], "shared"));
+			var scale:Float = 0;
 
-			if(isSelectable) {
-				if(creditsStuff[i][5] != null)
-				{
-					Mods.currentModDirectory = creditsStuff[i][5];
-				}
+			if (icon.width > icon.height) scale = 200 / icon.width;
+			else if (icon.height > icon.width) scale = 200 / icon.height;
+			else if (icon.height == icon.width) scale = 1;
 
-				var str:String = 'credits/missing_icon';
-				if(creditsStuff[i][1] != null && creditsStuff[i][1].length > 0)
-				{
-					var fileName = 'credits/' + creditsStuff[i][1];
-					if (Paths.fileExists('images/$fileName.png', IMAGE)) str = fileName;
-					else if (Paths.fileExists('images/$fileName-pixel.png', IMAGE)) str = fileName + '-pixel';
-				}
-
-				var icon:AttachedSprite = new AttachedSprite(str);
-				if(str.endsWith('-pixel')) icon.antialiasing = false;
-				icon.xAdd = optionText.width + 10;
-				icon.sprTracker = optionText;
-	
-				// using a FlxGroup is too much fuss!
-				iconArray.push(icon);
-				add(icon);
-				Mods.currentModDirectory = '';
-
-				if(curSelected == -1) curSelected = i;
-			}
-			else optionText.alignment = CENTERED;
+			icon.scale.set(scale, scale);
+			icon.updateHitbox();
+			icon.screenCenter();
+			icon.antialiasing = true;
+			iconGrp.add(icon);
 		}
 		
-		descBox = new AttachedSprite();
-		descBox.makeGraphic(1, 1, FlxColor.BLACK);
-		descBox.xAdd = -10;
-		descBox.yAdd = -10;
-		descBox.alphaMult = 0.6;
-		descBox.alpha = 0.6;
-		add(descBox);
+		arrowL = new FlxSprite(tv.x - 50).loadGraphic(Paths.image("freeplayshit/Key_Freeplay", "shared"));
+		arrowL.screenCenter(Y);
+		arrowL.x -= arrowL.width;
+		arrowL.flipX = true;
+		arrowL.scale.set(0.75, 0.75);
+		add(arrowL);
+		
+		arrowR = new FlxSprite((tv.x + tv.width) + 50).loadGraphic(Paths.image("freeplayshit/Key_Freeplay", "shared"));
+		arrowR.screenCenter(Y);
+		arrowR.scale.set(0.75, 0.75);
+		add(arrowR);
 
-		descText = new FlxText(50, FlxG.height + offsetThing - 25, 1180, "", 32);
+		descText = new FlxText(50, FlxG.height + offsetThing + 50, 1180, "", 48);
 		descText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER/*, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK*/);
 		descText.scrollFactor.set();
 		//descText.borderSize = 2.4;
-		descBox.sprTracker = descText;
 		add(descText);
 
-		bg.color = CoolUtil.colorFromString(creditsStuff[curSelected][4]);
-		intendedColor = bg.color;
+		frase = new FlxText(50, 75, 1180, "", 48);
+		frase.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER/*, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK*/);
+		frase.scrollFactor.set();
+		add(frase);
+
+		var animShit:Array<Int> = [];
+
+		for (i in 0...126) animShit.push(i);
+			
+		lol = new FlxSprite().loadGraphic(Paths.image("creditAssets/lol", "shared"), true, 466, 360);
+		lol.animation.add("ol", animShit, 24, true);
+		lol.animation.play("ol");
+		lol.scale.set(775 / lol.width, 75 / lol.height);
+		lol.updateHitbox();
+		lol.setPosition(barUp.x + (barUp.width / 2) - (775 / 2), barUp.y + (barUp.height / 2) - (75 / 2));
+		lol.visible = false;
+		add(lol);
+
+		musicalol = FlxG.sound.play(Paths.sound("audiolol", "shared"), 0.7, true);
+		musicalol.volume = 0;
+		
 		changeSelection();
 		super.create();
 	}
 
 	var quitting:Bool = false;
 	var holdTime:Float = 0;
+	var musicalol:FlxSound;
 	override function update(elapsed:Float)
 	{
-		if (FlxG.sound.music.volume < 0.7)
-		{
-			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
+		if (lol.visible) {
+			if (musicalol.volume < 1)
+			{
+				musicalol.volume += 0.5 * FlxG.elapsed;
+			}
+			FlxG.sound.music.volume = 0;
+		} else {
+			if (FlxG.sound.music.volume < 0.7)
+			{
+				FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
+			}
+			musicalol.volume = 0;
 		}
+
+		grid.color = colorGuide.color;
+		bg.color = colorGuide.color;
 
 		if(!quitting)
 		{
 			if(creditsStuff.length > 1)
 			{
-				var shiftMult:Int = 1;
-				if(FlxG.keys.pressed.SHIFT) shiftMult = 3;
-
-				var upP = controls.UI_UP_P;
-				var downP = controls.UI_DOWN_P;
+				var upP = controls.UI_LEFT_P;
+				var downP = controls.UI_RIGHT_P;
+				
+				var upR = controls.UI_LEFT_R;
+				var downR = controls.UI_RIGHT_R;
 
 				if (upP)
 				{
-					changeSelection(-shiftMult);
+					changeSelection(-1);
 					holdTime = 0;
+
+					arrowL.scale.set(0.5, 0.5);
+					arrowL.alpha = 0.5;
 				}
 				if (downP)
 				{
-					changeSelection(shiftMult);
+					changeSelection(1);
 					holdTime = 0;
+
+					arrowR.scale.set(0.5, 0.5);
+					arrowR.alpha = 0.5;
 				}
-
-				if(controls.UI_DOWN || controls.UI_UP)
-				{
-					var checkLastHold:Int = Math.floor((holdTime - 0.5) * 10);
-					holdTime += elapsed;
-					var checkNewHold:Int = Math.floor((holdTime - 0.5) * 10);
-
-					if(holdTime > 0.5 && checkNewHold - checkLastHold > 0)
-					{
-						changeSelection((checkNewHold - checkLastHold) * (controls.UI_UP ? -shiftMult : shiftMult));
-					}
+				
+				if (upR) {
+					arrowL.scale.set(0.75, 0.75);
+					arrowL.alpha = 1;
+				}
+				
+				if (downR) {
+					arrowR.scale.set(0.75, 0.75);
+					arrowR.alpha = 1;
 				}
 			}
-
-			if(controls.ACCEPT && (creditsStuff[curSelected][3] == null || creditsStuff[curSelected][3].length > 4)) {
-				CoolUtil.browserLoad(creditsStuff[curSelected][3]);
-			}
-			if (controls.BACK)
+			
+			var bac = controls.BACK;
+			
+			if (bac)
 			{
-				if(colorTween != null) {
-					colorTween.cancel();
-				}
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				MusicBeatState.switchState(new MainMenuState());
 				quitting = true;
-			}
-		}
-		
-		for (item in grpOptions.members)
-		{
-			if(!item.bold)
-			{
-				var lerpVal:Float = FlxMath.bound(elapsed * 12, 0, 1);
-				if(item.targetY == 0)
-				{
-					var lastX:Float = item.x;
-					item.screenCenter(X);
-					item.x = FlxMath.lerp(lastX, item.x - 70, lerpVal);
-				}
-				else
-				{
-					item.x = FlxMath.lerp(item.x, 200 + -40 * Math.abs(item.targetY), lerpVal);
-				}
 			}
 		}
 		super.update(elapsed);
 	}
 
 	var moveTween:FlxTween = null;
+	var fraseTween:FlxTween = null;
 	function changeSelection(change:Int = 0)
 	{
 		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
@@ -219,48 +236,53 @@ class CreditsState extends MusicBeatState
 				curSelected = 0;
 		} while(unselectableCheck(curSelected));
 
-		var newColor:FlxColor = CoolUtil.colorFromString(creditsStuff[curSelected][4]);
-		//trace('The BG color is: $newColor');
-		if(newColor != intendedColor) {
-			if(colorTween != null) {
-				colorTween.cancel();
-			}
-			intendedColor = newColor;
-			colorTween = FlxTween.color(bg, 1, bg.color, intendedColor, {
-				onComplete: function(twn:FlxTween) {
-					colorTween = null;
-				}
-			});
-		}
-
 		var bullShit:Int = 0;
 
-		for (item in grpOptions.members)
-		{
-			item.targetY = bullShit - curSelected;
-			bullShit++;
-
-			if(!unselectableCheck(bullShit-1)) {
-				item.alpha = 0.6;
-				if (item.targetY == 0) {
-					item.alpha = 1;
-				}
-			}
-		}
-
-		descText.text = creditsStuff[curSelected][2];
-		descText.y = FlxG.height - descText.height + offsetThing - 60;
+		descText.text = creditsStuff[curSelected][0] + "\n" + creditsStuff[curSelected][2];
+		descText.y = FlxG.height - descText.height + offsetThing + 5;
 
 		if(moveTween != null) moveTween.cancel();
-		moveTween = FlxTween.tween(descText, {y : descText.y + 75}, 0.25, {ease: FlxEase.sineOut});
+		moveTween = FlxTween.tween(descText, {y : descText.y + 30}, 0.25, {ease: FlxEase.sineOut});
+		
 
-		descBox.setGraphicSize(Std.int(descText.width + 20), Std.int(descText.height + 25));
-		descBox.updateHitbox();
+		frase.text = creditsStuff[curSelected][3];
+		frase.y = 5;
+
+		if(fraseTween != null) fraseTween.cancel();
+		fraseTween = FlxTween.tween(frase, {y : frase.y + 15}, 0.25, {ease: FlxEase.sineOut});
+
+		#if desktop
+		// Updating Discord Rich Presence
+		DiscordClient.changePresence("Credits:", creditsStuff[curSelected][0]);
+		#end
+		
+		iconGrp.forEachAlive(function(spr:FlxSprite) {
+			spr.alpha = 0;
+		});
+
+		if(colorTween != null) {
+			colorTween.cancel();
+		}
+		colorTween = FlxTween.color(colorGuide, 0.25, colorGuide.color, creditsStuff[curSelected][4], {
+			onComplete: function(twn:FlxTween) {
+				colorTween = null;
+			}
+		});
+
+		lol.visible = (frase.text == "Pene");
+		
+		iconGrp.members[curSelected].alpha = 1;
+		iconGrp.members[curSelected].screenCenter(Y);
+		iconGrp.members[curSelected].y -= 50;
+		FlxTween.tween(iconGrp.members[curSelected], {y: iconGrp.members[curSelected].y + 50}, 0.25, {ease: FlxEase.sineOut});
 	}
 
 	#if MODS_ALLOWED
+	private var modsAdded:Array<String> = [];
 	function pushModCreditsToList(folder:String)
 	{
+		if(modsAdded.contains(folder)) return;
+
 		var creditsFile:String = null;
 		if(folder != null && folder.trim().length > 0) creditsFile = Paths.mods(folder + '/data/credits.txt');
 		else creditsFile = Paths.mods('data/credits.txt');
@@ -276,9 +298,10 @@ class CreditsState extends MusicBeatState
 			}
 			creditsStuff.push(['']);
 		}
+		modsAdded.push(folder);
 	}
 	#end
-
+	
 	private function unselectableCheck(num:Int):Bool {
 		return creditsStuff[num].length <= 1;
 	}
