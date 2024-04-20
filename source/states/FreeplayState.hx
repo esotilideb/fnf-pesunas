@@ -98,7 +98,7 @@ class FreeplayState extends MusicBeatState
         
         for (i in 0...songArray.length)
         {
-            portrait.animation.add(songArray[i][0], [i]);
+         //   portrait.animation.add(songArray[i][0], [i]);
             title.animation.add(songArray[i][0], [i]);
         }
 
@@ -318,6 +318,9 @@ class FreeplayState extends MusicBeatState
                 }
             }
         }
+
+        portrait.loadGraphic(Paths.image('freeplayshit/' + songs[curSelected].songName + '/portada'));
+        title.loadGraphic(Paths.image('freeplayshit/' + songs[curSelected].songName + '/title'));
         
         super.update(elapsed);
     }

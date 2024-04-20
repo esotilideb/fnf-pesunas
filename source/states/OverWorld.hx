@@ -268,7 +268,7 @@ class OverWorld extends MusicBeatState
 	drossMail.visible = false;
 	drossMailP.visible = false;
 	FlxG.sound.play(Paths.sound('Listo'));
-	MusicBeatState.switchState(new FreeplayState());
+	MusicBeatState.switchState(new OverworldDross());
    }
 
 	if(FlxG.mouse.justPressed && FlxG.mouse.overlaps(drossMail)){

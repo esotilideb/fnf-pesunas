@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="logoBumpin.png">
+	<!-- Created with Adobe Animate version 22.0.3.179 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="logo bumpin0000" x="0" y="0" width="1005" height="879" frameX="-26" frameY="-26" frameWidth="1057" frameHeight="924"/>
+	<SubTexture name="logo bumpin0001" x="1005" y="0" width="1057" height="924"/>
+	<SubTexture name="logo bumpin0002" x="1005" y="0" width="1057" height="924"/>
+	<SubTexture name="logo bumpin0003" x="2062" y="0" width="1027" height="898" frameX="-15" frameY="-15" frameWidth="1057" frameHeight="924"/>
+	<SubTexture name="logo bumpin0004" x="2062" y="0" width="1027" height="898" frameX="-15" frameY="-15" frameWidth="1057" frameHeight="924"/>
+	<SubTexture name="logo bumpin0005" x="0" y="924" width="1019" height="891" frameX="-19" frameY="-19" frameWidth="1057" frameHeight="924"/>
+	<SubTexture name="logo bumpin0006" x="0" y="924" width="1019" height="891" frameX="-19" frameY="-19" frameWidth="1057" frameHeight="924"/>
+	<SubTexture name="logo bumpin0007" x="0" y="924" width="1019" height="891" frameX="-19" frameY="-19" frameWidth="1057" frameHeight="924"/>
+	<SubTexture name="logo bumpin0008" x="0" y="924" width="1019" height="891" frameX="-19" frameY="-19" frameWidth="1057" frameHeight="924"/>
+	<SubTexture name="logo bumpin0009" x="0" y="924" width="1019" height="891" frameX="-19" frameY="-19" frameWidth="1057" frameHeight="924"/>
+	<SubTexture name="logo bumpin0010" x="0" y="924" width="1019" height="891" frameX="-19" frameY="-19" frameWidth="1057" frameHeight="924"/>
+	<SubTexture name="logo bumpin0011" x="0" y="924" width="1019" height="891" frameX="-19" frameY="-19" frameWidth="1057" frameHeight="924"/>
+	<SubTexture name="logo bumpin0012" x="0" y="924" width="1019" height="891" frameX="-19" frameY="-19" frameWidth="1057" frameHeight="924"/>
+	<SubTexture name="logo bumpin0013" x="0" y="924" width="1019" height="891" frameX="-19" frameY="-19" frameWidth="1057" frameHeight="924"/>
+	<SubTexture name="logo bumpin0014" x="0" y="924" width="1019" height="891" frameX="-19" frameY="-19" frameWidth="1057" frameHeight="924"/>
+</TextureAtlas>
