@@ -15,6 +15,11 @@ import openfl.Assets;
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
 
+import flixel.addons.display.FlxBackdrop;
+import flixel.addons.display.FlxGridOverlay;
+
+import flixel.math.FlxRandom;
+
 import shaders.ColorSwap;
 
 import states.StoryMenuState;
@@ -206,15 +211,22 @@ class TitleState extends MusicBeatState
 		add(bg);
 
 		var shit:FlxSprite = new FlxSprite(Paths.image('menuDesat'));
+		shit.color = 0x0415FF;
 		add(shit);
 
 		var pepito:FlxSprite = new FlxSprite(Paths.image('title/pepito'));
 		add(pepito);
 
-		logoBl = new FlxSprite(titleJSON.titlex, titleJSON.titley);
+        var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0xFF3F00EC, FlxColor.TRANSPARENT));
+		grid.velocity.set(40, 40);
+        grid.alpha = 0.5;
+		add(grid); // robado para ahorrar tiempo xDxDxDxd
+
+		logoBl = new FlxSprite(250, 50);
 		logoBl.frames = Paths.getSparrowAtlas('title/logoBumpin');
 		logoBl.antialiasing = ClientPrefs.data.antialiasing;
-		logoBl.screenCenter();
+		//logoBl.screenCenter();
+		logoBl.setGraphicSize(Std.int(logoBl.height * 0.8));
 
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 		logoBl.animation.play('bump');
@@ -222,12 +234,24 @@ class TitleState extends MusicBeatState
 		// logoBl.screenCenter();
 		// logoBl.color = FlxColor.BLACK;
 
+		var barras:FlxSprite = new FlxSprite(Paths.image('title/lineas'));
+		barras.screenCenter();
+		add(barras);
+
 		if(ClientPrefs.data.shaders) swagShader = new ColorSwap();
 		gfDance = new FlxSprite(titleJSON.gfx, titleJSON.gfy);
 		gfDance.antialiasing = ClientPrefs.data.antialiasing;
+		gfDance.visible = false;
 
 		var easterEgg:String = FlxG.save.data.psychDevsEasterEgg;
 		if(easterEgg == null) easterEgg = ''; //html5 fix
+
+		if(FlxG.random.bool(50)){
+			logoBl.frames = Paths.getSparrowAtlas('title/logoBumpin2');
+			logoBl.x = 265;
+			logoBl.y = 100;
+			logoBl.animation.play('bump');
+		}
 
 		switch(easterEgg.toUpperCase())
 		{
