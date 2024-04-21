@@ -1245,7 +1245,7 @@ class PlayState extends MusicBeatState
 		}
 
 		var tempScore:String = '';
-		if (curStage == 'PepeHouse') {
+		if (curStage == 'PepeHouse' || curStage == 'Dross') {
 			tempScore = '
 			Score: ${songScore}' + (!instakillOnMiss ? '
 			Misses: ${songMisses}' : "") + '
@@ -1633,7 +1633,7 @@ class PlayState extends MusicBeatState
 			var targetAlpha:Float = 1;
 			if (player < 1)
 			{
-				if(!ClientPrefs.data.opponentStrums || curStage == 'PepeHouse') targetAlpha = 0;
+				if(!ClientPrefs.data.opponentStrums || curStage == 'PepeHouse' || curStage == 'Dross') targetAlpha = 0;
 				else if(ClientPrefs.data.middleScroll) targetAlpha = 0.35;
 			}
 
@@ -2014,7 +2014,7 @@ class PlayState extends MusicBeatState
 		}
 
 		var iconOffset:Int = 26;
-		if (curStage == "PepeHouse") 
+		if (curStage == "PepeHouse" || curStage == 'Dross') 
 			iconP1.x = iconP1.x;
 		else {
 			iconP1.x = healthBar.barCenter + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
