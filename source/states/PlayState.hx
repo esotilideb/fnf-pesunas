@@ -417,6 +417,7 @@ class PlayState extends MusicBeatState
 		switch (curStage)
 		{
 			case 'PepeHouse': new states.stages.PepeHouse(); //WEEK 1
+			case 'PepeHouse2': new states.stages.PepeHouse();
 			case 'EteSech': new states.stages.EteSech(); //HORROR-PEPE.MIEDO
 			case 'goat': new states.stages.Dross(); //adivina
 			case 'Apoco': new states.stages.Apoco(); //tops
@@ -2594,7 +2595,6 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-
 	public var transitioning = false;
 	var ogMid:Bool = false;
 	public function endSong()
@@ -2643,10 +2643,22 @@ class PlayState extends MusicBeatState
 		FlxG.save.data.songBool = bools;
 		FlxG.save.flush();
 
+		var playedAllSongs:Bool = true;
+        for (i in 0...4)
+        {
+            if (!FlxG.save.data.songBool[i][1])
+                playedAllSongs = false;
+        }
+
 		bgColor = 0xFF000000;
 
 		deathCounter = 0;
 		seenCutscene = false;
+
+		if (playedAllSongs && !FlxG.save.data.endMessageShowed) {
+			MusicBeatState.switchState(new CardState());
+			return true;
+		}
 
 		#if ACHIEVEMENTS_ALLOWED
 		var weekNoMiss:String = WeekData.getWeekFileName() + '_nomiss';

@@ -110,9 +110,10 @@ class PepeHouse extends BaseStage
 			normalBG.add(puas3);
 		}
 
-		if (backend.BaseStage.exe == "but.exe/")
+		if (backend.BaseStage.exe == "but.exe/") {
 			realGF = new Character(750, 440, 'gfDark');
-		else
+			realGF.visible = false;
+		} else
 			realGF = new Character(750, 440, 'gf');
 
 		add(realGF);

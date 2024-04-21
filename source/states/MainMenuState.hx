@@ -16,13 +16,9 @@ class MainMenuState extends MusicBeatState
 	var magosexual:Array<String> = [
 		'magicfunkin'
 	];
-	var horrorpepe:Array<String> = [
-		'horror'
-	];
 
 	var allowedKeys:String = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	var magosexualBuffer:String = '';
-	var horrorPepeB:String = '';
 	
 	public static var psychEngineVersion:String = '0.7.2h'; // This is also used for Discord RPC
 	public static var curSelected:Int = 0;
@@ -54,6 +50,8 @@ class MainMenuState extends MusicBeatState
 		Mods.pushGlobalMods();
 		#end
 		Mods.loadTopMod();
+
+		if (FlxG.save.data.endMessageShowed == null) FlxG.save.data.endMessageShowed = false;
 
 		if (FlxG.save.data.songBool == null)
 		{
@@ -102,9 +100,10 @@ class MainMenuState extends MusicBeatState
 		cat.antialiasing = false;
 
 		discord = new FlxSprite(710, -265).loadGraphic(Paths.image('discord'));
-		discord.scale.x = 0.3;
-		discord.scale.y = 0.3;
-		discord.scrollFactor.set(0);
+		discord.scale.set(0.3, 0.3);
+		discord.updateHitbox();
+		discord.setPosition(FlxG.width - discord.width - 50, 50);
+		discord.scrollFactor.set();
 		add(discord);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
@@ -206,17 +205,17 @@ class MainMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		if (FlxG.mouse.justPressed && FlxG.mouse.overlaps(discord))
+		if (FlxG.mouse.overlaps(discord)) {
+			discord.scale.set(0.25, 0.25);
+			discord.alpha = 0.5;
+			if (FlxG.mouse.justPressed)
 			{
-				discord.scale.x = 0.40;
-				discord.scale.y = 0.40;
 				CoolUtil.browserLoad('https://discord.gg/4c6hKFAc3V');
 			}
-			else if (FlxG.mouse.justReleased)
-			{
-				discord.scale.x = 0.3;
-				discord.scale.y = 0.3;
-			}
+		} else {
+			discord.scale.set(0.3, 0.3);
+			discord.alpha = 1;
+		}
 
 		if (FlxG.keys.firstJustPressed() != FlxKey.NONE)
 		{
@@ -236,26 +235,6 @@ class MainMenuState extends MusicBeatState
 				}
 			}
 		}
-
-		if (FlxG.keys.firstJustPressed() != FlxKey.NONE)
-			{
-				var keyPressed:FlxKey = FlxG.keys.firstJustPressed();
-				var keyName:String = Std.string(keyPressed);
-				if(allowedKeys.contains(keyName)) {
-					horrorPepeB += keyName;
-					if(horrorPepeB.length >= 32) horrorPepeB = horrorPepeB.substring(1);
-	
-					for (wordRaw in horrorpepe)
-					{
-						var word:String = wordRaw.toUpperCase();
-						if (horrorPepeB.contains(word))
-						{
-							LoadingState.loadAndSwitchState(new PlayState());
-							PlayState.SONG = Song.loadFromJson("horror-pepe", "horror-pepe");
-						}
-					}
-				}
-			}
 		
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;

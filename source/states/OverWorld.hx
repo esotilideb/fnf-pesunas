@@ -195,7 +195,7 @@ class OverWorld extends MusicBeatState
 	//ola
 
 	
-	var black:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+	/*var black:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 	black.alpha = 0.5;
 	add(black);
 
@@ -225,7 +225,7 @@ class OverWorld extends MusicBeatState
 	FlxG.mouse.visible = true;
 
 	drossMailO.visible = false;
-	drossMailP.visible = false;
+	drossMailP.visible = false;*/
 
 	FlxG.camera.y = 200;
 	FlxG.camera.x = -200;
@@ -260,36 +260,6 @@ class OverWorld extends MusicBeatState
 		//FlxG.camera.follow(player);
 
 	//	trace(velocidadVal);
-
-   trace(clickCounter);
-
-   if(clickCounter == 2){
-	drossMailO.visible = false;
-	drossMail.visible = false;
-	drossMailP.visible = false;
-	FlxG.sound.play(Paths.sound('Listo'));
-	MusicBeatState.switchState(new OverworldDross());
-   }
-
-	if(FlxG.mouse.justPressed && FlxG.mouse.overlaps(drossMail)){
-			
-		drossMailO.animation.play('open');
-		drossMailO.visible = true;
-		drossMail.visible = false;
-		clickCounter++;
-		FlxTween.tween(FlxG.camera, {zoom: 1.25}, 1.2, {ease:FlxEase.quadInOut});
-			new FlxTimer().start(1.5, function(deadTime:FlxTimer)
-				{
-		FlxG.camera.flash(FlxColor.WHITE, 1);
-		drossMailP.animation.play('showingT');
-		drossMailO.visible = false;
-		drossMailP.visible = true;
-		drossMail.visible = false;
-		FlxG.sound.play(Paths.sound('aparicion_makiabelika'));
-		FlxTween.tween(FlxG.camera, {zoom: 1}, 1.5, {ease:FlxEase.quadInOut});
-				});
-			
-	}
 	
 	}
 
@@ -356,37 +326,4 @@ class OverWorld extends MusicBeatState
 }
 /*
 CUIDADO
-
-CULO JUMPCARE!!!!!!
-
-⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠘⠹⣶⣿⠷⢃⡆⠻⢈⣿⣿
-⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⢉⣴⣿⣷⢱⢠⡘⣿⣿
-⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣀⣴⣿⠿⣫⣾⢈⣸⣷⠹⣿
-⠄⠄⠄⠄⠄⠄⠄⠄⠄⣀⣤⣶⣾⣿⣿⣿⣷⣶⣶⣬⡩⣵⣿⣿⣿⡘⢹⣿⢠⣄
-⠄⠄⠄⠄⠄⠄⠄⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣮⢻⣿⣿⣞⡄⢿⣜⣿
-⠄⠄⠄⠄⠄⢀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣇⣿⣿⣋⠄⠙⠉⠛
-⠄⠄⠄⠄⢀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢸⣷⠇⠄⠄⠄⠄
-⠄⠄⠄⠄⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠄⣿⡄⠄⠄⠄⠄
-⡀⠄⠄⢠⣿⣿⣿⡿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠄⠄⠘⠇⠄⠄⠄⠄
-⣶⣾⣿⣷⡹⣿⣿⣿⣎⢿⣿⣿⣿⣿⣿⣿⣿⡿⠿⣛⣵⣿⣷⣶⣤⡀⠄⠄⠄⠄
-⣿⣿⣿⣿⣿⣮⣿⡿⠿⣛⣢⢩⣭⣭⣭⣭⣶⣿⣿⣿⣿⣿⣿⣿⣿⣷⠄⠄⠄⠄
-⣿⣿⣿⠿⣫⣾⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠄⠄⠄⠄
-⠿⢟⣭⣾⣿⣿⣿⣿⣿⣿⣿⣮⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠄⠄⠄⠄
-⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢛⣁⣀⣀⣀⣀⣀
-
-⣿⣿⣿⣿⣿⣿⡿⠿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⣿⣿⣿DENGER⡄⢽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⣿⠟⢰⣾⢛⣃⣾⣿⣿⣿⣿⠟⠋⠙⠛⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⠡⣶⡾⢿⡄⠻⣿⣿⣿⣿⡟HAXEFLIXEL⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⠄⢸⣇⢸⡇⠱⣌⣛⣛⡛⣉⣤⣤⡤⠤⠭⠭⠉⠻⠿⠿⠿⢿⣿⣿⣿
-⣿⣿⣿⣿⡆⡄⢻⡀⠳⣷⣶⣷⠂⣰⣿⣿⡀⣶⠄⠄⠄⠄⠄⠄⠄⠄⠄⢸⣿⣿
-⣿⣿⣿⡿⣡⣿⣦⣌⠢⡙⠋⠄⢺⡿⠿⣩⣴⣿⠠⣤⣤⣤⣤⣤⣤⣤⣤⢀⣿⣿
-⣿⣿⣿⡇⢿⣿⣿⡏⢠⣄⣙⠂⢈⣴⣾⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿
-⣿⣿⣿⣿⣦⠻⣿⣷⠈⢿⣿⡐⣿⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿
-⣿⣿⣿⣿⣿⣆⠹⣿⡇⠈⢻⣧⢻⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿
-⣿⣿⣿⣿⣿⠟⣠⡿⢁⣾⠄⣿⢸⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿
-⣿⣿⣿⣿⡏⢸⡿⢁⣾⣿⣶⡇⣿⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿
-⣿⣿⣿⣿⡇⡾⠄⠬⠍⡙⠄⠑⠿⠿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿
-⣿⣿⣿⣿⡐⠧⣜⡻⢿⣏⡘⠂⠄⠐⣿⣿⣿⣿⠸⢛⣛⣛⣛⣛⣛⣛⠻⢸⣿⣿
-⣿⣿⣿⣿⣿⣷⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣾⣿⣿⣿⣿⣿⣿⣷⣾⣿
 */

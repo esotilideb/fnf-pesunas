@@ -108,6 +108,7 @@ class CreditsState extends MusicBeatState
 			["HIGO", "higo", "Artista", "Pepe te amo, acabas de perder tu hígado", 0xFFFFFFFF],
 
 			["Glob", "glob", "Músico", "Pepe soy tu fan!", 0xFF3498DB],
+			["MAJAVI", "maj", "Músico y Artista", "Pepito hubiera echo mas songs pero sella se las carreó todas", 0xFFB5B4B4],
 
 			["Luk9as", "yo", 'Coder', "Pene", 0xFFFF3931],
 			["Denger", "denger", "Coder", "Pepe yo te veo desde que tengo 5 AÑOS, eres una deidad :sob:\nPD: Shotouts a Ristar por la imagen", 0xFF87C0EF],
