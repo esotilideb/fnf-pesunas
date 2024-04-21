@@ -35,7 +35,7 @@ class OverworldDross extends FlxState
 		bg.updateHitbox();
 		add(bg);
 
-        player = new Player(736, 1208);
+        player = new Player(109, 550);
         player.animation.play("up", false);
 		add(player);
 
@@ -44,7 +44,7 @@ class OverworldDross extends FlxState
 		walls.follow();
 		walls.setTileProperties(1, NONE);
 		walls.setTileProperties(2, ANY);
-		walls.visible = false;
+		walls.visible = true;
 		add(walls);
 
 		invisible = new FlxSprite(720, 690).loadGraphic(Paths.image("overWorld/checkpoint"));
@@ -55,7 +55,7 @@ class OverworldDross extends FlxState
 
 		var coso1:FlxSprite = new FlxSprite(48, 93).loadGraphic(Paths.image("overWorld/Dross_Tree"));
 		coso1.antialiasing = false;
-		add(invisible);
+		add(coso1);
 
 		var coso2:FlxSprite = new FlxSprite(126, 93).loadGraphic(Paths.image("overWorld/Dross_Tree"));
 		coso2.antialiasing = false;
@@ -71,10 +71,10 @@ class OverworldDross extends FlxState
 
 		super.create();
 
-		FlxG.camera.follow(player, TOPDOWN, 1);
+		FlxG.camera.follow(player, LOCKON, 1);
 
 		FlxG.camera.scroll.x = -250;
-		FlxG.camera.scroll.y = -400;
+		FlxG.camera.scroll.y = -590;
 
 		FlxG.camera.x = -75;
 	//FlxG.camera.y = -400;
