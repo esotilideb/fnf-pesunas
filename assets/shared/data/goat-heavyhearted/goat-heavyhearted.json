@@ -11175,13 +11175,14 @@
 					[
 						219076.923076923,
 						1,
-						1771
+						1771,
+						"Alt Animation"
 					]
 				],
 				"typeOfSection": 0,
 				"gfSection": false,
 				"altAnim": false,
-				"mustHitSection": true,
+				"mustHitSection": false,
 				"changeBPM": false,
 				"bpm": 195
 			},
@@ -11191,63 +11192,74 @@
 					[
 						221692.307692307,
 						1,
-						0
+						0,
+						"Alt Animation"
 					],
 					[
 						222000,
 						2,
-						0
+						0,
+						"Alt Animation"
 					],
 					[
 						222076.923076923,
 						0,
-						770
+						770,
+						"Alt Animation"
 					],
 					[
 						222923.076923077,
 						1,
-						0
+						0,
+						"Alt Animation"
 					],
 					[
 						221769.230769231,
 						3,
-						77
+						77,
+						"Alt Animation"
 					],
 					[
 						221230.769230769,
 						3,
-						0
+						0,
+						"Alt Animation"
 					],
 					[
 						221307.692307692,
 						0,
-						0
+						0,
+						"Alt Animation"
 					],
 					[
 						221384.615384615,
 						1,
-						0
+						0,
+						"Alt Animation"
 					],
 					[
 						221461.538461538,
 						0,
-						0
+						0,
+						"Alt Animation"
 					],
 					[
 						220923.076923077,
 						2,
-						231
+						231,
+						"Alt Animation"
 					],
 					[
 						221538.461538461,
 						2,
-						0
+						0,
+						"Alt Animation"
 					]
 				],
 				"typeOfSection": 0,
 				"gfSection": false,
 				"altAnim": false,
-				"mustHitSection": true,
+				"mustHitSection": false,
 				"changeBPM": false,
 				"bpm": 195
 			},
@@ -11257,43 +11269,50 @@
 					[
 						223076.923076923,
 						3,
-						0
+						0,
+						"Alt Animation"
 					],
 					[
 						223230.769230769,
 						2,
-						0
+						0,
+						"Alt Animation"
 					],
 					[
 						223384.615384615,
 						3,
-						78
+						78,
+						"Alt Animation"
 					],
 					[
 						223692.307692307,
 						3,
-						77
+						77,
+						"Alt Animation"
 					],
 					[
 						224000,
 						1,
-						0
+						0,
+						"Alt Animation"
 					],
 					[
 						224153.846153846,
 						0,
-						0
+						0,
+						"Alt Animation"
 					],
 					[
 						224230.769230769,
 						2,
-						0
+						0,
+						"Alt Animation"
 					]
 				],
 				"typeOfSection": 0,
 				"gfSection": false,
 				"altAnim": false,
-				"mustHitSection": true,
+				"mustHitSection": false,
 				"changeBPM": false,
 				"bpm": 195
 			},
@@ -11303,33 +11322,38 @@
 					[
 						224461.538461538,
 						1,
-						77
+						77,
+						"Alt Animation"
 					],
 					[
 						224615.384615384,
 						3,
-						77
+						77,
+						"Alt Animation"
 					],
 					[
 						224769.230769231,
 						0,
-						231
+						231,
+						"Alt Animation"
 					],
 					[
 						225076.923076923,
 						2,
-						0
+						0,
+						"Alt Animation"
 					],
 					[
 						225384.615384615,
 						1,
-						77
+						77,
+						"Alt Animation"
 					]
 				],
 				"typeOfSection": 0,
 				"gfSection": false,
 				"altAnim": false,
-				"mustHitSection": true,
+				"mustHitSection": false,
 				"changeBPM": false,
 				"bpm": 195
 			},
@@ -11339,28 +11363,32 @@
 					[
 						225692.307692307,
 						3,
-						231
+						231,
+						"Alt Animation"
 					],
 					[
 						226000,
 						2,
-						231
+						231,
+						"Alt Animation"
 					],
 					[
 						226307.692307692,
 						0,
-						231
+						231,
+						"Alt Animation"
 					],
 					[
 						226615.384615384,
 						1,
-						0
+						0,
+						"Alt Animation"
 					]
 				],
 				"typeOfSection": 0,
 				"gfSection": false,
 				"altAnim": false,
-				"mustHitSection": true,
+				"mustHitSection": false,
 				"changeBPM": false,
 				"bpm": 195
 			},
@@ -11370,23 +11398,26 @@
 					[
 						226923.076923077,
 						1,
-						693
+						693,
+						"Alt Animation"
 					],
 					[
 						227692.307692307,
 						2,
-						0
+						0,
+						"Alt Animation"
 					],
 					[
 						227846.153846154,
 						3,
-						0
+						0,
+						"Alt Animation"
 					]
 				],
 				"typeOfSection": 0,
 				"gfSection": false,
 				"altAnim": false,
-				"mustHitSection": true,
+				"mustHitSection": false,
 				"changeBPM": false,
 				"bpm": 195
 			},
@@ -11396,18 +11427,20 @@
 					[
 						228000,
 						0,
-						0
+						0,
+						"Alt Animation"
 					],
 					[
 						228153.846153846,
 						1,
-						77
+						77,
+						"Alt Animation"
 					]
 				],
 				"typeOfSection": 0,
 				"gfSection": false,
 				"altAnim": false,
-				"mustHitSection": true,
+				"mustHitSection": false,
 				"changeBPM": false,
 				"bpm": 195
 			},
