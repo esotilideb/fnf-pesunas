@@ -252,14 +252,19 @@ class OverWorld extends MusicBeatState
 
 				PlayState.storyPlaylist = ['Lunar-magic', 'Dark-magic'];
 				
+				Difficulty.list = ['Easy', 'Normal', 'Hard'];
 				PlayState.SONG = Song.loadFromJson(StringTools.replace(PlayState.storyPlaylist[0]," ", "-").toLowerCase(), StringTools.replace(PlayState.storyPlaylist[0]," ", "-").toLowerCase());  
 				PlayState.campaignScore = 0;
 				PlayState.isStoryMode = true;
-				PlayState.storyDifficulty = 2;
+				PlayState.storyDifficulty = 1;
 				PauseSubState.isOverworld = true;
 				LoadingState.loadAndSwitchState(new PlayState());
 				Lib.application.window.title = "Magic Funkin";
 			}
+		}
+		if (FlxG.keys.justPressed.D) {
+			MusicBeatState.switchState(new OverworldDross());
+			Lib.application.window.title = "Magic Funkin";
 		}
 		if (FlxG.keys.justPressed.ESCAPE) {
 			MusicBeatState.switchState(new MainMenuState());
