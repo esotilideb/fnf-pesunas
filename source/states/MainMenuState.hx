@@ -22,7 +22,7 @@ class MainMenuState extends MusicBeatState
 		'horror'
 	];
 	var castigo:Array<String> = [
-		'castigo'
+		'caztigo'
 	];
 	var castigoBuffer:String = '';
 	var allowedKeys:String = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';

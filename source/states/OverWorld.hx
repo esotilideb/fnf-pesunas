@@ -230,7 +230,7 @@ class OverWorld extends MusicBeatState
 
 	drossMailO.visible = false;
 	drossMailP.visible = false;*/
-
+		
 
 		super.create();
 	}
@@ -242,9 +242,6 @@ class OverWorld extends MusicBeatState
 
 	//	trace("x es" +FlxG.mouse.x);
 	//	trace("y es" + FlxG.mouse.y);
-	//FlxG.camera.y = 350;
-//	FlxG.camera.x = -300;
-	//FlxG.camera.zoom = 2.5;
 	
 
 		if(FlxG.overlap(player, casaPepeC)){

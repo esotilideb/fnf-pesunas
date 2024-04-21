@@ -96,6 +96,7 @@ class CreditsState extends MusicBeatState
 
 			["StormyMat", "stormy", "Co-Director", "Pepe te doné 10 pesos, te quiero mucho", 0xFF19D103],
 			["JustMaskiu", "maskiu", "Co-Director", "tiamo pepe", 0xFFC02A],
+			["Denger", "denger", "Co-Director y Coder", "Pepe yo te veo desde que tengo 5 AÑOS, eres una deidad :sob:\nPD: Shotouts a Ristar por la imagen", 0xFF87C0EF],
 
 			["AlexSucks8K", "alex", "Artista", "Pepe, los foursucks te queremos mucho", 0xFFB7104D],
 			["Bleen", "bleen", "Artista", "hoal pepe soy tu fan", 0xFF0066CC],
@@ -112,9 +113,8 @@ class CreditsState extends MusicBeatState
 			["MAJAVI", "maj", "Músico y Artista", "Pepito hubiera echo mas songs pero sella se las carreó todas", 0xFFB5B4B4],
 
 			["Luk9as", "yo", 'Coder', "Pene", 0xFFFF3931],
-			["Denger", "denger", "Coder", "Pepe yo te veo desde que tengo 5 AÑOS, eres una deidad :sob:\nPD: Shotouts a Ristar por la imagen", 0xFF87C0EF],
-			["_Tinny_", "tinny", 'Coder', "hola pepe pon castigado en el menu para una sorpresita jiji (y juega vs cartoon cat v2 cuando salga pls pls pls psl pls :pray:", 0xFF52FF6E],
-			["Cabox", "cabox", 'Coder', "ola pepe le mandas un saludo a mi amigo meloXD", 0xFFC0C0C0],
+			["_Tinny_", "tinny", 'Coder', "hola pepe", 0xFF52FF6E],
+			["Cabox", "cabox", 'Coder', "ola pepe te mando un saludo", 0xFFE3E3E3],
 
 			["GameeWorld", "game", "Coder", "Pepe mi idolo", 0xFFFF8000],
 
