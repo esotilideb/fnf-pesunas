@@ -26,6 +26,9 @@ import openfl.utils.Assets as OpenFlAssets;
 import openfl.events.KeyboardEvent;
 import haxe.Json;
 
+import flixel.effects.particles.FlxEmitter;
+import flixel.effects.particles.FlxParticle;
+
 import cutscenes.CutsceneHandler;
 import cutscenes.DialogueBoxPsych;
 
@@ -750,6 +753,37 @@ class PlayState extends MusicBeatState
 		discName = PlayState.SONG.song.replace(' ', '');
 
 		tiempoShader = 0.0;
+
+	
+if(curSong == 'Dark Magic'){
+	
+	var emitidor = new FlxEmitter(200, 100);
+
+	for(i in 0...800){
+		var pt = new FlxParticle();
+		emitidor.x = 500;
+		emitidor.y = 900;
+		pt.x = 500;
+		pt.y = 900;
+		pt.loadGraphic(Paths.image('particula'));
+
+	//	emitidor.scale.set(0.5, 1, 2, 2.5);
+		//pt.exists = false;
+		emitidor.add(pt);
+		//pt.makeParticles(2, 2, FlxColor.BLACK, 120);
+	//	pt.speed.set(200, 100);
+	
+	emitidor.velocity.set(0, 0, 0, -200);
+	pt.velocity.set(0, -200);
+	emitidor.lifespan.set(0);
+	}
+	add(dad);
+	add(emitidor);
+
+	//emitidor.setXSpeed(-20, 20);
+//	emitidor.setYSpeed(-100, -200);
+	emitidor.start(false, 1, 800);
+}
 
 		super.create();
 		Paths.clearUnusedMemory();
@@ -1806,6 +1840,8 @@ class PlayState extends MusicBeatState
 
 		tiempoShader += elapsed;
 	//	chroma.update(tiempoShader);
+
+
 
 		super.update(elapsed);
 
