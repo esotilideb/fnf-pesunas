@@ -12,6 +12,7 @@ import flixel.FlxObject;
 import sys.io.File;
 import flixel.util.FlxColor;
 import openfl.Assets;
+import openfl.Lib;
 import haxe.Json;
 import backend.Paths;
 import backend.Song;
@@ -80,7 +81,7 @@ class OverworldDross extends FlxState
 	//FlxG.camera.y = -400;
 		//FlxG.camera.zoom = -2;
 
-		
+		FlxG.sound.music.fadeIn(0.1, 0, 0);
 
 	}
 	override public function update(elapsed:Float):Void
@@ -89,6 +90,12 @@ class OverworldDross extends FlxState
         FlxG.collide(player, walls);
 		//FlxG.camera.updateFramerate();
 		
+		if (FlxG.keys.justPressed.ESCAPE) {
+            MusicBeatState.switchState(new MainMenuState());
+            Lib.application.window.title = "Magic Funkin";
+            FlxG.sound.playMusic(Paths.music("freakyMenu"));
+        }
+
 		if(FlxG.overlap(player, invisible)){
 			if (FlxG.keys.justPressed.Z) {
 				LoadingState.loadAndSwitchState(new PlayState());
