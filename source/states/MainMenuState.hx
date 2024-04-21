@@ -58,6 +58,7 @@ class MainMenuState extends MusicBeatState
 		Mods.loadTopMod();
 
 		bgColor = 0xFF000000;
+		Conductor.bpm = 121;
 
 		if (FlxG.save.data.endMessageShowed == null) FlxG.save.data.endMessageShowed = false;
 
