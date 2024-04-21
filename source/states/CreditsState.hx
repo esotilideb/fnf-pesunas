@@ -58,9 +58,9 @@ class CreditsState extends MusicBeatState
 		bg.screenCenter();
         add(bg);
 
-        grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0xFF002FFF, FlxColor.TRANSPARENT));
+        grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0xFF969696, FlxColor.TRANSPARENT));
 		grid.velocity.set(40, 40);
-        grid.alpha = 0.5;
+        //grid.alpha = 0.5;
 		add(grid);
 		
 		var tv = new FlxSprite().loadGraphic(Paths.image("creditAssets/tv", "shared"));
@@ -81,9 +81,9 @@ class CreditsState extends MusicBeatState
 		add(iconGrp);
 
 		var pisspoop:Array<Array<Dynamic>> = [ //Name - Icon name - Trabajo - Frase - BG Color
-			["AngieGB", "angie", "Director, Animador y Artista", "Vas a caer pixel art", 0xFF9be330],
 			["TelmexCedric", "cedric", "Director, Artista y Charter", "Un mod de fans y para fans de pepe!", 0xFFFF5733],
 			["END_SELLA", "sella", "Director y Músico", "Yo soy... El mijail", 0xFF34EBD8],
+			["AngieGB", "angie", "Director, Animador y Artista", "Vas a caer pixel art", 0xFF9be330],
 
 			["StormyMat", "stormy", "Co-Director", "Pepe te doné 10 pesos, te quiero mucho", 0xFF19D103],
 			["JustMaskiu", "maskiu", "Co-Director", "tiamo pepe", 0xFFC02A],
@@ -109,7 +109,7 @@ class CreditsState extends MusicBeatState
 
 			["Smokind", "smok", "Animador", "Había una vez un niño ardido, fin.", 0xFF5B2574],
 			["Ethan", "ethan", "Animador", "Hola papá", 0xFF282B41],
-			["CrashBNashe", "crash", "Un saludo a pepe, idolo!", 0xFFD4D4D4],
+			["CrashBNashe", "crash", "Animador", "Un saludo a pepe, idolo!", 0xFFD4D4D4],
 			["yolotzy0307", "yolo", "Animador y Coder", "Pepe eres mi infancia", 0xFFFBE6F5],
 			["Dalky", "dalky", "Animador", "Ourpleguyhola", 0xFFFF8F00],
 
@@ -133,9 +133,7 @@ class CreditsState extends MusicBeatState
 			var icon:FlxSprite = new FlxSprite().loadGraphic(Paths.image("papuIcons/" + creditsStuff[i][1], "shared"));
 			var scale:Float = 0;
 
-			if (icon.width > icon.height) scale = 200 / icon.width;
-			else if (icon.height > icon.width) scale = 200 / icon.height;
-			else if (icon.height == icon.width) scale = 1;
+			scale = 150 / icon.width;
 
 			icon.scale.set(scale, scale);
 			icon.updateHitbox();

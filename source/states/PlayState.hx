@@ -2643,6 +2643,8 @@ class PlayState extends MusicBeatState
 		FlxG.save.data.songBool = bools;
 		FlxG.save.flush();
 
+		bgColor = 0xFF000000;
+
 		deathCounter = 0;
 		seenCutscene = false;
 
@@ -3256,8 +3258,12 @@ class PlayState extends MusicBeatState
 				char = gf; 
 				meloXDsegundo = gf;
 				iconP2.changeIcon(gf.healthIcon);
-				if (curStage == 'PepeHouse')
+				if (curStage == 'PepeHouse') {
 					iconP1.changeIcon(gf.healthIcon);
+				}
+				reloadHealthBarColors();
+			} else {
+
 			}
 
 			if(char != null)
@@ -3330,6 +3336,7 @@ class PlayState extends MusicBeatState
 			{
 				char = gf;
 				iconP1.changeIcon(gf.healthIcon);
+				reloadHealthBarColors();
 				animCheck = 'cheer';
 			}
 
@@ -3339,6 +3346,7 @@ class PlayState extends MusicBeatState
 			iconP1.updateHitbox();
 
 			iconP1.changeIcon(boyfriend.healthIcon);
+			reloadHealthBarColors();
 		}
 
 			if(char != null)
