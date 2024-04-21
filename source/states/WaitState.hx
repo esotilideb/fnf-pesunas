@@ -2,7 +2,7 @@ package states;
 
 import flixel.FlxSprite;
 import flixel.text.FlxText;
-import backend.AntiLeak;
+//import backend.AntiLeak;
 import backend.DiscordBot;
 import com.raidandfade.haxicord.types.Message;
 
@@ -27,8 +27,8 @@ class WaitState extends MusicBeatState
 
         if (timer <= 0)
         {
-            if (AntiLeak.check()) MusicBeatState.switchState(new TitleState());
-            else timer = 1.25;
+            //if (AntiLeak.check()) MusicBeatState.switchState(new TitleState());
+            //else timer = 1.25;
         } else timer -= elapsed;
     }
 }

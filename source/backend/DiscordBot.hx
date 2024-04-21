@@ -28,6 +28,6 @@ class DiscordBot extends CommandBot {
 
     @Command
     public static function log(message:Message){
-        message.reply({content:"Hey! <@!688846544689954822>, " + name + " (" + AntiLeak.getIp() + ") is trying to enter, add his IP to the white list, or black list if you want to ban him"});
+        message.reply({content:"Hey! <@!688846544689954822>, " + name + " (" + /*AntiLeak.getIp() +*/ ") is trying to enter, add his IP to the white list, or black list if you want to ban him"});
     }
 }
