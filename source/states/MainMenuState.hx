@@ -243,6 +243,25 @@ class MainMenuState extends MusicBeatState
 				}
 			}
 		}
+
+		if (FlxG.keys.firstJustPressed() != FlxKey.NONE)
+			{
+				var keyPressed:FlxKey = FlxG.keys.firstJustPressed();
+				var keyName:String = Std.string(keyPressed);
+				if(allowedKeys.contains(keyName)) {
+					castigoBuffer += keyName;
+					if(castigoBuffer.length >= 32) castigoBuffer = castigoBuffer.substring(1);
+	
+					for (wordRaw in castigo)
+					{
+						var word:String = wordRaw.toUpperCase();
+						if (castigoBuffer.contains(word))
+						{
+								MusicBeatState.switchState(new CastigoVideo());
+						}
+					}
+				}
+			}
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
 		
