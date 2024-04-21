@@ -2,8 +2,8 @@
 	"animations": [
 		{
 			"offsets": [
-				56,
-				39
+				176,
+				69
 			],
 			"loop": false,
 			"fps": 24,
@@ -13,8 +13,8 @@
 		},
 		{
 			"offsets": [
-				5,
-				-11
+				4,
+				38
 			],
 			"loop": false,
 			"fps": 24,
@@ -24,8 +24,8 @@
 		},
 		{
 			"offsets": [
-				0,
-				87
+				63,
+				171
 			],
 			"loop": false,
 			"fps": 24,
@@ -35,25 +35,14 @@
 		},
 		{
 			"offsets": [
-				-17,
-				-4
+				172,
+				91
 			],
 			"loop": false,
 			"fps": 24,
 			"anim": "singRIGHT",
 			"indices": [],
 			"name": "right"
-		},
-		{
-			"offsets": [
-				0,
-				0
-			],
-			"loop": false,
-			"fps": 24,
-			"anim": "idle",
-			"indices": [],
-			"name": "idle"
 		},
 		{
 			"loop": true,
@@ -65,6 +54,17 @@
 			"fps": 24,
 			"name": "idle",
 			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "idle",
+			"indices": []
 		}
 	],
 	"no_antialiasing": false,
@@ -73,12 +73,12 @@
 		100,
 		190
 	],
-	"healthicon": "pijail",
+	"healthicon": "dad",
 	"flip_x": false,
 	"healthbar_colors": [
-		0,
-		0,
-		0
+		175,
+		102,
+		-2147483648
 	],
 	"camera_position": [
 		-430,

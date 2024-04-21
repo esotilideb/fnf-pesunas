@@ -274,13 +274,13 @@ class MainMenuState extends MusicBeatState
 					var keyPressed:FlxKey = FlxG.keys.firstJustPressed();
 					var keyName:String = Std.string(keyPressed);
 					if(allowedKeys.contains(keyName)) {
-						magosexualBuffer += keyName;
-						if(magosexualBuffer.length >= 32) magosexualBuffer = magosexualBuffer.substring(1);
+						castigoBuffer += keyName;
+						if(castigoBuffer.length >= 32) castigoBuffer = castigoBuffer.substring(1);
 		
 						for (wordRaw in castigo)
 						{
 							var word:String = wordRaw.toUpperCase();
-							if (magosexualBuffer.contains(word))
+							if (castigoBuffer.contains(word))
 							{
 									MusicBeatState.switchState(new CastigoVideo());
 							}
