@@ -12,7 +12,7 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
-
+import openfl.Lib;
 #if MODS_ALLOWED
 import sys.FileSystem;
 import sys.io.File;
@@ -51,6 +51,7 @@ class CreditsState extends MusicBeatState
 	{
 		persistentUpdate = true;
 
+		Lib.application.window.title = "Magic Funkin - Credits";
 
 		colorGuide = new FlxSprite().makeGraphic(1, 1, FlxColor.WHITE);
 		colorGuide.alpha = 0;
@@ -112,6 +113,7 @@ class CreditsState extends MusicBeatState
 
 			["Luk9as", "yo", 'Coder', "Pene", 0xFFFF3931],
 			["Denger", "denger", "Coder", "Pepe yo te veo desde que tengo 5 AÑOS, eres una deidad :sob:\nPD: Shotouts a Ristar por la imagen", 0xFF87C0EF],
+			["_Tinny_", "tinny", 'Coder', "hola pepe pon castigado en el menu para una sorpresita jiji (y juega vs cartoon cat v2 cuando salga es el mod en el q colaboro gorefield pls pls pls psl pls :pray:)", 0xFF52FF6E],
 			["Cabox", "cabox", 'Coder', "ola pepe te mando un saludo", 0xFFE3E3E3],
 
 			["GameeWorld", "game", "Coder", "Pepe mi idolo", 0xFFFF8000],
@@ -263,6 +265,7 @@ class CreditsState extends MusicBeatState
 			{
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				MusicBeatState.switchState(new MainMenuState());
+				Lib.application.window.title = "Magic Funkin";
 				quitting = true;
 			}
 		}

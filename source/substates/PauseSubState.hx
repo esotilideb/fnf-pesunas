@@ -12,6 +12,8 @@ import states.StoryMenuState;
 import states.FreeplayState;
 import options.OptionsState;
 
+import openfl.Lib;
+
 class PauseSubState extends MusicBeatSubstate
 {
 	var grpMenuShit:FlxTypedGroup<Alphabet>;
@@ -325,6 +327,8 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.changedDifficulty = false;
 					PlayState.chartingMode = false;
 					FlxG.camera.followLerp = 0;
+
+					Lib.application.window.title = "Magic Funkin";
 			}
 
 			if(isOverworld = true)

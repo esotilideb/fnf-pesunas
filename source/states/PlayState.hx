@@ -1414,6 +1414,8 @@ class PlayState extends MusicBeatState
 
 		curSong = songData.song;
 
+		Lib.application.window.title = "Magic Funkin - " + curSong;
+
 		vocals = new FlxSound();
 		try
 		{
@@ -1670,6 +1672,8 @@ class PlayState extends MusicBeatState
 		stagesFunc(function(stage:BaseStage) stage.openSubState(SubState));
 		if (paused)
 		{
+			Lib.application.window.title = "Magic Funkin - " + curSong + " - PAUSED";
+
 			if (FlxG.sound.music != null)
 			{
 				FlxG.sound.music.pause();
@@ -1699,6 +1703,8 @@ class PlayState extends MusicBeatState
 		stagesFunc(function(stage:BaseStage) stage.closeSubState());
 		if (paused)
 		{
+			if (health > 0)
+				Lib.application.window.title = "Magic Funkin - " + curSong;
 			if (FlxG.sound.music != null && !startingSong)
 			{
 				resyncVocals();
@@ -1833,6 +1839,7 @@ class PlayState extends MusicBeatState
 
 		if(!endingSong && !inCutscene && allowDebugKeys)
 		{
+			Lib.application.window.title = "Magic Funkin";
 			if (controls.justPressed('debug_1'))
 				openChartEditor();
 			else if (controls.justPressed('debug_2'))
@@ -2677,6 +2684,7 @@ class PlayState extends MusicBeatState
 
 			if (chartingMode)
 			{
+				Lib.application.window.title = "Magic Funkin";
 				openChartEditor();
 				return false;
 			}
@@ -2698,7 +2706,9 @@ class PlayState extends MusicBeatState
 					if(FlxTransitionableState.skipNextTransIn) {
 						CustomFadeTransition.nextCamera = null;
 					}
-					MusicBeatState.switchState(new StoryMenuState());
+					MusicBeatState.switchState(new OverWorld());
+
+					Lib.application.window.title = "Magic Funkin - Overworld";
 
 					// if ()
 					if(!ClientPrefs.getGameplaySetting('practice') && !ClientPrefs.getGameplaySetting('botplay')) {
@@ -2726,6 +2736,8 @@ class PlayState extends MusicBeatState
 
 					cancelMusicFadeTween();
 					LoadingState.loadAndSwitchState(new PlayState());
+
+					Lib.application.window.title = "Magic Funkin";
 				}
 			}
 			else
@@ -2741,6 +2753,8 @@ class PlayState extends MusicBeatState
 				MusicBeatState.switchState(new FreeplayState());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 				changedDifficulty = false;
+
+				Lib.application.window.title = "Magic Funkin - Freeplay";
 			}
 			transitioning = true;
 		}

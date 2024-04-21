@@ -3,6 +3,7 @@ package states;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import openfl.Lib;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
@@ -55,6 +56,8 @@ class OverWorld extends MusicBeatState
 
 	override public function create():Void
 	{
+		Lib.application.window.title = "Magic Funkin - Overworld";
+
 		playerJSON = tjson.TJSON.parse(Paths.getTextFromFile(Paths.player("overworld")));
 
 		mapData = converter(Paths.level("overworld", "overworld"));
@@ -247,6 +250,7 @@ class OverWorld extends MusicBeatState
 				LoadingState.loadAndSwitchState(new PlayState());
 				PlayState.SONG = Song.loadFromJson("Lunar-magic", "Lunar-magic");
 				PauseSubState.isOverworld = true;
+				Lib.application.window.title = "Magic Funkin";
 			}
 		}
 
@@ -255,6 +259,7 @@ class OverWorld extends MusicBeatState
 		}
 		if (FlxG.keys.justPressed.ESCAPE) {
 			MusicBeatState.switchState(new MainMenuState());
+			Lib.application.window.title = "Magic Funkin";
 			FlxG.sound.playMusic(Paths.music("freakyMenu"));
 		}
 		//FlxG.camera.follow(player);

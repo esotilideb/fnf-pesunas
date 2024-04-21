@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.FlxState;
 import flixel.util.FlxTimer;
 import flixel.util.FlxSpriteUtil;
+import openfl.Lib;
 
 import cutscenes.CutsceneHandler;
 
@@ -18,6 +19,8 @@ class MagicVideo extends FlxState
 {
     override public function create()
     {
+        Lib.application.window.title = "EL RAP DE MAGIC FUNKIN";
+
         startVideo('rap_insano');
         super.create();
         FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);

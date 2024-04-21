@@ -28,14 +28,14 @@ class OverworldDross extends FlxState
 
 	override public function create():Void
 	{
-        FlxG.camera.zoom = 2;
+        FlxG.camera.zoom = 4.5;
 
-        var bg:FlxSprite = new FlxSprite(640, 664).loadGraphic(Paths.image('overWorld/drossmap'));
+        var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('overWorld/drossmap'));
 		bg.antialiasing = false;
 		bg.updateHitbox();
 		add(bg);
 
-        player = new Player(736, 1208);
+        player = new Player(109, 550);
         player.animation.play("up", false);
 		add(player);
 
@@ -53,15 +53,30 @@ class OverworldDross extends FlxState
 		invisible.visible = false;
 		add(invisible);
 
+		var coso1:FlxSprite = new FlxSprite(48, 93).loadGraphic(Paths.image("overWorld/Dross_Tree"));
+		coso1.antialiasing = false;
+		add(coso1);
+
+		var coso2:FlxSprite = new FlxSprite(126, 93).loadGraphic(Paths.image("overWorld/Dross_Tree"));
+		coso2.antialiasing = false;
+		add(coso2);
+
+		var coso3:FlxSprite = new FlxSprite(52, 35).loadGraphic(Paths.image("overWorld/Dross_Tree"));
+		coso3.antialiasing = false;
+		add(coso3);
+
+		var coso4:FlxSprite = new FlxSprite(78, 73).loadGraphic(Paths.image("overWorld/Barrel"));
+		coso4.antialiasing = false;
+		add(coso4);
 
 		super.create();
 
-		FlxG.camera.follow(player, TOPDOWN, 1);
+		FlxG.camera.follow(player, LOCKON, 1);
 
 		FlxG.camera.scroll.x = -250;
-		FlxG.camera.scroll.y = -400;
+		FlxG.camera.scroll.y = -590;
 
-		FlxG.camera.x = -150;
+		FlxG.camera.x = -70;
 	//FlxG.camera.y = -400;
 		//FlxG.camera.zoom = -2;
 
@@ -74,13 +89,6 @@ class OverworldDross extends FlxState
         FlxG.collide(player, walls);
 		//FlxG.camera.updateFramerate();
 		
-
-		if (FlxG.keys.justPressed.TWO) {
-			player.x = FlxG.mouse.x;
-			player.y = FlxG.mouse.y;
-			trace('player x is' + player.x + 'player y is' + player.y);
-		}
-
 		if(FlxG.overlap(player, invisible)){
 			if (FlxG.keys.justPressed.Z) {
 				LoadingState.loadAndSwitchState(new PlayState());
