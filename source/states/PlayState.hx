@@ -26,6 +26,9 @@ import openfl.utils.Assets as OpenFlAssets;
 import openfl.events.KeyboardEvent;
 import haxe.Json;
 
+import flixel.effects.particles.FlxEmitter;
+import flixel.effects.particles.FlxParticle;
+
 import cutscenes.CutsceneHandler;
 import cutscenes.DialogueBoxPsych;
 
@@ -629,7 +632,7 @@ class PlayState extends MusicBeatState
 		uiGroup.add(iconP2);
 
 		scoreTxt = new FlxText(0, healthBar.y + 40, FlxG.width, "", 20);
-		if (curStage == 'PepeHouse')
+		if (curStage == 'PepeHouse' || curStage == 'goat')
 			scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		else
 			scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -750,6 +753,37 @@ class PlayState extends MusicBeatState
 		discName = PlayState.SONG.song.replace(' ', '');
 
 		tiempoShader = 0.0;
+
+	
+if(curSong == 'Dark Magic'){
+	
+	var emitidor = new FlxEmitter(200, 100);
+
+	for(i in 0...800){
+		var pt = new FlxParticle();
+		emitidor.x = 500;
+		emitidor.y = 900;
+		pt.x = 500;
+		pt.y = 900;
+		pt.loadGraphic(Paths.image('particula'));
+
+	//	emitidor.scale.set(0.5, 1, 2, 2.5);
+		//pt.exists = false;
+		emitidor.add(pt);
+		//pt.makeParticles(2, 2, FlxColor.BLACK, 120);
+	//	pt.speed.set(200, 100);
+	
+	emitidor.velocity.set(0, 0, 0, -200);
+	pt.velocity.set(0, -200);
+	emitidor.lifespan.set(0);
+	}
+	add(dad);
+	add(emitidor);
+
+	//emitidor.setXSpeed(-20, 20);
+//	emitidor.setYSpeed(-100, -200);
+	emitidor.start(false, 1, 800);
+}
 
 		super.create();
 		Paths.clearUnusedMemory();
@@ -1245,7 +1279,7 @@ class PlayState extends MusicBeatState
 		}
 
 		var tempScore:String = '';
-		if (curStage == 'PepeHouse' || curStage == 'Dross') {
+		if (curStage == 'PepeHouse' || curStage == 'goat') {
 			tempScore = '
 			Score: ${songScore}' + (!instakillOnMiss ? '
 			Misses: ${songMisses}' : "") + '
@@ -1633,7 +1667,7 @@ class PlayState extends MusicBeatState
 			var targetAlpha:Float = 1;
 			if (player < 1)
 			{
-				if(!ClientPrefs.data.opponentStrums || curStage == 'PepeHouse' || curStage == 'Dross') targetAlpha = 0;
+				if(!ClientPrefs.data.opponentStrums || curStage == 'PepeHouse' || curStage == 'goat') targetAlpha = 0;
 				else if(ClientPrefs.data.middleScroll) targetAlpha = 0.35;
 			}
 
@@ -1806,6 +1840,8 @@ class PlayState extends MusicBeatState
 
 		tiempoShader += elapsed;
 	//	chroma.update(tiempoShader);
+
+
 
 		super.update(elapsed);
 
@@ -2014,7 +2050,7 @@ class PlayState extends MusicBeatState
 		}
 
 		var iconOffset:Int = 26;
-		if (curStage == "PepeHouse" || curStage == 'Dross') 
+		if (curStage == "PepeHouse" || curStage == 'goat') 
 			iconP1.x = iconP1.x;
 		else {
 			iconP1.x = healthBar.barCenter + (150 * iconP1.scale.x - 150) / 2 - iconOffset;

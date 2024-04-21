@@ -10,6 +10,8 @@ import flixel.input.keyboard.FlxKey;
 import states.PlayState;
 import backend.Song;
 
+import flixel.effects.particles.FlxEmitter;
+import flixel.effects.particles.FlxParticle;
 
 class MainMenuState extends MusicBeatState
 {
@@ -25,6 +27,7 @@ class MainMenuState extends MusicBeatState
 	var castigoBuffer:String = '';
 	var allowedKeys:String = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	var magosexualBuffer:String = '';
+	var horrorBuffer:String = '';
 	
 	public static var psychEngineVersion:String = '0.7.2h'; // This is also used for Discord RPC
 	public static var curSelected:Int = 0;
@@ -58,6 +61,7 @@ class MainMenuState extends MusicBeatState
 		Mods.loadTopMod();
 
 		bgColor = 0xFF000000;
+		Conductor.bpm = 121;
 
 		if (FlxG.save.data.endMessageShowed == null) FlxG.save.data.endMessageShowed = false;
 
@@ -188,6 +192,7 @@ class MainMenuState extends MusicBeatState
 			chavalitems.members[i].setPosition(chavalOgPos[i][0] + chavalOffset[i][0], chavalOgPos[i][1] + chavalOffset[i][1]);
 		}
 
+
 		changeItem();
 
 		#if ACHIEVEMENTS_ALLOWED
@@ -249,19 +254,39 @@ class MainMenuState extends MusicBeatState
 				var keyPressed:FlxKey = FlxG.keys.firstJustPressed();
 				var keyName:String = Std.string(keyPressed);
 				if(allowedKeys.contains(keyName)) {
-					castigoBuffer += keyName;
-					if(castigoBuffer.length >= 32) castigoBuffer = castigoBuffer.substring(1);
+					horrorBuffer += keyName;
+					if(horrorBuffer.length >= 32) horrorBuffer = horrorBuffer.substring(1);
 	
-					for (wordRaw in castigo)
+					for (wordRaw in horrorpepe)
 					{
 						var word:String = wordRaw.toUpperCase();
-						if (castigoBuffer.contains(word))
+						if (horrorBuffer.contains(word))
 						{
-								MusicBeatState.switchState(new CastigoVideo());
+							LoadingState.loadAndSwitchState(new PlayState());
+							PlayState.SONG = Song.loadFromJson("horror-pepe", "horror-pepe");
 						}
 					}
 				}
 			}
+
+			if (FlxG.keys.firstJustPressed() != FlxKey.NONE)
+				{
+					var keyPressed:FlxKey = FlxG.keys.firstJustPressed();
+					var keyName:String = Std.string(keyPressed);
+					if(allowedKeys.contains(keyName)) {
+						magosexualBuffer += keyName;
+						if(magosexualBuffer.length >= 32) magosexualBuffer = magosexualBuffer.substring(1);
+		
+						for (wordRaw in castigo)
+						{
+							var word:String = wordRaw.toUpperCase();
+							if (magosexualBuffer.contains(word))
+							{
+									MusicBeatState.switchState(new CastigoVideo());
+							}
+						}
+					}
+				}
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
 		

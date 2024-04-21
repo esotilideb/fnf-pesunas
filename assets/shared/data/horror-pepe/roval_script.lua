@@ -4,17 +4,20 @@
 
 -------------Parte del Script que si puedes modificar dependiendo que necesites---------------------------
 int = 30; -- INTENSIDAD DE MOVIMIENTO DE CAMARA, mas = intenso
-opacidadhud = 0.7; -- La opacidad del hud que tiene AL INICIO DE LA CANCION, luego lo cambias con el evento "hudz" o "hud"
+opacidadhud = 1; -- La opacidad del hud que tiene AL INICIO DE LA CANCION, luego lo cambias con el evento "hudz" o "hud"
+zoomextra = 0.25; --Coloca con cuanto zoom extra quieres que inicie la cancion, el predeterminado de extra es 0 (solo el que tiene el stage)
+velcaminicio = 1; --A que velocidad de camara inicias la cancion, el predeterminado es 1
 seguircamara = true; -- ACTIVA O DESACTIVA LA CAMARA ACTIVA, false = desactivado
 mediocamara = true; -- ACTIVA O DESACTIVA - true = camara empieza desde el medio, luego tienes que cambiarlo con el evento "p" para que sea normal
-pantallanegra = true; -- ACTIVA O DESACTIVA - true = la pantalla esta negra y con el evento "flash" o "flashz" lo quitas, pero despues cambia el color a blanco para que funcione como flash
-opacidadflash = 1 -- SI ACTIVAS PANTALLA NEGRA, COMO QUIERES QUE EMPIECE EL FLASH NEGRO
 showcasemode = false; -- SI ACTIVAS EL MODO SHOWCASE SE ELIMINA PUNTACION, BARRA DE TIEMPO Y EL SCORE -- Para subir videos con poco hud
+saltearcontador = true; -- Saltear el contador del inicio de la cancion, puede generar bugs asi que no recomiendo usarlo tanto xd
+pantallanegra = false; -- ACTIVA O DESACTIVA - true = la pantalla esta negra y con el evento "flash" o "flashz" lo quitas, pero despues cambia el color a blanco para que funcione como flash
+opacidadflash = 1 -- SI ACTIVAS PANTALLA NEGRA, COMO QUIERES QUE EMPIECE EL FLASH NEGRO
 
 dadx1 = 0; --Eje X de camara de dad (Menos = Izquierda  Mas = Derecha)
 dady1 = 0; --Eje Y de camara de dad (Menos = Arriba  Mas = Abajo)
-bfx1 = 0; --Eje X de camara de bf (Menos = Izquierda  Mas = Derecha)
-bfy1 = 0; --Eje Y de camara de bf (Menos = Arriba  Mas = Abajo)
+bfx1 = -170; --Eje X de camara de bf (Menos = Izquierda  Mas = Derecha)
+bfy1 = 120; --Eje Y de camara de bf (Menos = Arriba  Mas = Abajo)
 gfx1 = 0; --Eje X de camara de gf (Menos = Izquierda  Mas = Derecha) Recomiendo usarlo para otra posicion de camara extra si gf no canta
 gfy1 = 0; --Eje Y de camara de gf (Menos = Arriba  Mas = Abajo) Recomiendo usarlo para otra posicion de camara extra si gf no canta
 centrox1 = 0;
@@ -63,14 +66,22 @@ del2 = 0;
 
 
 
+if saltearcontador == true then
+    function onCreate() -- Por cierto, si al activar esto y al iniciar la song por primera vez el audio esta bug, mejor desactiva esto :p
+        setProperty('skipCountdown', true)
+    end
+end
 
 --Aca te dejo un listado de todos eases/transiciones, puedes buscar en google como funciona cada uno de ellos
 tiposease = {"linear","quadIn","quadOut","quadInOut","cubeIn","cubeOut","cubeInOut","quartIn","quartOut","quartInOut","quintIn","quintOut","quintInOut","sineIn","sineOut","sineInOut","bounceIn","bounceOut","bounceInOut","elasticIn","elasticOut","elasticInOut","backIn","backOut","backInOut"}
 ----------------------------------------------
 
 function onCreatePost()
+    setProperty('camGame.bgColor', getColorFromHex('FFFFFF'))
+    setProperty('gf.alpha', 0); 
     zoom = getProperty('defaultCamZoom'); --Zoom que tiene el stage
     velocidad = getProperty('cameraSpeed'); --Velocidad al que va la camara - Se lo cambia con eventos o desde aca
+
     makeLuaSprite('negro', '', -100, -100); --lo puse negro pq en un principio lo estaba, pero lo cambie para mejor configuracion
     makeGraphic('negro', 1280*2, 720*2, 'FFFFFF');
     setScrollFactor('negro', 0, 0); --Set Scroll factor = Determina cuanto se mueve al mover la camara, con 0 no se mueve, con 1 se mueve mucho
@@ -78,13 +89,10 @@ function onCreatePost()
     setProperty('negro.alpha',0); --Es invisible hasta que lo actives
     addLuaSprite('negro', false); --Se ubica ATRAS de los personajes
 
-    setProperty('camGame.bgColor', getColorFromHex('99b1dd'))
-
     makeLuaSprite('flash', '', -100, -100); 
     makeGraphic('flash', 1280*2, 720*2, 'FFFFFF'); --Esto si es blanco p
     setScrollFactor('flash', 0, 0);
     screenCenter('flash');
-    
     if pantallanegra == true then
         setProperty('flash.alpha',opacidadflash);
         setProperty('flash.colorTransform.greenOffset', -255)
@@ -93,7 +101,6 @@ function onCreatePost()
     else
         setProperty('flash.alpha',0); -- esta transparente
     end
-    
     addLuaSprite('flash', true); --Se ubica ADELANTE de los personajes  
 
 
@@ -101,11 +108,25 @@ function onCreatePost()
         setProperty('scoreTxt.visible', false);
         setProperty('timeBar.visible', false);
         setProperty('timeBarBG.visible', false);
-        setProperty('timeTxt.visible', false);
-    else        
+        setProperty('timeTxt.visible', false);       
     end
 
+    if zoomextra == 0 then
+        setProperty('defaultCamZoom', zoom)  
+    else
+        doTweenZoom('zoomtween', 'camGame', zoom + zoomextra, 0.001, 'linear')
+        setProperty('defaultCamZoom', (zoom + zoomextra))  
+    end
 
+    if opacidadhud == 1 then
+    else
+        doTweenAlpha('camaaHUD', 'camHUD', opacidadhud, 0.001)
+    end
+
+    if velcaminicio == 1 then
+    else
+        setProperty('cameraSpeed', velcaminicio);
+    end
 
     makeLuaSprite('luz', 'luz', -400, 400)
     setGraphicSize('luz', 2000, 400)
@@ -139,9 +160,6 @@ function onCreatePost()
     setObjectCamera("textoc", 'hud');
     addLuaText('textoc')
 
-    doTweenAlpha('camaaHUD', 'camHUD', opacidadhud, 0.001)
-    setProperty('defaultCamZoom', zoom)  
-    setProperty('cameraSpeed', velocidad);
     strumYOrigin = getPropertyFromGroup('strumLineNotes', 0, 'y') --Saca el valor de la Y
     strumXOrigin = getPropertyFromGroup('strumLineNotes', 0, 'x') --Saca el valor de la X
 
@@ -392,6 +410,29 @@ function onEvent(n,v1,v2)
             setTextString('textoc',  '' .. textitoc)
         end
 
+        if v1 == 'cantacolor' then --Cambia el color
+            local colortx = split(v2,",")            
+            letras = (colortx[1])
+            colorr = (colortx[2])
+
+            if letras == '' then
+                letras = 'a'
+            end
+
+            if colorr == '' then
+                colorr = 'ffffff'
+            end
+
+            if letras == 'a' then
+                setTextColor('texto', colorr) --AJUSTAS EL COLOR DEL TEXTO EN DAD
+            end
+            if letras == 'b' then
+                setTextColor('textob', colorr) --AJUSTAS EL COLOR DEL TEXTO EN DAD
+            end
+            if letras == 'c' then
+                setTextColor('textoc', colorr) --AJUSTAS EL COLOR DEL TEXTO EN DAD
+            end
+        end
         
 
         if v1 == 'velcam' then --Ajusta la velocidad del movimiento de la camara - 1 solo valor en Value2
@@ -1052,4 +1093,8 @@ end
 
 function onSkipDialogue(count)
     -- triggered when you press Enter and skip a dialogue line that was still being typed, dialogue line starts with 1
+end
+
+function onDestroy()
+    setProperty('camGame.bgColor', getColorFromHex('000000'))
 end

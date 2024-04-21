@@ -81,14 +81,15 @@ class OverWorld extends MusicBeatState
 	map.setTileProperties(13, ANY);
 	map.setTileProperties(14, NONE);
 	map.setTileProperties(15, NONE);
+	map.setTileProperties(16, ANY);
 		add(map);
 
 		var casaPepe:FlxSprite = new FlxSprite(752, 175).loadGraphic(Paths.image("overWorld/pepeCasa"));
-		casaPepe.setGraphicSize(Std.int(casaPepe.width * 4));
+		casaPepe.setGraphicSize(Std.int(casaPepe.width * 5.7));
 		casaPepe.antialiasing = false;
 		add(casaPepe);
 
-		casaPepeC = new FlxSprite(720, 240).loadGraphic(Paths.image("overWorld/checkpoint"));
+		casaPepeC = new FlxSprite(720, 290).loadGraphic(Paths.image("overWorld/checkpoint"));
 		casaPepeC.setGraphicSize(Std.int(casaPepeC.width * 0.63));
 		casaPepeC.antialiasing = false;
 		add(casaPepeC);
@@ -230,9 +231,7 @@ class OverWorld extends MusicBeatState
 	drossMailO.visible = false;
 	drossMailP.visible = false;*/
 
-	FlxG.camera.y = 250;
-	FlxG.camera.x = -300;
-	FlxG.camera.zoom += 1.5;
+
 		super.create();
 	}
 	override public function update(elapsed:Float):Void
@@ -243,14 +242,23 @@ class OverWorld extends MusicBeatState
 
 	//	trace("x es" +FlxG.mouse.x);
 	//	trace("y es" + FlxG.mouse.y);
-
+	//FlxG.camera.y = 350;
+//	FlxG.camera.x = -300;
+	//FlxG.camera.zoom = 2.5;
 	
 
 		if(FlxG.overlap(player, casaPepeC)){
-			if (FlxG.keys.justPressed.Z) {
-				LoadingState.loadAndSwitchState(new PlayState());
-				PlayState.SONG = Song.loadFromJson("Lunar-magic", "Lunar-magic");
+			if (FlxG.keys.justPressed.Z || controls.ACCEPT) {
+
+				PlayState.storyPlaylist = ['Lunar-magic', 'Dark-magic'];
+				
+				Difficulty.list = ['Easy', 'Normal', 'Hard'];
+				PlayState.SONG = Song.loadFromJson(StringTools.replace(PlayState.storyPlaylist[0]," ", "-").toLowerCase(), StringTools.replace(PlayState.storyPlaylist[0]," ", "-").toLowerCase());  
+				PlayState.campaignScore = 0;
+				PlayState.isStoryMode = true;
+				PlayState.storyDifficulty = 1;
 				PauseSubState.isOverworld = true;
+				LoadingState.loadAndSwitchState(new PlayState());
 				Lib.application.window.title = "Magic Funkin";
 			}
 		}

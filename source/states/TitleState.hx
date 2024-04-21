@@ -26,6 +26,7 @@ import states.StoryMenuState;
 import states.OutdatedState;
 import states.MainMenuState;
 
+
 typedef TitleData =
 {
 	titlex:Float,
@@ -344,6 +345,8 @@ class TitleState extends MusicBeatState
 		ngSpr.screenCenter(X);
 		ngSpr.antialiasing = ClientPrefs.data.antialiasing;
 
+
+
 		if (initialized)
 			skipIntro();
 		else
@@ -407,6 +410,9 @@ class TitleState extends MusicBeatState
 				pressedEnter = true;
 			#end
 		}
+		if(FlxG.mouse.justPressed){
+			MusicBeatState.switchState(new CardState());
+	}
 		
 		if (newTitle) {
 			titleTimer += FlxMath.bound(elapsed, 0, 1);
