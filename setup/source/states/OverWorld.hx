@@ -247,10 +247,16 @@ class OverWorld extends MusicBeatState
 	
 
 		if(FlxG.overlap(player, casaPepeC)){
-			if (FlxG.keys.justPressed.Z) {
-				LoadingState.loadAndSwitchState(new PlayState());
-				PlayState.SONG = Song.loadFromJson("Lunar-magic", "Lunar-magic");
+			if (FlxG.keys.justPressed.Z || Controls.ACCEPT) {
+				
+				PlayState.storyPlaylist = ['Lunar-magic', 'Dark-magic'];
+				
+				PlayState.SONG = Song.loadFromJson(StringTools.replace(PlayState.storyPlaylist[0]," ", "-").toLowerCase(), StringTools.replace(PlayState.storyPlaylist[0]," ", "-").toLowerCase());  
+				PlayState.campaignScore = 0;
+				PlayState.isStoryMode = true;
+				PlayState.storyDifficulty = 2;
 				PauseSubState.isOverworld = true;
+				LoadingState.loadAndSwitchState(new PlayState());
 				Lib.application.window.title = "Magic Funkin";
 			}
 		}

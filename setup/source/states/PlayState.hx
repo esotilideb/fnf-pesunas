@@ -629,7 +629,7 @@ class PlayState extends MusicBeatState
 		uiGroup.add(iconP2);
 
 		scoreTxt = new FlxText(0, healthBar.y + 40, FlxG.width, "", 20);
-		if (curStage == 'PepeHouse')
+		if (curStage == 'PepeHouse' || curStage == 'goat')
 			scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		else
 			scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -1245,7 +1245,7 @@ class PlayState extends MusicBeatState
 		}
 
 		var tempScore:String = '';
-		if (curStage == 'PepeHouse' || curStage == 'Dross') {
+		if (curStage == 'PepeHouse' || curStage == 'goat') {
 			tempScore = '
 			Score: ${songScore}' + (!instakillOnMiss ? '
 			Misses: ${songMisses}' : "") + '
@@ -1633,7 +1633,7 @@ class PlayState extends MusicBeatState
 			var targetAlpha:Float = 1;
 			if (player < 1)
 			{
-				if(!ClientPrefs.data.opponentStrums || curStage == 'PepeHouse' || curStage == 'Dross') targetAlpha = 0;
+				if(!ClientPrefs.data.opponentStrums || curStage == 'PepeHouse' || curStage == 'goat') targetAlpha = 0;
 				else if(ClientPrefs.data.middleScroll) targetAlpha = 0.35;
 			}
 
@@ -2014,7 +2014,7 @@ class PlayState extends MusicBeatState
 		}
 
 		var iconOffset:Int = 26;
-		if (curStage == "PepeHouse" || curStage == 'Dross') 
+		if (curStage == "PepeHouse" || curStage == 'goat') 
 			iconP1.x = iconP1.x;
 		else {
 			iconP1.x = healthBar.barCenter + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
