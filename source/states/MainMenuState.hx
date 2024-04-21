@@ -43,6 +43,8 @@ class MainMenuState extends MusicBeatState
 	var catTween:FlxTween;
 	var cat:FlxSprite;
 
+	var discord:FlxSprite;
+
 	var chavalOgPos:Array<Array<Float>> = [];
 	var chavalOffset:Array<Array<Int>> = [[0, 127], [0, 46], [0, 42], [325, 355]];
 
@@ -98,6 +100,12 @@ class MainMenuState extends MusicBeatState
 		cat.screenCenter();
 		cat.alpha = 0;
 		cat.antialiasing = false;
+
+		discord = new FlxSprite(710, -265).loadGraphic(Paths.image('discord'));
+		discord.scale.x = 0.3;
+		discord.scale.y = 0.3;
+		discord.scrollFactor.set(0);
+		add(discord);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
@@ -189,6 +197,7 @@ class MainMenuState extends MusicBeatState
 		super.create();
 
 		FlxG.camera.follow(camFollow, null, 0.15);
+		FlxG.mouse.visible = true;
 	}
 
 	var selectedSomethin:Bool = false;
@@ -197,6 +206,18 @@ class MainMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
+		if (FlxG.mouse.justPressed && FlxG.mouse.overlaps(discord))
+			{
+				discord.scale.x = 0.40;
+				discord.scale.y = 0.40;
+				CoolUtil.browserLoad('https://discord.gg/4c6hKFAc3V');
+			}
+			else if (FlxG.mouse.justReleased)
+			{
+				discord.scale.x = 0.3;
+				discord.scale.y = 0.3;
+			}
+
 		if (FlxG.keys.firstJustPressed() != FlxKey.NONE)
 		{
 			var keyPressed:FlxKey = FlxG.keys.firstJustPressed();
