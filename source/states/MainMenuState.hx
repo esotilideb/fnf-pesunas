@@ -7,14 +7,22 @@ import lime.app.Application;
 import states.editors.MasterEditorMenu;
 import options.OptionsState;
 import flixel.input.keyboard.FlxKey;
+import states.PlayState;
+import backend.Song;
+
 
 class MainMenuState extends MusicBeatState
 {
 	var magosexual:Array<String> = [
 		'magicfunkin'
 	];
+	var horrorpepe:Array<String> = [
+		'horror'
+	];
+
 	var allowedKeys:String = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	var magosexualBuffer:String = '';
+	var horrorPepeB:String = '';
 	
 	public static var psychEngineVersion:String = '0.7.2h'; // This is also used for Discord RPC
 	public static var curSelected:Int = 0;
@@ -207,6 +215,26 @@ class MainMenuState extends MusicBeatState
 				}
 			}
 		}
+
+		if (FlxG.keys.firstJustPressed() != FlxKey.NONE)
+			{
+				var keyPressed:FlxKey = FlxG.keys.firstJustPressed();
+				var keyName:String = Std.string(keyPressed);
+				if(allowedKeys.contains(keyName)) {
+					horrorPepeB += keyName;
+					if(horrorPepeB.length >= 32) horrorPepeB = horrorPepeB.substring(1);
+	
+					for (wordRaw in horrorpepe)
+					{
+						var word:String = wordRaw.toUpperCase();
+						if (horrorPepeB.contains(word))
+						{
+							LoadingState.loadAndSwitchState(new PlayState());
+							PlayState.SONG = Song.loadFromJson("horror-pepe", "horror-pepe");
+						}
+					}
+				}
+			}
 		
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;

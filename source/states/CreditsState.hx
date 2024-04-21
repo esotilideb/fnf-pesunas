@@ -82,7 +82,8 @@ class CreditsState extends MusicBeatState
 
 		var pisspoop:Array<Array<Dynamic>> = [ //Name - Icon name - Trabajo - Frase - BG Color
 			["AngieGB", "angie", "Director, Animador y Artista", "Vas a caer pixel art", 0xFF9be330],
-			["Luk9as", "yo", 'Coder', "Pene", 0xFFFF3931]
+			["Luk9as", "yo", 'Coder', "Pene", 0xFFFF3931],
+			["Denger", "yo", 'Coder', "Pene", 0xFFFF3931]
 		];
 		
 		for(i in pisspoop){
