@@ -15,6 +15,8 @@ import options.OptionsState;
 import openfl.Lib;
 import states.OverWorld;
 
+import states.OverWorld;
+
 class PauseSubState extends MusicBeatSubstate
 {
 	var grpMenuShit:FlxTypedGroup<Alphabet>;

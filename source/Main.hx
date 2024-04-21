@@ -1,6 +1,5 @@
 package;
 
-import states.WaitState;
 #if android
 import android.content.Context;
 #end
@@ -43,7 +42,7 @@ class Main extends Sprite
 	var game = {
 		width: 1280, // WINDOW width
 		height: 720, // WINDOW height
-		initialState: #if debug WaitState #else TitleState #end, // initial game state
+		initialState: TitleState, // initial game state
 		zoom: -1.0, // game state bounds
 		framerate: 60, // default framerate
 		skipSplash: true, // if the default flixel splash screen should be skipped
