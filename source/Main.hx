@@ -18,6 +18,7 @@ import openfl.events.Event;
 import openfl.display.StageScaleMode;
 import lime.app.Application;
 import states.TitleState;
+import data.CppAPI;
 
 #if linux
 import lime.graphics.Image;
@@ -62,6 +63,10 @@ class Main extends Sprite
 	{
 		super();
 
+		#if cpp
+		CppAPI.darkMode();
+		#end
+		
 		// Credits to MAJigsaw77 (he's the og author for this code)
 		#if android
 		Sys.setCwd(Path.addTrailingSlash(Context.getExternalFilesDir()));

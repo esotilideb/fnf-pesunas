@@ -19,6 +19,8 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.util.FlxColor;
 
+import openfl.Lib;
+
 class FreeplayState extends MusicBeatState
 {
     var scoreBG:FlxSprite;
@@ -270,6 +272,7 @@ class FreeplayState extends MusicBeatState
                 persistentUpdate = false;
                 FlxG.sound.play(Paths.sound('cancelMenu'));
                 MusicBeatState.switchState(new MainMenuState());
+                Lib.application.window.title = "Magic Funkin";
             }
             else if(FlxG.keys.justPressed.CONTROL)
             {
@@ -278,6 +281,8 @@ class FreeplayState extends MusicBeatState
             }
             else if (controls.ACCEPT)
             {
+                Lib.application.window.title = "Magic Funkin";
+
                 persistentUpdate = false;
                 var songLowercase:String = Paths.formatToSongPath(songs[curSelected].songName);
                 var poop:String = Highscore.formatSong(songLowercase, curDifficulty);
@@ -336,6 +341,8 @@ class FreeplayState extends MusicBeatState
         curSelected += change;
     
         changing = !pene;
+
+        Lib.application.window.title = "Magic Funkin - " + songs[curSelected].songName;
 
         if (curSelected < 0)
             curSelected = songs.length - 1;

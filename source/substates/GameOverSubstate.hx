@@ -9,6 +9,8 @@ import flixel.FlxSubState;
 import states.StoryMenuState;
 import states.FreeplayState;
 
+import openfl.Lib;
+
 class GameOverSubstate extends MusicBeatSubstate
 {
 	public var boyfriend:Character;
@@ -55,6 +57,8 @@ class GameOverSubstate extends MusicBeatSubstate
 
 		PlayState.instance.setOnScripts('inGameOver', true);
 
+		Lib.application.window.title = "Magic Funkin - GAME OVER";
+
 		Conductor.songPosition = 0;
 
 		boyfriend = new Character(x, y, characterName, true);
@@ -88,6 +92,8 @@ class GameOverSubstate extends MusicBeatSubstate
 
 		if (controls.BACK)
 		{
+			Lib.application.window.title = "Magic Funkin";
+
 			#if desktop DiscordClient.resetClientID(); #end
 			FlxG.sound.music.stop();
 			PlayState.deathCounter = 0;
@@ -170,6 +176,8 @@ class GameOverSubstate extends MusicBeatSubstate
 				});
 			});
 			PlayState.instance.callOnScripts('onGameOverConfirm', [true]);
+
+			Lib.application.window.title = "Magic Funkin";
 		}
 	}
 }

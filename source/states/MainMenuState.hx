@@ -13,8 +13,12 @@ class MainMenuState extends MusicBeatState
 	var magosexual:Array<String> = [
 		'magicfunkin'
 	];
+	var castigo:Array<String> = [
+		'castigo'
+	];
 	var allowedKeys:String = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	var magosexualBuffer:String = '';
+	var castigoBuffer:String = '';
 	
 	public static var psychEngineVersion:String = '0.7.2h'; // This is also used for Discord RPC
 	public static var curSelected:Int = 0;
@@ -207,6 +211,25 @@ class MainMenuState extends MusicBeatState
 				}
 			}
 		}
+
+		if (FlxG.keys.firstJustPressed() != FlxKey.NONE)
+			{
+				var keyPressed:FlxKey = FlxG.keys.firstJustPressed();
+				var keyName:String = Std.string(keyPressed);
+				if(allowedKeys.contains(keyName)) {
+					castigoBuffer += keyName;
+					if(castigoBuffer.length >= 32) castigoBuffer = castigoBuffer.substring(1);
+	
+					for (wordRaw in castigo)
+					{
+						var word:String = wordRaw.toUpperCase();
+						if (castigoBuffer.contains(word))
+						{
+								MusicBeatState.switchState(new CastigoVideo());
+						}
+					}
+				}
+			}
 		
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;

@@ -12,7 +12,7 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
-
+import openfl.Lib;
 #if MODS_ALLOWED
 import sys.FileSystem;
 import sys.io.File;
@@ -49,6 +49,7 @@ class CreditsState extends MusicBeatState
 	{
 		persistentUpdate = true;
 
+		Lib.application.window.title = "Magic Funkin - Credits";
 
 		colorGuide = new FlxSprite().makeGraphic(1, 1, FlxColor.WHITE);
 		colorGuide.alpha = 0;
@@ -217,6 +218,7 @@ class CreditsState extends MusicBeatState
 			{
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				MusicBeatState.switchState(new MainMenuState());
+				Lib.application.window.title = "Magic Funkin";
 				quitting = true;
 			}
 		}
