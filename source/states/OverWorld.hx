@@ -259,6 +259,10 @@ class OverWorld extends MusicBeatState
 				Lib.application.window.title = "Magic Funkin";
 			}
 		}
+		if (FlxG.keys.justPressed.D) {
+			MusicBeatState.switchState(new OverworldDross());
+			Lib.application.window.title = "Magic Funkin";
+		}
 		if (FlxG.keys.justPressed.ESCAPE) {
 			MusicBeatState.switchState(new MainMenuState());
 			Lib.application.window.title = "Magic Funkin";
