@@ -1972,7 +1972,7 @@ class PlayState extends MusicBeatState
 			checkEventNote();
 		}
 
-		//#if debug
+		#if debug
 		if(!endingSong && !startingSong) {
 			if (FlxG.keys.justPressed.ONE) {
 				KillNotes();
@@ -1983,7 +1983,7 @@ class PlayState extends MusicBeatState
 				clearNotesBefore(Conductor.songPosition);
 			}
 		}
-		//#end
+		#end
 
 		setOnScripts('cameraX', camFollow.x);
 		setOnScripts('cameraY', camFollow.y);

@@ -60,6 +60,8 @@ class FreeplayState extends MusicBeatState
             ['horror-pepe', "EXTRA - HORROR PEPAURI"]*/
         ];
 
+        if (FlxG.save.data.endMessageShowed) songArray.push(['goat-heavyhearted', "EXTRA - ???"]);
+
         for (i in 0...songArray.length)
         {
             addSong(songArray[i][0], 1, "dad", songArray[i][1]);
@@ -338,8 +340,6 @@ class FreeplayState extends MusicBeatState
         curSelected += change;
     
         changing = !pene;
-
-        Lib.application.window.title = "Magic Funkin - " + songs[curSelected].songName;
 
         if (curSelected < 0)
             curSelected = songs.length - 1;
