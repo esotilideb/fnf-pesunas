@@ -248,7 +248,7 @@ class TitleState extends MusicBeatState
 
 		if(FlxG.random.bool(50)){
 			logoBl.frames = Paths.getSparrowAtlas('title/logoBumpin2');
-			logoBl.x = 265;
+			logoBl.x = 273;
 			logoBl.y = 100;
 			logoBl.animation.play('bump');
 		}

@@ -12,6 +12,7 @@ class Dross extends BaseStage
 		trace("COÑOOOOOOOOOOOO");
 
 		var bg:FlxSprite = new FlxSprite(100, 200).loadGraphic(Paths.image("dross"));
+		bg.setGraphicSize(Std.int(bg.width * 1.4));
 		bg.scrollFactor.set(0.9, 0.9);
 		add(bg);
 	}
