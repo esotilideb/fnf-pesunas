@@ -57,6 +57,8 @@ class MainMenuState extends MusicBeatState
 		#end
 		Mods.loadTopMod();
 
+		bgColor = 0xFF000000;
+
 		if (FlxG.save.data.endMessageShowed == null) FlxG.save.data.endMessageShowed = false;
 
 		if (FlxG.save.data.songBool == null)
@@ -241,27 +243,6 @@ class MainMenuState extends MusicBeatState
 				}
 			}
 		}
-
-		if (FlxG.keys.firstJustPressed() != FlxKey.NONE)
-			{
-				var keyPressed:FlxKey = FlxG.keys.firstJustPressed();
-				var keyName:String = Std.string(keyPressed);
-				if(allowedKeys.contains(keyName)) {
-					horrorPepeB += keyName;
-					if(horrorPepeB.length >= 32) horrorPepeB = horrorPepeB.substring(1);
-	
-					for (wordRaw in horrorpepe)
-					{
-						var word:String = wordRaw.toUpperCase();
-						if (horrorPepeB.contains(word))
-						{
-							LoadingState.loadAndSwitchState(new PlayState());
-							PlayState.SONG = Song.loadFromJson("horror-pepe", "horror-pepe");
-						}
-					}
-				}
-			}
-		
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
 		

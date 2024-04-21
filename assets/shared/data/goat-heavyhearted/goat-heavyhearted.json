@@ -1,7 +1,7 @@
 {
 	"song": {
 		"sectionLengths": [],
-		"player1": "bf",
+		"player1": "bf-lunar",
 		"events": [
 			[
 				0,
@@ -11817,7 +11817,7 @@
 		],
 		"player3": null,
 		"song": "Goat HeavyHearted",
-		"stage": "stage-dross",
+		"stage": "goat",
 		"validScore": true,
 		"sections": 0,
 		"needsVoices": true,
