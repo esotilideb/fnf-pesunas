@@ -54,10 +54,6 @@ class OverworldDross extends FlxState
 		invisible.visible = false;
 		add(invisible);
 
-		colision = new FlxSprite(104, 65).makeGraphic(22, 13, FlxColor.RED);
-		colision.visible = false;
-		add(colision);
-
 		var coso1:FlxSprite = new FlxSprite(48, 93).loadGraphic(Paths.image("overWorld/Dross_Tree"));
 		coso1.antialiasing = false;
 		add(coso1);
@@ -100,7 +96,7 @@ class OverworldDross extends FlxState
             FlxG.sound.playMusic(Paths.music("freakyMenu"));
         }
 
-		if(FlxG.overlap(player, colision)){
+		if(FlxG.overlap(player, invisible)){
 			if (FlxG.keys.justPressed.Z) {
 				LoadingState.loadAndSwitchState(new PlayState());
 				PlayState.SONG = Song.loadFromJson("goat-heavyhearted", "goat-heavyhearted");
