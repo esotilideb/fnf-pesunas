@@ -59,7 +59,13 @@ class FreeplayState extends MusicBeatState
             ['dreams-awakened', "EXTRA - ..."]/*,
             ['horror-pepe', "EXTRA - HORROR PEPAURI"]*/
         ];
-
+        var colorArray:Array<Array<String>> = [
+            ["0x87C0EF"],
+            ["0x932C58"],
+            ['Tops', "EXTRA - Pepe VS Nerd"],
+            ['dreams-awakened', "EXTRA - ..."]/*,
+            ['horror-pepe', "EXTRA - HORROR PEPAURI"]*/
+        ];
         if (FlxG.save.data.endMessageShowed) songArray.push(['goat-heavyhearted', "EXTRA - ???"]);
 
         for (i in 0...songArray.length)

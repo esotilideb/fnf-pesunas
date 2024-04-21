@@ -81,7 +81,7 @@ class CardState extends MusicBeatState {
 				new FlxTimer().start(18 / 24, function (tmr:FlxTimer) {
 					dross.animation.play("showingT");
                     dross.y -= 100;
-                    dross.x -= 150;
+                    dross.x -= 100;
 					canClick = true;
 				});
 
