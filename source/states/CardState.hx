@@ -71,8 +71,6 @@ class CardState extends MusicBeatState {
     {
         super.update(elapsed);
 
-        trace(FlxG.mouse.x, FlxG.mouse.y);
-
         if (FlxG.mouse.justPressed || controls.ACCEPT)
 		{
 			if (!drossShit) {

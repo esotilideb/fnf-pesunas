@@ -2763,6 +2763,7 @@ if(curSong == 'Dark Magic'){
 					trace('LOADING NEXT SONG');
 					trace(Paths.formatToSongPath(PlayState.storyPlaylist[0]) + difficulty);
 
+
 					FlxTransitionableState.skipNextTransIn = true;
 					FlxTransitionableState.skipNextTransOut = true;
 					prevCamFollow = camFollow;
@@ -2771,6 +2772,12 @@ if(curSong == 'Dark Magic'){
 					FlxG.sound.music.stop();
 
 					cancelMusicFadeTween();
+
+					if (Paths.formatToSongPath(PlayState.storyPlaylist[0]) == 'dark-magic')
+                        backend.BaseStage.exe = 'but.exe/';
+                    else
+                        backend.BaseStage.exe = '';
+
 					LoadingState.loadAndSwitchState(new PlayState());
 
 					Lib.application.window.title = "Magic Funkin";

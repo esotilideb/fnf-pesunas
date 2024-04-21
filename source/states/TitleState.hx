@@ -410,9 +410,6 @@ class TitleState extends MusicBeatState
 				pressedEnter = true;
 			#end
 		}
-		if(FlxG.mouse.justPressed){
-			MusicBeatState.switchState(new CardState());
-	}
 		
 		if (newTitle) {
 			titleTimer += FlxMath.bound(elapsed, 0, 1);
