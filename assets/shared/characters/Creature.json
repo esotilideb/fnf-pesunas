@@ -76,9 +76,9 @@
 	"healthicon": "lol",
 	"flip_x": false,
 	"healthbar_colors": [
-		49,
-		176,
-		209
+		255,
+		255,
+		255
 	],
 	"camera_position": [
 		20,
