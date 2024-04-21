@@ -247,8 +247,8 @@ class OverWorld extends MusicBeatState
 	
 
 		if(FlxG.overlap(player, casaPepeC)){
-			if (FlxG.keys.justPressed.Z || Controls.ACCEPT) {
-				
+			if (FlxG.keys.justPressed.Z || controls.ACCEPT) {
+
 				PlayState.storyPlaylist = ['Lunar-magic', 'Dark-magic'];
 				
 				PlayState.SONG = Song.loadFromJson(StringTools.replace(PlayState.storyPlaylist[0]," ", "-").toLowerCase(), StringTools.replace(PlayState.storyPlaylist[0]," ", "-").toLowerCase());  
