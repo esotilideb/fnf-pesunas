@@ -44,7 +44,7 @@ class OverworldDross extends FlxState
 		walls.follow();
 		walls.setTileProperties(1, NONE);
 		walls.setTileProperties(2, ANY);
-		walls.visible = true;
+		walls.visible = false;
 		add(walls);
 
 		invisible = new FlxSprite(720, 690).loadGraphic(Paths.image("overWorld/checkpoint"));
@@ -76,7 +76,7 @@ class OverworldDross extends FlxState
 		FlxG.camera.scroll.x = -250;
 		FlxG.camera.scroll.y = -590;
 
-		FlxG.camera.x = -75;
+		FlxG.camera.x = -70;
 	//FlxG.camera.y = -400;
 		//FlxG.camera.zoom = -2;
 
