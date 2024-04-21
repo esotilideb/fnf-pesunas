@@ -230,8 +230,9 @@ class OverWorld extends MusicBeatState
 	drossMailO.visible = false;
 	drossMailP.visible = false;*/
 
-	FlxG.camera.y = 200;
-	FlxG.camera.x = -200;
+	FlxG.camera.y = 250;
+	FlxG.camera.x = -300;
+	FlxG.camera.zoom += 1.5;
 		super.create();
 	}
 	override public function update(elapsed:Float):Void
@@ -252,10 +253,6 @@ class OverWorld extends MusicBeatState
 				PauseSubState.isOverworld = true;
 				Lib.application.window.title = "Magic Funkin";
 			}
-		}
-
-		if (FlxG.keys.justPressed.D) {
-			MusicBeatState.switchState(new OverworldDross());
 		}
 		if (FlxG.keys.justPressed.ESCAPE) {
 			MusicBeatState.switchState(new MainMenuState());

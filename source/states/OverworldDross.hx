@@ -48,7 +48,7 @@ class OverworldDross extends FlxState
 		add(walls);
 
 		invisible = new FlxSprite(720, 690).loadGraphic(Paths.image("overWorld/checkpoint"));
-		invisible.setGraphicSize(Std.int(invisible.width * 0.20));
+		invisible.setGraphicSize(Std.int(invisible.width * 0.30));
 		invisible.antialiasing = false;
 		invisible.visible = false;
 		add(invisible);
