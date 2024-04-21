@@ -45,6 +45,8 @@ class CreditsState extends MusicBeatState
 	var colorGuide:FlxSprite;
 	var lol:FlxSprite;
 
+	var porlaguea:FlxSprite;
+
 	override function create()
 	{
 		persistentUpdate = true;
@@ -59,9 +61,9 @@ class CreditsState extends MusicBeatState
 		bg.screenCenter();
         add(bg);
 
-        grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0xFF002FFF, FlxColor.TRANSPARENT));
+        grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0xFF969696, FlxColor.TRANSPARENT));
 		grid.velocity.set(40, 40);
-        grid.alpha = 0.5;
+        //grid.alpha = 0.5;
 		add(grid);
 		
 		var tv = new FlxSprite().loadGraphic(Paths.image("creditAssets/tv", "shared"));
@@ -81,9 +83,51 @@ class CreditsState extends MusicBeatState
 		iconGrp = new FlxTypedGroup<FlxSprite>();
 		add(iconGrp);
 
+		porlaguea = new FlxSprite().loadGraphic(Paths.image('porlaguea'));
+		porlaguea.visible = false;
+		porlaguea.setGraphicSize(Std.int(porlaguea.width * 1.7));
+		porlaguea.screenCenter();
+		add(porlaguea);
+
 		var pisspoop:Array<Array<Dynamic>> = [ //Name - Icon name - Trabajo - Frase - BG Color
+			["TelmexCedric", "cedric", "Director, Artista y Charter", "Un mod de fans y para fans de pepe!", 0xFFFF5733],
+			["END_SELLA", "sella", "Director y Músico", "Yo soy... El mijail", 0xFF34EBD8],
 			["AngieGB", "angie", "Director, Animador y Artista", "Vas a caer pixel art", 0xFF9be330],
-			["Luk9as", "yo", 'Coder', "Pene", 0xFFFF3931]
+
+			["StormyMat", "stormy", "Co-Director", "Pepe te doné 10 pesos, te quiero mucho", 0xFF19D103],
+			["JustMaskiu", "maskiu", "Co-Director", "tiamo pepe", 0xFFC02A],
+
+			["AlexSucks8K", "alex", "Artista", "Pepe, los foursucks te queremos mucho", 0xFFB7104D],
+			["Bleen", "bleen", "Artista", "hoal pepe soy tu fan", 0xFF0066CC],
+			["ImJuanGMC", "ver", "Artista", "Un saludo de parte de los devs Pepauri!", 0xFFDD5A0A],
+			["Tagg", "tagg", "Artista", "Mi pana isaleniun te manda un saludo pepauri", 0xFFE3E3E3],
+			["Alguien Random", "ran", "Artista", "Eres mi youtuber favorito Pepe", 0xFF41D96C],
+			["Candias", "candias", "Artista", "¡Oh por deus, Pepe sabe de mi existencia!", 0xFF8D90A3],
+			["Wolfiy", "wolfi", "Artista", "te quiero pepe", 0xFF009AFF],
+
+			["Juan412", "juan", "Artista", "TREMENDO", 0xFF326ba8],
+			["HIGO", "higo", "Artista", "Pepe te amo, acabas de perder tu hígado", 0xFFFFFFFF],
+
+			["Glob", "glob", "Músico", "Pepe soy tu fan!", 0xFF3498DB],
+
+			["Luk9as", "yo", 'Coder', "Pene", 0xFFFF3931],
+			["Denger", "denger", "Coder", "Pepe yo te veo desde que tengo 5 AÑOS, eres una deidad :sob:\nPD: Shotouts a Ristar por la imagen", 0xFF87C0EF],
+			["Cabox", "cabox", 'Coder', "ola pepe te mando un saludo", 0xFFE3E3E3],
+
+			["GameeWorld", "game", "Coder", "Pepe mi idolo", 0xFFFF8000],
+
+			["Smokind", "smok", "Animador", "Había una vez un niño ardido, fin.", 0xFF5B2574],
+			["Ethan", "ethan", "Animador", "Hola papá", 0xFF282B41],
+			["CrashBNashe", "crash", "Animador", "Un saludo a pepe, idolo!", 0xFFD4D4D4],
+			["yolotzy0307", "yolo", "Animador y Coder", "Pepe eres mi infancia", 0xFFFBE6F5],
+			["Dalky", "dalky", "Animador", "Ourpleguyhola", 0xFFFF8F00],
+
+			["M_64", "m", 'Chromatic Maker', "Pepauri eres el mejor!", 0xFFE3E3E3],
+			["GreenCat", "green", 'Chromatic Maker', "Oal pepe soy fan we aaa", 0xFF00FF66],
+
+			["Andree1x", "andre", "Charter", "Apoco muy dimon", 0xFF00FF77],
+			["Draco", "drac", "Charter", "Ola pp", 0xFF89AC76],
+			["Roval", "roval", "Charter", "Te amo pepe!", 0xFFEDBB0F]
 		];
 		
 		for(i in pisspoop){
@@ -98,9 +142,7 @@ class CreditsState extends MusicBeatState
 			var icon:FlxSprite = new FlxSprite().loadGraphic(Paths.image("papuIcons/" + creditsStuff[i][1], "shared"));
 			var scale:Float = 0;
 
-			if (icon.width > icon.height) scale = 200 / icon.width;
-			else if (icon.height > icon.width) scale = 200 / icon.height;
-			else if (icon.height == icon.width) scale = 1;
+			scale = 150 / icon.width;
 
 			icon.scale.set(scale, scale);
 			icon.updateHitbox();
@@ -169,6 +211,9 @@ class CreditsState extends MusicBeatState
 				FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
 			}
 			musicalol.volume = 0;
+		}
+		if(porlaguea.visible){
+			FlxTween.tween(porlaguea, {alpha: 0}, 1, {ease: FlxEase.sineOut});
 		}
 
 		grid.color = colorGuide.color;
@@ -272,6 +317,7 @@ class CreditsState extends MusicBeatState
 		});
 
 		lol.visible = (frase.text == "Pene");
+		porlaguea.visible = (frase.text == "Pepe yo te veo desde que tengo 5 AÑOS, eres una deidad :sob:\nPD: Shotouts a Ristar por la imagen");
 		
 		iconGrp.members[curSelected].alpha = 1;
 		iconGrp.members[curSelected].screenCenter(Y);

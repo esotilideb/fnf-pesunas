@@ -62,16 +62,16 @@
 		0,
 		0
 	],
-	"healthicon": "face",
+	"healthicon": "luigi",
 	"flip_x": false,
 	"healthbar_colors": [
-		161,
-		161,
-		161
+		96,
+		128,
+		102
 	],
 	"camera_position": [
 		0,
-		0
+		100
 	],
 	"sing_duration": 4,
 	"scale": 0.4,

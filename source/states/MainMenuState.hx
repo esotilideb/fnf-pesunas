@@ -7,18 +7,17 @@ import lime.app.Application;
 import states.editors.MasterEditorMenu;
 import options.OptionsState;
 import flixel.input.keyboard.FlxKey;
+import states.PlayState;
+import backend.Song;
+
 
 class MainMenuState extends MusicBeatState
 {
 	var magosexual:Array<String> = [
 		'magicfunkin'
 	];
-	var castigo:Array<String> = [
-		'castigo'
-	];
 	var allowedKeys:String = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	var magosexualBuffer:String = '';
-	var castigoBuffer:String = '';
 	
 	public static var psychEngineVersion:String = '0.7.2h'; // This is also used for Discord RPC
 	public static var curSelected:Int = 0;
@@ -38,6 +37,8 @@ class MainMenuState extends MusicBeatState
 	var bg:FlxSprite;
 	var catTween:FlxTween;
 	var cat:FlxSprite;
+
+	var discord:FlxSprite;
 
 	var chavalOgPos:Array<Array<Float>> = [];
 	var chavalOffset:Array<Array<Int>> = [[0, 127], [0, 46], [0, 42], [325, 355]];
@@ -94,6 +95,12 @@ class MainMenuState extends MusicBeatState
 		cat.screenCenter();
 		cat.alpha = 0;
 		cat.antialiasing = false;
+
+		discord = new FlxSprite(710, -265).loadGraphic(Paths.image('discord'));
+		discord.scale.x = 0.3;
+		discord.scale.y = 0.3;
+		discord.scrollFactor.set(0);
+		add(discord);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
@@ -185,6 +192,7 @@ class MainMenuState extends MusicBeatState
 		super.create();
 
 		FlxG.camera.follow(camFollow, null, 0.15);
+		FlxG.mouse.visible = true;
 	}
 
 	var selectedSomethin:Bool = false;
@@ -193,6 +201,18 @@ class MainMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
+		if (FlxG.mouse.justPressed && FlxG.mouse.overlaps(discord))
+			{
+				discord.scale.x = 0.40;
+				discord.scale.y = 0.40;
+				CoolUtil.browserLoad('https://discord.gg/4c6hKFAc3V');
+			}
+			else if (FlxG.mouse.justReleased)
+			{
+				discord.scale.x = 0.3;
+				discord.scale.y = 0.3;
+			}
+
 		if (FlxG.keys.firstJustPressed() != FlxKey.NONE)
 		{
 			var keyPressed:FlxKey = FlxG.keys.firstJustPressed();
@@ -211,25 +231,6 @@ class MainMenuState extends MusicBeatState
 				}
 			}
 		}
-
-		if (FlxG.keys.firstJustPressed() != FlxKey.NONE)
-			{
-				var keyPressed:FlxKey = FlxG.keys.firstJustPressed();
-				var keyName:String = Std.string(keyPressed);
-				if(allowedKeys.contains(keyName)) {
-					castigoBuffer += keyName;
-					if(castigoBuffer.length >= 32) castigoBuffer = castigoBuffer.substring(1);
-	
-					for (wordRaw in castigo)
-					{
-						var word:String = wordRaw.toUpperCase();
-						if (castigoBuffer.contains(word))
-						{
-								MusicBeatState.switchState(new CastigoVideo());
-						}
-					}
-				}
-			}
 		
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;

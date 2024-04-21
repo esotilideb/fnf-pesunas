@@ -297,6 +297,8 @@ class PlayState extends MusicBeatState
 
 	var meloXDsegundo:Character;
 
+	public var shaderOff:Bool = false;
+
 	override public function create()
 	{
 		//trace('Playback Rate: ' + playbackRate);
@@ -2002,15 +2004,22 @@ class PlayState extends MusicBeatState
 
 	public dynamic function updateIconsPosition()
 	{
-		var newShitOffset:Float = 0;
-		if (curStage == "caca" && healthBar.percent > 80) newShitOffset = FlxG.random.float(-15, 15);
+		var newShitOffsetX:Float = 0;
+		var newShitOffsetY:Float = 0;
+
+		if (curStage == "caca" && healthBar.percent > 80) {
+			newShitOffsetX = FlxG.random.float(-5, 5);
+			newShitOffsetY = FlxG.random.float(-5, 5);
+		}
 
 		var iconOffset:Int = 26;
 		if (curStage == "PepeHouse") 
 			iconP1.x = iconP1.x;
 		else {
 			iconP1.x = healthBar.barCenter + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
-			iconP2.x = (healthBar.barCenter - (150 * iconP2.scale.x) / 2 - iconOffset * 2) + newShitOffset;
+			iconP2.x = (healthBar.barCenter - (150 * iconP2.scale.x) / 2 - iconOffset * 2) + newShitOffsetX;
+
+			if (curStage == "caca") iconP2.y = healthBar.y - 75 + newShitOffsetY;
 		}
 	}
 
@@ -2122,6 +2131,7 @@ class PlayState extends MusicBeatState
 					timer.active = true;
 				}
 				#end
+				bgColor = 0xFF000000;
 				openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x - boyfriend.positionArray[0], boyfriend.getScreenPosition().y - boyfriend.positionArray[1], camFollow.x, camFollow.y));
 
 				// MusicBeatState.switchState(new GameOverState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
@@ -2255,6 +2265,8 @@ class PlayState extends MusicBeatState
 				}
 			case 'poner shader xdxdxd evento hecho en source puto lua':
 				chromaShader();
+			case 'Shader':
+				shaderOff = (value1 == "true");
 			case 'eventosCul':
 				switch(Std.parseInt(value1))
 				{
@@ -2637,6 +2649,8 @@ class PlayState extends MusicBeatState
 
 		FlxG.save.data.songBool = bools;
 		FlxG.save.flush();
+
+		bgColor = 0xFF000000;
 
 		deathCounter = 0;
 		seenCutscene = false;
@@ -3258,8 +3272,12 @@ class PlayState extends MusicBeatState
 				char = gf; 
 				meloXDsegundo = gf;
 				iconP2.changeIcon(gf.healthIcon);
-				if (curStage == 'PepeHouse')
+				if (curStage == 'PepeHouse') {
 					iconP1.changeIcon(gf.healthIcon);
+				}
+				reloadHealthBarColors();
+			} else {
+
 			}
 
 			if(char != null)
@@ -3332,6 +3350,7 @@ class PlayState extends MusicBeatState
 			{
 				char = gf;
 				iconP1.changeIcon(gf.healthIcon);
+				reloadHealthBarColors();
 				animCheck = 'cheer';
 			}
 
@@ -3341,6 +3360,7 @@ class PlayState extends MusicBeatState
 			iconP1.updateHitbox();
 
 			iconP1.changeIcon(boyfriend.healthIcon);
+			reloadHealthBarColors();
 		}
 
 			if(char != null)
