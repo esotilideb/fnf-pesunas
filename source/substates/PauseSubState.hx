@@ -318,7 +318,7 @@ class PauseSubState extends MusicBeatSubstate
 
 					Mods.loadTopMod();
 					if(PlayState.isStoryMode) {
-						MusicBeatState.switchState(new StoryMenuState());
+						MusicBeatState.switchState(new OverWorld());
 					} else {
 						MusicBeatState.switchState(new FreeplayState());
 					}
