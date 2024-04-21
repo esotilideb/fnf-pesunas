@@ -52,7 +52,11 @@ class GameOverSubstate extends MusicBeatSubstate
 	public function new(x:Float, y:Float, camX:Float, camY:Float)
 	{
 		super();
-
+		
+		var bg = new FlxSprite().makeGraphic(FlxG.width * 7, FlxG.height * 7, 0xFF000000);
+		bg.scrollFactor.set();
+		bg.screenCenter();
+		add(bg);
 		PlayState.instance.setOnScripts('inGameOver', true);
 
 		Conductor.songPosition = 0;
@@ -60,7 +64,7 @@ class GameOverSubstate extends MusicBeatSubstate
 		boyfriend = new Character(x, y, characterName, true);
 		boyfriend.x += boyfriend.positionArray[0];
 		boyfriend.y += boyfriend.positionArray[1];
-		add(boyfriend);
+		//add(boyfriend);
 
 		FlxG.sound.play(Paths.sound(deathSoundName));
 		FlxG.camera.scroll.set();
@@ -151,7 +155,7 @@ class GameOverSubstate extends MusicBeatSubstate
 
 	function coolStartDeath(?volume:Float = 1):Void
 	{
-		FlxG.sound.playMusic(Paths.music(loopSoundName), volume);
+		trace("muerte");//FlxG.sound.playMusic(Paths.music(loopSoundName), volume);
 	}
 
 	function endBullshit():Void
