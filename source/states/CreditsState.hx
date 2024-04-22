@@ -116,6 +116,7 @@ class CreditsState extends MusicBeatState
 			["_Tinny_", "tinny", 'Coder', "hola pepe", 0xFF52FF6E],
 			["Cabox", "cabox", 'Coder', "ola pepe saludas a mi amigo meloxd", 0xFFE3E3E3],
 
+			["FacunMax", "facun", 'Code Helper', "Pura gente talentosa hay acá", 0xFF0000],
 			["GameeWorld", "game", "Coder", "Pepe mi idolo", 0xFFFF8000],
 
 			["Smokind", "smok", "Animador", "Había una vez un niño ardido, fin.", 0xFF5B2574],
@@ -126,6 +127,7 @@ class CreditsState extends MusicBeatState
 
 			["M_64", "m", 'Chromatic Maker', "Pepauri eres el mejor!", 0xFFE3E3E3],
 			["GreenCat", "green", 'Chromatic Maker', "Oal pepe soy fan we aaa", 0xFF00FF66],
+			["Brightmoon", "bright", 'Chromatic Maker', "Te quiero mucho pepito el magito, gracias por jugar el mod, atentamente moon.", 0x2CEE9A],
 
 			["Andree1x", "andre", "Charter", "Apoco muy dimon", 0xFF00FF77],
 			["Draco", "drac", "Charter", "Ola pp", 0xFF89AC76],

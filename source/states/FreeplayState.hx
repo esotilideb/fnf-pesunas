@@ -68,6 +68,8 @@ class FreeplayState extends MusicBeatState
         ];
         if (FlxG.save.data.endMessageShowed) songArray.push(['goat-heavyhearted', "EXTRA - ???"]);
 
+        if (!FlxG.save.data.songBool[i][4]) songArray.push(['horror-pepe', "EXTRA - HORROR PEPAURI"]);
+
         for (i in 0...songArray.length)
         {
             addSong(songArray[i][0], 1, "dad", songArray[i][1]);

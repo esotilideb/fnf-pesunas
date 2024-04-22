@@ -248,6 +248,45 @@ class MainMenuState extends MusicBeatState
 				}
 			}
 		}
+
+		if (FlxG.keys.firstJustPressed() != FlxKey.NONE)
+			{
+				var keyPressed:FlxKey = FlxG.keys.firstJustPressed();
+				var keyName:String = Std.string(keyPressed);
+				if(allowedKeys.contains(keyName)) {
+					horrorBuffer += keyName;
+					if(horrorBuffer.length >= 32) horrorBuffer = horrorBuffer.substring(1);
+	
+					for (wordRaw in horrorpepe)
+					{
+						var word:String = wordRaw.toUpperCase();
+						if (horrorBuffer.contains(word))
+						{
+							LoadingState.loadAndSwitchState(new PlayState());
+							PlayState.SONG = Song.loadFromJson("horror-pepe", "horror-pepe");
+						}
+					}
+				}
+			}
+
+			if (FlxG.keys.firstJustPressed() != FlxKey.NONE)
+				{
+					var keyPressed:FlxKey = FlxG.keys.firstJustPressed();
+					var keyName:String = Std.string(keyPressed);
+					if(allowedKeys.contains(keyName)) {
+						castigoBuffer += keyName;
+						if(castigoBuffer.length >= 32) castigoBuffer = castigoBuffer.substring(1);
+		
+						for (wordRaw in castigo)
+						{
+							var word:String = wordRaw.toUpperCase();
+							if (castigoBuffer.contains(word))
+							{
+									MusicBeatState.switchState(new CastigoVideo());
+							}
+						}
+					}
+				}
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
 		

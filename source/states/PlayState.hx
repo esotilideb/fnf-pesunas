@@ -2109,28 +2109,17 @@ if(curSong == 'Dark Magic'){
 	var catTween:FlxTween;
 	function openChartEditor()
 	{
-		/*if (catTween != null)
+		if (catTween != null)
 			catTween.cancel(); //esto es lo ultimo en bromas xdxdxd
 
 		FlxG.sound.play(Paths.sound('vine boom'), 1);
 		catTween = FlxTween.tween(cat, {alpha: 1}, 0.15, {ease: FlxEase.sineOut, onComplete: function(twn:FlxTween)
 			{
 				catTween = FlxTween.tween(cat, {alpha : 0}, 2, {ease: FlxEase.sineOut});
-			}}); troleito de una build tal vez lo deje para la build final*/
-
-
-		FlxG.camera.followLerp = 0;
-		persistentUpdate = false;
-		paused = true;
-		cancelMusicFadeTween();
-		chartingMode = true;
-
-		#if desktop
-		DiscordClient.changePresence("Chart Editor", null, null, true);
-		DiscordClient.resetClientID();
-		#end
-
-		MusicBeatState.switchState(new ChartingState());
+			}}); 
+			//troleito de una build tal vez lo deje para la build final
+			//like si te vale verga
+			//👍 1
 	}
 
 	function openCharacterEditor()
