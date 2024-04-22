@@ -17,7 +17,7 @@ class CardState extends MusicBeatState {
         trace("inMessage");
         canClick = false;
 
-        FlxG.sound.playMusic(Paths.music('freakyMenu'));
+        //FlxG.sound.playMusic(Paths.music('freakyMenu'));
                 
         var blackScreenMessage:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
         blackScreenMessage.scrollFactor.set();
@@ -36,6 +36,8 @@ class CardState extends MusicBeatState {
         dross.alpha = 0;
 
         next = new FlxSprite().loadGraphic(Paths.image('next'));
+        next.scale.set(0.25, 0.25);
+        next.updateHitbox();
         next.setPosition(FlxG.width - next.width, FlxG.height - next.height);
         add(next);
 
