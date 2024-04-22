@@ -3,6 +3,8 @@ package states.stages;
 import states.stages.objects.*;
 import openfl.filters.ShaderFilter;
 import objects.Character;
+import flixel.effects.particles.FlxEmitter;
+import flixel.effects.particles.FlxParticle;
 
 class PepeHouse extends BaseStage
 {
@@ -61,6 +63,8 @@ class PepeHouse extends BaseStage
 			var puas2:BGSprite = new BGSprite('stages/pepe-casa/but.exe/coso2', -600, -200, 0.9, 0.9);
 			puas2.updateHitbox();
 			normalBG.add(puas2);
+
+
 		}
 
 		piso = new BGSprite('stages/pepe-casa/' + backend.BaseStage.exe + 'piso-casa', -600, -200, 0.9, 0.9);

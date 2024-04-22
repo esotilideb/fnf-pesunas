@@ -13,6 +13,9 @@ import states.FreeplayState;
 import options.OptionsState;
 
 import openfl.Lib;
+import states.OverWorld;
+
+import states.OverWorld;
 
 class PauseSubState extends MusicBeatSubstate
 {
@@ -318,7 +321,7 @@ class PauseSubState extends MusicBeatSubstate
 
 					Mods.loadTopMod();
 					if(PlayState.isStoryMode) {
-						MusicBeatState.switchState(new OverWorld());
+						FlxG.switchState(new OverWorld());
 					} else {
 						MusicBeatState.switchState(new FreeplayState());
 					}
