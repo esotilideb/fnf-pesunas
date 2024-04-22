@@ -2742,9 +2742,7 @@ if(curSong == 'Dark Magic'){
 					if(FlxTransitionableState.skipNextTransIn) {
 						CustomFadeTransition.nextCamera = null;
 					}
-					MusicBeatState.switchState(new OverWorld());
-
-					Lib.application.window.title = "Magic Funkin - Overworld";
+					MusicBeatState.switchState(new FreeplayState());
 
 					// if ()
 					if(!ClientPrefs.getGameplaySetting('practice') && !ClientPrefs.getGameplaySetting('botplay')) {

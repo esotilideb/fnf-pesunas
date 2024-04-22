@@ -83,7 +83,16 @@ class OverworldDross extends FlxState
 
 		FlxG.sound.music.fadeIn(0.1, 0, 0);
 
+		next = new FlxText(0, 0, 0, "Press Z to select a stage", 48);
+		next.screenCenter();
+		next.y += 300;
+		next.scrollFactor.set();
+		next.visible = false;
+		add(next);
+
 	}
+
+	var next:FlxText;
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
@@ -99,10 +108,13 @@ class OverworldDross extends FlxState
         }
 
 		if(FlxG.overlap(player, invisible)){
-			if (FlxG.keys.justPressed.Z) {
+			next.visible = true;
+			if (FlxG.keys.justPressed.Z || FlxG.keys.justPressed.ENTER) {
 				LoadingState.loadAndSwitchState(new PlayState());
 				PlayState.SONG = Song.loadFromJson("goat-heavyhearted", "goat-heavyhearted");
 			}
+		} else {
+			next.visible = false;
 		}
 	} //749 726
 }

@@ -231,9 +231,16 @@ class OverWorld extends MusicBeatState
 	drossMailO.visible = false;
 	drossMailP.visible = false;*/
 		
-
+		next = new FlxText(0, 0, 0, "Press Z to select a stage", 48);
+		next.screenCenter();
+		next.y += 300;
+		next.scrollFactor.set();
+		next.visible = false;
+		add(next);
 		super.create();
 	}
+
+	var next:FlxText;
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
@@ -245,6 +252,7 @@ class OverWorld extends MusicBeatState
 	
 
 		if(FlxG.overlap(player, casaPepeC)){
+			next.visible = true;
 			if (FlxG.keys.justPressed.Z || controls.ACCEPT) {
 
 				PlayState.storyPlaylist = ['Lunar-magic', 'Dark-magic'];
@@ -258,6 +266,8 @@ class OverWorld extends MusicBeatState
 				LoadingState.loadAndSwitchState(new PlayState());
 				Lib.application.window.title = "Magic Funkin";
 			}
+		} else {
+			next.visible = false;
 		}
 		if (FlxG.keys.justPressed.ESCAPE) {
 			MusicBeatState.switchState(new MainMenuState());

@@ -92,7 +92,7 @@ class CreditsState extends MusicBeatState
 		var pisspoop:Array<Array<Dynamic>> = [ //Name - Icon name - Trabajo - Frase - BG Color
 			["TelmexCedric", "cedric", "Director, Artista y Charter", "Un mod de fans y para fans de pepe!", 0xFFFF5733],
 			["END_SELLA", "sella", "Director y Músico", "Yo soy... El mijail", 0xFF34EBD8],
-			["AngieGB", "angie", "Director, Animador y Artista", "Vas a caer pixel art", 0xFF9be330],
+			["AngieGB", "angie", "Director, Animador y Artista", "Saludos a Mary Te amo", 0xFF9be330],
 
 			["StormyMat", "stormy", "Co-Director", "Pepe te doné 10 pesos, te quiero mucho", 0xFF19D103],
 			["JustMaskiu", "maskiu", "Co-Director", "tiamo pepe", 0xFFC02A],
@@ -114,13 +114,13 @@ class CreditsState extends MusicBeatState
 
 			["Luk9as", "yo", 'Coder', "Pene", 0xFFFF3931],
 			["_Tinny_", "tinny", 'Coder', "hola pepe", 0xFF52FF6E],
-			["Cabox", "cabox", 'Coder', "ola pepe te mando un saludo", 0xFFE3E3E3],
+			["Cabox", "cabox", 'Coder', "ola pepe saludas a mi amigo meloxd", 0xFFE3E3E3],
 
 			["GameeWorld", "game", "Coder", "Pepe mi idolo", 0xFFFF8000],
 
 			["Smokind", "smok", "Animador", "Había una vez un niño ardido, fin.", 0xFF5B2574],
 			["Ethan", "ethan", "Animador", "Hola papá", 0xFF282B41],
-			["CrashBNashe", "crash", "Animador", "Un saludo a pepe, idolo!", 0xFFD4D4D4],
+			["CrashBNashe", "crash", "Animador", "literal anime una cosa nomas pero igual un saludo a pepe el mago", 0xFFD4D4D4],
 			["yolotzy0307", "yolo", "Animador y Coder", "Pepe eres mi infancia", 0xFFFBE6F5],
 			["Dalky", "dalky", "Animador", "Ourpleguyhola", 0xFFFF8F00],
 

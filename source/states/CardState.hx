@@ -35,7 +35,8 @@ class CardState extends MusicBeatState {
         dross.y += 300;
         dross.alpha = 0;
 
-        next = new FlxSprite(987, 587).loadGraphic(Paths.image('next'));
+        next = new FlxSprite().loadGraphic(Paths.image('next'));
+        next.setPosition(FlxG.width - next.width, FlxG.height - next.height);
         add(next);
 
         FlxTween.tween(dross, {y: dross.y - 300}, 1.25, {ease: FlxEase.quadOut, 
@@ -50,22 +51,10 @@ class CardState extends MusicBeatState {
         FlxG.save.data.endMessageShowed = true;
         FlxG.save.flush();
         FlxG.mouse.visible = true;
-
-        
-        if (FlxG.mouse.overlaps(next)) {
-			next.scale.set(0.25, 0.25);
-			next.alpha = 0.5;
-			if (FlxG.mouse.justPressed) // hermano q paja poner esta wea
-			{
-				
-			}
-		} else {
-			next.scale.set(0.3, 0.3);
-			next.alpha = 1;
-		}
     }
 
     var drossShit:Bool = false;
+    var timer:Float = -1;
 
     override function update(elapsed:Float)
     {
@@ -81,10 +70,12 @@ class CardState extends MusicBeatState {
                     dross.y -= 100;
                     dross.x -= 100;
 					canClick = true;
+                    timer = 3;
 				});
 
 
 			} else {
+
 				trace('WENT BACK TO FREEPLAY??');
 				Mods.loadTopMod();
 				#if desktop DiscordClient.resetClientID(); #end
@@ -92,5 +83,12 @@ class CardState extends MusicBeatState {
                 MusicBeatState.switchState(new OverworldDross());
 			}
 		}
+
+        if (drossShit) {
+            if (timer <= 0)
+            {
+                next.visible = true;
+            } else timer -= elapsed;
+        }
     }
 }
