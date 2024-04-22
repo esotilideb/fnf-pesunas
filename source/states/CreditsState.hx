@@ -114,18 +114,21 @@ class CreditsState extends MusicBeatState
 
 			["Luk9as", "yo", 'Coder', "Pene", 0xFFFF3931],
 			["_Tinny_", "tinny", 'Coder', "hola pepe", 0xFF52FF6E],
-			["Cabox", "cabox", 'Coder', "ola pepe te mando un saludo", 0xFFE3E3E3],
+			["Cabox", "cabox", 'Coder', "ola pepe le puedes mandar un saludo a mi amigo meloXD?", 0xFFE3E3E3],
 
+			["FacunMax", "facun", 'Code Helper', "Pura gente talentosa hay acá", 0xFF0000],
 			["GameeWorld", "game", "Coder", "Pepe mi idolo", 0xFFFF8000],
 
 			["Smokind", "smok", "Animador", "Había una vez un niño ardido, fin.", 0xFF5B2574],
 			["Ethan", "ethan", "Animador", "Hola papá", 0xFF282B41],
+			["Gabo", "gabo", "Animador", "no se que decir, pero se que la proxima, chambeare mejor xd", 0xBE8E6F],
 			["CrashBNashe", "crash", "Animador", "Un saludo a pepe, idolo!", 0xFFD4D4D4],
 			["yolotzy0307", "yolo", "Animador y Coder", "Pepe eres mi infancia", 0xFFFBE6F5],
 			["Dalky", "dalky", "Animador", "Ourpleguyhola", 0xFFFF8F00],
 
 			["M_64", "m", 'Chromatic Maker', "Pepauri eres el mejor!", 0xFFE3E3E3],
 			["GreenCat", "green", 'Chromatic Maker', "Oal pepe soy fan we aaa", 0xFF00FF66],
+			["Brightmoon", "bright", 'Chromatic Maker', "Te quiero mucho pepito el magito, gracias por jugar el mod, atentamente moon.", 0x2CEE9A],
 
 			["Andree1x", "andre", "Charter", "Apoco muy dimon", 0xFF00FF77],
 			["Draco", "drac", "Charter", "Ola pp", 0xFF89AC76],
