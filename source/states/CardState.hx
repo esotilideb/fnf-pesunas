@@ -38,6 +38,7 @@ class CardState extends MusicBeatState {
         next = new FlxSprite().loadGraphic(Paths.image('next'));
         next.scale.set(0.25, 0.25);
         next.updateHitbox();
+        next.visible = false;
         next.setPosition(FlxG.width - next.width, FlxG.height - next.height);
         add(next);
 
@@ -69,10 +70,11 @@ class CardState extends MusicBeatState {
 				dross.animation.play("open");
 				new FlxTimer().start(18 / 24, function (tmr:FlxTimer) {
 					dross.animation.play("showingT");
-                    dross.y -= 100;
-                    dross.x -= 100;
+                    dross.y -= 120;
 					canClick = true;
-                    timer = 3;
+                    new FlxTimer().start(3, function (tmr1:FlxTimer) {
+                        next.visible = true;
+                    });
 				});
 
 
@@ -85,12 +87,5 @@ class CardState extends MusicBeatState {
                 MusicBeatState.switchState(new OverworldDross());
 			}
 		}
-
-        if (drossShit) {
-            if (timer <= 0)
-            {
-                next.visible = true;
-            } else timer -= elapsed;
-        }
     }
 }

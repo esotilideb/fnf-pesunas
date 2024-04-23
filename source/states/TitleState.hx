@@ -398,6 +398,7 @@ class TitleState extends MusicBeatState
 		}
 		#end
 
+		if (FlxG.keys.justPressed.D) MusicBeatState.switchState(new CardState());
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
 
 		if (gamepad != null)
